@@ -1,9 +1,9 @@
 package cn.dmdream.entity;
 
 public class SnAdmin {
-	private Integer adminId;//主键
-	private String adminUsername;//管理员用户名
-	private String adminPassword;//管理员密码
+	private Integer adminId;//主键 自动生成
+	private String adminUsername;//管理员用户名 唯一 不为空
+	private String adminPassword;//管理员密码 不为空
 	private String adminNickpic;//管理员头像
 	public SnAdmin() {
 		super();

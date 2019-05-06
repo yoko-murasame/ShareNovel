@@ -8,7 +8,10 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import cn.dmdream.controller.base.BaseServlet;
+import cn.dmdream.entity.SnAdmin;
 import cn.dmdream.utils.FastDFSClient;
+import cn.dmdream.vo.JsonMsg;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TestServlet extends BaseServlet {
 
@@ -29,13 +34,13 @@ public class TestServlet extends BaseServlet {
 			e.printStackTrace();
 		}
 	}
-
+	//测试请求转发跳转
 	public String toSuccess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		System.out.println("进入了请求转发测试方法");
 		return "/resultPage/success.jsp";
 	}
-
+	//测试文件上传
 	public String fileUpload(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		System.out.println("进入了文件上传方法");
@@ -81,4 +86,21 @@ public class TestServlet extends BaseServlet {
 		}
 		return null;
 	}
+	//测试文本编码过滤器和json文本类型设置
+	public String testEncodeAndJson(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String username = req.getParameter("username");
+		SnAdmin snAdmin = new SnAdmin();
+		snAdmin.setAdminUsername(username);
+		//新建JsonMsg
+		JsonMsg success = JsonMsg.makeSuccess("请求成功!", snAdmin);
+		//转换成json数组
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonStr = objectMapper.writeValueAsString(success);
+		//通过response返回
+		resp.getWriter().write(jsonStr);
+		return null;
+	}
+	
+	
 }
