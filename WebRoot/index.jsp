@@ -11,6 +11,20 @@
 <script type="text/javascript" src="js/kindeditor/lang/zh-CN.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
 <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/js/bootstrap.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#testChEncode").click(function(){
+			$.ajax({
+				type:"get",
+				url:"testServlet.do?method=testEncodeAndJson&username=yoko",
+				async:true,
+				success:(e)=>{
+					console.log(e);
+				}
+			});
+		});
+	})
+</script>
 </head>
 <body>
 <div class="container">
@@ -24,7 +38,7 @@
 			</form>
 		</li>
 		<li><textarea name="content" rows="30" cols="40"></textarea></li>
-		
+		<li><button class="btn btn-default" id="testChEncode">点我测试文本编码过滤器和json文本类型设置</button></li>
 	</ul>
 	<!-- 富文本-->
 	<script type="text/javascript">
