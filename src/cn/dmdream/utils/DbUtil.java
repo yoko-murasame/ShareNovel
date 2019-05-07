@@ -1,22 +1,50 @@
 package cn.dmdream.utils;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetFactory;
 import javax.sql.rowset.RowSetProvider;
 
 public class DbUtil {
 
+	private static String driverName;
+	private static String url;
+	private static String username;
+	private static String password;
+
 	private Connection conn = null;
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
+
+	static {
+		// src目录
+		ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
+		driverName = resourceBundle.getString("drivername");
+		url = resourceBundle.getString("url");
+		username = resourceBundle.getString("username");
+		password = resourceBundle.getString("password");
+
+		// Properties properties = new Properties();
+		// try {
+		// properties.load(
+		// new FileInputStream(new File("db.properties")));
+		// // properties.load(new FileInputStream(new
+		// // File("db.properties")));//必须在同级目录
+		// driverName = properties.getProperty("drivername");
+		// url = properties.getProperty("url");
+		// username = properties.getProperty("username");
+		// password = properties.getProperty("password");
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
+
+	}
 
 	/**
 	 * 获取连接
@@ -27,10 +55,8 @@ public class DbUtil {
 
 		Connection connection = null;
 		try {
-			//采用连接池技术
-			Context context = new InitialContext();
-			DataSource datasource = (DataSource) context.lookup("java:comp/env/mysqlDataSource");
-			connection = datasource.getConnection();
+			Class.forName(driverName);
+			connection = DriverManager.getConnection(url, username, password);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -174,7 +200,7 @@ public class DbUtil {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		}finally {
 			closeAll();
 		}
 
