@@ -15,7 +15,7 @@ public class SnAdminDaoImpl implements SnAdminDao {
 	@Override
 	public SnAdmin findById(Integer id) {
 
-		String sql = "select * from sn_admin where id=?";
+		String sql = "select * from sn_admin where admin_id=?";
 		ResultSet rs = dbUtil.query(sql, id);
 		SnAdmin snAdmin = null;
 		try {
@@ -49,7 +49,7 @@ public class SnAdminDaoImpl implements SnAdminDao {
 		try {
 			while(rs.next()){
 				snAdmin=new SnAdmin();
-				int admin_id=rs.getInt("id");
+				int admin_id=rs.getInt("admin_id");
 				String admin_password=rs.getString("admin_password");
 				String admin_nickpic = rs.getString("admin_nickpic");
 				
@@ -78,7 +78,7 @@ public class SnAdminDaoImpl implements SnAdminDao {
 	@Override
 	public int update(SnAdmin snAdmin) {
 
-		String sql="update sn_admin set admin_username=?, admin_password=?,admin_nickpic=? where id=?";
+		String sql="update sn_admin set admin_username=?, admin_password=?,admin_nickpic=? where admin_id=?";
 		int i =dbUtil.update(sql, snAdmin.getAdminUsername(),snAdmin.getAdminPassword(),snAdmin.getAdminNickpic(),snAdmin.getAdminId());
 		return i;
 	}
