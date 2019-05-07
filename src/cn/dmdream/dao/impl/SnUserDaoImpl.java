@@ -32,7 +32,7 @@ public class SnUserDaoImpl implements SnUserDao {
 	@Override
 	public int deleteById(Integer id) {
 
-		String sql = "delete from sn_user where id=?";
+		String sql = "delete from sn_user where user_id=?";
 		int i = dbUtil.update(sql, id);
 		return i;
 	}
@@ -41,7 +41,7 @@ public class SnUserDaoImpl implements SnUserDao {
 	public int update(SnUser snUser) {
 
 		String sql = "update sn_user set user_username=?,user_password=?,user_nickname=?,user_nickpic=?,user_email=?,user_phone=?,user_email_active=?,"
-				+ "user_phone_active=?,user_registtime=? where id=?";
+				+ "user_phone_active=?,user_registtime=? where user_id=?";
 		int i = dbUtil.update(sql, snUser.getUserUsername(), snUser.getUserPassword(), snUser.getUserNickname(),
 				snUser.getUserNickpic(), snUser.getUserEmail(), snUser.getUserPhone(), snUser.getUserEmailActive(),
 				snUser.getUserPhoneActive(), snUser.getUserRegisttime(), snUser.getUserId());
