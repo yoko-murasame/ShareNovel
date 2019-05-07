@@ -51,7 +51,7 @@ public class SnUserDaoImpl implements SnUserDao {
 	@Override
 	public SnUser findById(Integer id) {
 
-		String sql = "select * from sn_user where id=?";
+		String sql = "select * from sn_user where user_id=?";
 		ResultSet rs = dbUtil.query(sql, id);
 		List<SnUser> list = new ArrayList<SnUser>();
 		handleData(rs, list);
