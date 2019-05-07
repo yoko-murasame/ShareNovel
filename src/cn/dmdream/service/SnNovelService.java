@@ -1,36 +1,50 @@
-package cn.dmdream.dao;
+package cn.dmdream.service;
 
 import java.util.List;
 
 import cn.dmdream.entity.SnNovel;
 
 /**
- * 小说Dao层接口
+ * 小说Service层接口
  * @author KuluS
  *
  */
-public interface SnNovelDao {
+public interface SnNovelService {
 
 	/**
 	 * 小说新增
 	 * @param snNovel
 	 * @return
 	 */
-	public int save(SnNovel snNovel);
+	public boolean save(SnNovel snNovel);
 	
 	/**
 	 * 删除
 	 * @param snNovel
 	 * @return
 	 */
-	public int delete(SnNovel snNovel);
+	public boolean delete(SnNovel snNovel);
+	
+	/**
+	 * 批量删除
+	 * @param list
+	 * @return
+	 */
+	public boolean deleteAll(List<SnNovel> list);
 	
 	/**
 	 * 修改
 	 * @param snNovel
 	 * @return
 	 */
-	public int update(SnNovel snNovel);
+	public boolean update(SnNovel snNovel);
+	
+	/**
+	 * 批量修改
+	 * @param list
+	 * @return
+	 */
+	public boolean updateAll(List<SnNovel> list);
 	
 	/**
 	 * 根据主键查询
