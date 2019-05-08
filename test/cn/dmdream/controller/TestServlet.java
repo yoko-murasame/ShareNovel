@@ -37,6 +37,7 @@ public class TestServlet extends BaseServlet {
 	//测试请求转发跳转
 	public String toSuccess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		req.setAttribute("abc", 22);
 		System.out.println("进入了请求转发测试方法");
 		return "/resultPage/success.jsp";
 	}

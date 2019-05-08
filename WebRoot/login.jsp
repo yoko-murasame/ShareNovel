@@ -9,9 +9,9 @@
 <html>
 <head>
 <title>登录页面</title>
-<link rel="stylesheet" href="css/bootstrap.css" />
-<script src="js/jquery-3.4.0.js"></script>
-<script src="js/bootstrap.js"></script>
+<link rel="stylesheet" href="js/bootstrap-3.3.7-dist/bootstrap.css" />
+<script src="js/kindeditor/jquery-3.4.0.min.js"></script>
+<script src="js/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 </head>
 
 <body>
