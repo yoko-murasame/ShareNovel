@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	//确认用户是否登录
-
+	
 	//查询每周排行榜
 	//查询最近更新章节
 	//查询最新入库小说
@@ -21,14 +21,15 @@
 <meta http-equiv="description" content="这个小说网站是我们的实训项目">
 <link rel="stylesheet" type="text/css" href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="css/mainpage.css">
-
+<script src="js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 	<div class="container-fluid" id="head">
 		<div class="container">
 			<div class="col-lg-4">
 				<div class="col-lg-6" id="logintip">
-					<span>亲,请登录</span> <a href="#">登录</a>
+					<span>亲,请登录</span> <a href="javascript:openmodel()">登录</a>
 				</div>
 				<div class="col-lg-6">
 					<a href="#"> <font color="red">注册</font>
@@ -430,8 +431,58 @@
 			<span>Copyright © 中软小组-码之行</span>
 		</p>
 	</div>
-
+	<!--登入模态框  -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<div>
+					    <center><h3>用户登录</h3></center>
+					</div>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<input type="text" class="form-control" id="username"  name="username" placeholder="手机/邮箱/用户名">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="password" name="password" placeholder="密码">
+						</div>
+						<div class="form-group">
+							<div style="float: left">
+								<input type="checkbox" name="autoLogin" value="auto">记住密码
+							</div>
+							<div style="float: right">
+								<a href="#" class="text-right">忘记密码</a>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<center>
+						<button type="button" class="btn btn-danger btn-block">登录</button>
+					</center>
+					<center>
+						<div>
+							<a href="#">免费注册</a>
+						</div>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
-<script src="js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+//设置模态框
+function openmodel(){
+	$('#myModal').modal({
+	  keyboard: false,
+	})
+}
+</script>
+
+
 </html>
