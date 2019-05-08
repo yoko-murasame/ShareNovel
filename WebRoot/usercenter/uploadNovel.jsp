@@ -151,9 +151,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
-						<div class="" style="border: dashed 1px;width: 300px;height: 380px;">
+						<div class="" style="border: dashed 1px;width: 300px;height: 340px;">
 
 						</div>
+					</div>
+					<div class="form-group form-group-lg">
+						<input class="btn btn-danger" style="width:300px" type="submit" value="提交" />
 					</div>
 					</div>
 				</form>
