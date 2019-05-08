@@ -453,7 +453,7 @@
 						</div>
 						<div class="form-group">
 							<div style="float: left">
-								<input type="checkbox" name="autoLogin" value="auto">记住密码
+								<input type="checkbox"  value="auto">记住密码
 							</div>
 							<div style="float: right">
 								<a href="#" class="text-right">忘记密码</a>
