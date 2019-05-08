@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	//确认用户是否登录
-
+	
 	//查询每周排行榜
 	//查询最近更新章节
 	//查询最新入库小说
