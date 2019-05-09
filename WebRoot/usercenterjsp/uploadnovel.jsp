@@ -20,6 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			.myContainer{
 			    width:800px;
 			    height:600px;
+			    margin-top:30px;
 			}
 			#novelSummary {
 				height: 300px;
@@ -80,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
 
 	<body>
-		<div class="container">
+	    <div class="container">
 		    <div class="myContainer">
 				<form class="form-horizontal" action="#" method="post" onsubmit="">
 					<div id="contentLeft">
