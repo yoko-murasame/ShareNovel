@@ -75,8 +75,9 @@ public class TestSnChapterDao {
 
 	@Test
 	public void testfindByNovelByPage() {
-		SnNovel novel = snNovelDao.findById(1);
-		List<SnChapter> chapterList = chapterDao.findByNovelByPage(novel, 5, 1);
+		SnNovel novel=new SnNovel();
+		novel.setNovelId(1);
+		List<SnChapter> chapterList = chapterDao.findByNovelByPage(novel, 40, 1);
 		chapterList.forEach(System.out::println);
 	}
 
@@ -106,6 +107,12 @@ public class TestSnChapterDao {
 	public void testfindByNovelByTitleOrderByPage(){
 		SnNovel novel = snNovelDao.findById(1);
 		List<SnChapter> chapterList = chapterDao.findByNovelByOrdersByPage(novel,null,SnChapterDao.DESC ,null, 10, 1);
+		chapterList.forEach(System.out::println);
+	}
+	@Test
+	public void testfindRecentUpdate(){
+		long t=1000*60*60;
+		List<SnChapter> chapterList = chapterDao.findRecentUpdate(t,10);
 		chapterList.forEach(System.out::println);
 	}
 }

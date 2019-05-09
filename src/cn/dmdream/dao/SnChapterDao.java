@@ -85,5 +85,24 @@ public interface SnChapterDao {
 	 * @return 分页查询
 	 */
 	public List<SnChapter> findByNovelByOrdersByPage(SnNovel snNovel, String idOrder,String titleOrder,String updatetimeOrder, int pageSize, int page);
-
+	/**
+	 * 获取n毫秒更新的 所有小说章节记录
+	 * @param  time 单位毫秒 到现在的时间间隔 必须大于0
+	 * @param  limit 前n条记录 n可以为空 ,为空则获取前n天更新的所有记录
+	 * @return 最近更新的小说章节
+	 */
+	public List<SnChapter> findRecentUpdate(Long time,Integer limit);
+	/**
+	 * 获取n毫秒前 到现在 更新的某本小说的新章节
+	 * @param  time 单位毫秒 到现在的时间间隔 必须大于0
+	 * @param  limit 前n条记录 n可以为空 ,为空则获取前n天更新的所有记录
+	 * @return 最近更新的小说章节
+	 */
+	public List<SnChapter> findRecentUpdate(SnNovel novel,Long time,Integer limit);
+	/**
+	 * 获取某本小说 的章节总数
+	 * @param  novel 指定小说
+	 * @return 章节数
+	 */
+	public int findNovelChapterTotalCount(SnNovel novel);
 }
