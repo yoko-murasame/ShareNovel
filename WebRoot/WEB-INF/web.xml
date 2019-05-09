@@ -8,11 +8,23 @@
 		<servlet-name>TestServlet</servlet-name>
 		<servlet-class>cn.dmdream.controller.TestServlet</servlet-class>
 	</servlet>
+  <servlet>
+    <servlet-name>novCk</servlet-name>
+    <servlet-class>cn.dmdream.controller.novelCheck.novCk</servlet-class>
+  </servlet>
+
+  
+
 
 	<servlet-mapping>
 		<servlet-name>TestServlet</servlet-name>
 		<url-pattern>/testServlet.do</url-pattern>
 	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>novCk</servlet-name>
+    <url-pattern>/novCk.do</url-pattern>
+  </servlet-mapping>
+  
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
