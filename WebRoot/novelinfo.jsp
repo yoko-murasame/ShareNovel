@@ -1,7 +1,23 @@
+<%@page import="cn.dmdream.service.impl.SnChapterServiceImpl"%>
+<%@page import="cn.dmdream.service.SnChapterService"%>
+<%@page import="cn.dmdream.entity.SnNovel"%>
+<%@page import="cn.dmdream.service.impl.SnNovelServiceImpl"%>
+<%@page import="cn.dmdream.service.SnNovelService"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+//获取novel id查询novel 详情
+String id=request.getParameter("nid");
+int totalnum=0;
+SnNovel novel=null;
+if(id!=null){
+	int nid=Integer.parseInt(id);
+	SnNovelService ss=new SnNovelServiceImpl();
+	SnChapterService sd=new SnChapterServiceImpl();
+	novel=ss.findById(nid);
+	totalnum=sd.findNovelChapterTotalCount(novel);
+}else{
+	request.getRequestDispatcher("mainpage.jsp").forward(request, response);
+}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -110,10 +126,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 				</div>
 				<div class="col-lg-6">
-					<p class="bookname">全球武装</p>
-					<p class="bookauthor">作者:暴走西红柿</p>
-					<p class="bookcategory">分类:军事</p>
-					<p class="bkintroduct">啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+					<p class="bookname"><%=novel.getNovelTitle() %></p>
+					<p class="bookauthor">作者:<%=novel.getNovelAuthor() %></p>
+					<p class="bookcategory">分类:<%=novel.getSnCategory() %></p>
+					<p class="bkintroduct"><%=novel.getNovelSummary() %></p>
 				</div>
 				<div class="col-lg-3" id="ff">
 					<a href="" class="btn btn-default">在线阅读</a>
@@ -130,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				  <li id="li3"><a href="#">其它</a></li>
 				</ul>
 			</div>
-		<iframe src="novelinfojsp/novelchapter.jsp" frameborder="0" scrolling="no" id="myiframe" onload="setIframeHeight(this)" class="col-lg-12"></iframe>
+		<iframe src="novelinfojsp/novelchapter.jsp?totalnum=<%=totalnum %>&nid=<%=novel.getNovelId() %>" frameborder="0" scrolling="no" id="myiframe" onload="setIframeHeight(this)" class="col-lg-12"></iframe>
 		<div class="clearfix"></div>
 		<div class="container footer text-center" style="height: 200px;">
 			<hr>

@@ -36,6 +36,7 @@ public class TestSnChapterDao {
 		SnNovel novel = snNovelDao.findById(1);
 		for (int i = 1; i <= 50; i++) {
 			chapter.setSnNovel(novel);
+			chapter.setChapterNum(i);
 			chapter.setChapterTitle("第" + i + "章-章节标题" + "");
 			chapter.setChapterContent(
 					"京华大学，华夏国最高学府，坐落于京华市中心之北，在历经数百年风风雨雨的洗礼后沉淀了丰厚的历史和文化底蕴，在全世界的高等学府中有着举足轻重的地位。能入京华，几乎是所有华夏学子的梦想和荣耀。");
@@ -75,8 +76,9 @@ public class TestSnChapterDao {
 
 	@Test
 	public void testfindByNovelByPage() {
-		SnNovel novel = snNovelDao.findById(1);
-		List<SnChapter> chapterList = chapterDao.findByNovelByPage(novel, 5, 1);
+		SnNovel novel=new SnNovel();
+		novel.setNovelId(1);
+		List<SnChapter> chapterList = chapterDao.findByNovelByPage(novel, 40, 1);
 		chapterList.forEach(System.out::println);
 	}
 
@@ -96,7 +98,8 @@ public class TestSnChapterDao {
 	
 	@Test
 	public void testfindByNovelByTitleOrderByPage(){
-		SnNovel novel = snNovelDao.findById(1);
+		SnNovel novel=new SnNovel();
+		novel.setNovelId(1);
 		List<SnChapter> chapterList = chapterDao.findByNovelByOrdersByPage(novel,SnChapterDao.DESC ,null,null, 10, 1);
 		chapterList.forEach(System.out::println);
 	}

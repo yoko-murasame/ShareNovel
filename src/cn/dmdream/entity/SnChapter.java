@@ -4,9 +4,16 @@ public class SnChapter {
 
 	private Integer chapterId;// True 章节id,自增
 	private SnNovel snNovel;// True 外键 指向小说id 小说对象
+	private int chapterNum;//章节序号
 	private String chapterTitle;// True 章节标题
 	private String chapterContent;// True 章节文本
 	private String chapterUpdatetime;// 章节更新时间
+	public int getChapterNum() {
+		return chapterNum;
+	}
+	public void setChapterNum(int chapterNum) {
+		this.chapterNum = chapterNum;
+	}
 
 	public SnChapter() {
 		super();
@@ -53,19 +60,24 @@ public class SnChapter {
 		this.chapterUpdatetime = chapterUpdatetime;
 	}
 
-	public SnChapter(Integer chapterId, SnNovel snNovel, String chapterTitle, String chapterContent,
+
+
+	public SnChapter(Integer chapterId, SnNovel snNovel, int chapterNum, String chapterTitle, String chapterContent,
 			String chapterUpdatetime) {
 		super();
 		this.chapterId = chapterId;
 		this.snNovel = snNovel;
+		this.chapterNum = chapterNum;
 		this.chapterTitle = chapterTitle;
 		this.chapterContent = chapterContent;
 		this.chapterUpdatetime = chapterUpdatetime;
 	}
-
 	@Override
 	public String toString() {
-		return "SnChapter [chapterId=" + chapterId + ", snNovel=" + snNovel + ", chapterTitle=" + chapterTitle
-				+ ", chapterContent=" + chapterContent + ", chapterUpdatetime=" + chapterUpdatetime + "]";
+		return "SnChapter [chapterId=" + chapterId + ", snNovel=" + snNovel + ", chapterNum=" + chapterNum
+				+ ", chapterTitle=" + chapterTitle + ", chapterContent=" + chapterContent + ", chapterUpdatetime="
+				+ chapterUpdatetime + "]";
 	}
+
+	
 }

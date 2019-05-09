@@ -17,10 +17,15 @@
 			}
 			#myiframe{
 				border: 0px ;
+				min-height:800px;
+			}
+			.warp{
+				background-image: url(img/5-120601095139-50.gif);
 			}
 		</style>
 	</head>
 	<body>
+	<div class="container-fluid warp">
 		<div class="container" id="body">
 			<div class="header">
 				<h2>个人中心</h2>
@@ -44,6 +49,7 @@
 			<p>请所有作者发布作品时务必遵守国家互联网信息管理办法规定，我们拒绝任何色情小说，一经发现，即作删除！举报电话：110</p>
 			<p>本站所收录的作品、社区话题、用户评论、用户上传内容或图片等均属用户个人行为。如前述内容侵害您的权益，欢迎举报投诉，一经核实，立即删除，本站不承担任何责任</p>
 			<p><span>Copyright © 中软小组-码之行</span></p>
+		</div>
 		</div>
 	</body>
 	<script type="text/javascript">
