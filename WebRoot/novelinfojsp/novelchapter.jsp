@@ -3,7 +3,8 @@
 <%@page import="cn.dmdream.service.impl.SnChapterServiceImpl"%>
 <%@page import="cn.dmdream.service.SnChapterService"%>
 <%@page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%	String pages = request.getParameter("pagenum");
+<%	
+	String pages = request.getParameter("pagenum");
 	String totalnum=request.getParameter("totalnum");
 	int pagenum = 1;
 	if (pages != null) {
@@ -17,8 +18,10 @@
 		SnNovel novel = new SnNovel();
 		novel.setNovelId(nid);
 		SnChapterService ss = new SnChapterServiceImpl();
-		list = ss.findByNovelByPage(novel, 40, pagenum);
-		newlist=ss.findRecentUpdate(novel,1, 12);
+		list = ss.findByNovelByPage(novel, 60, pagenum);
+		if(pagenum<2){
+			newlist=ss.findRecentUpdate(novel,1, 12);
+		}
 	} else {
 		request.getRequestDispatcher("mainpage.jsp").forward(request, response);
 	}
@@ -43,7 +46,7 @@
 }
 
 .chapterbox {
-	padding: 10px 20px;
+	padding: 10px 0px;
 }
 
 .chapterbox li {
@@ -68,20 +71,25 @@
 h3 {
 	text-align: center;
 }
+.allchapter{
+	min-height:350;
+}
 </style>
 </head>
 <body>
 	<div class="chapterbox newchapter">
+		<%if(newlist!=null){ %>
 		<h3>最近更新</h3>
 		<ul style="list-style: none; text-align: center; overflow: auto;">
 			<%
 				for (SnChapter chapter : newlist) {
 			%>
-			<li class="chapter"><a href="#"><%=chapter.getChapterTitle()%></a></li>
+			<li class="chapter"><a href="../chapter.do?method=readOnline&cid=<%=chapter.getChapterId() %>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
 			<%
 				}
 			%>
 		</ul>
+		<% }%>
 	</div>
 	<p style="clear: both;"></p>
 	<div class="chapterbox allchapter">
@@ -90,9 +98,9 @@ h3 {
 			<%
 				for (SnChapter chapter : list) {
 			%>
-			<li class="chapter"><a href="#"><%=chapter.getChapterTitle()%></a></li>
+			<li class="chapter"><a href="../chapter.do?method=readOnline&cid=<%=chapter.getChapterId()%>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
 			<%
-				}
+			}
 			%>
 		</ul>
 	</div>
@@ -102,8 +110,8 @@ h3 {
 		new Page({
 		    id: 'pager',
 		    curPage:<%=pagenum%>, //初始页码
-		    pageTotal:<%=(Integer.parseInt(totalnum)/40+1)%>, //总页数
-		    pageAmount: 40, //每页多少条
+		    pageTotal:<%=(Integer.parseInt(totalnum)/60+1)%>, //总页数
+		    pageAmount: 60, //每页多少条
 		    dataTotal: <%=totalnum%>, //总共多少条数据
 		    pageSize: 5, //可选,分页个数
 		    showPageTotalFlag: true, //是否显示数据统计

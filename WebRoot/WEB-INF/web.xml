@@ -14,6 +14,23 @@
 		<url-pattern>/testServlet.do</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>ChapterServlet</servlet-name>
+		<servlet-class>cn.dmdream.servlet.ChapterServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ChapterServlet</servlet-name>
+		<url-pattern>/chapter.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>BaseServlet</servlet-name>
+		<servlet-class>cn.dmdream.controller.base.BaseServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BaseServlet</servlet-name>
+		<url-pattern>/base</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>mainpage.jsp</welcome-file>
 	</welcome-file-list>

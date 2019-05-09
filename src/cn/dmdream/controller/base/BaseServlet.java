@@ -16,7 +16,6 @@ public class BaseServlet extends HttpServlet {
 
 		// localhost:8080/store/productServlet?method=addProduct
 		String method = req.getParameter("method");
-
 		if (null == method || "".equals(method) || method.trim().equals("")) {
 			method = "execute";
 		}

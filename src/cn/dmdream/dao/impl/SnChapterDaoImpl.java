@@ -277,7 +277,7 @@ public class SnChapterDaoImpl implements SnChapterDao {
 	@Override
 	public List<SnChapter> findRecentUpdate(SnNovel novel, Long time, Integer limit) {
 		Date since=new java.util.Date(new java.util.Date().getTime()-time);
-		String sql="select * from sn_chapter where chapter_novelid=? and chapter_updatetime>=? order by chapter_num desc";
+		String sql="select * from sn_chapter where chapter_novelid=? and chapter_updatetime>=? order by chapter_updatetime desc";
 		List<SnChapter> newshapter=new ArrayList<SnChapter>();
 		CachedRowSet query;
 		if(limit==null) {	
@@ -293,7 +293,7 @@ public class SnChapterDaoImpl implements SnChapterDao {
 
 	@Override
 	public int findNovelChapterTotalCount(SnNovel novel) {
-		String sql="select count(chapter_num) from sn_chapter";
+		String sql="select count(chapter_novelid) from sn_chapter";
 		CachedRowSet query = dbUtil.query(sql);
 		int ret=0;
 		try {
