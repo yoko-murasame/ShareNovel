@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.dmdream.dao.SnChapterDao;
-import cn.dmdream.dao.SnNovelDao;
 import cn.dmdream.entity.SnChapter;
 import cn.dmdream.entity.SnNovel;
 import cn.dmdream.utils.DateTimeUtils;
