@@ -26,8 +26,8 @@
   </servlet-mapping>
   
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
+    <welcome-file>mainpage.jsp</welcome-file>
+  </welcome-file-list>
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>cn.dmdream.controller.filter.CharacterEncodingFilter</filter-class>
