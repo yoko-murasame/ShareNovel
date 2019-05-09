@@ -1,9 +1,20 @@
+<%@page import="cn.dmdream.service.impl.SnChapterServiceImpl"%>
+<%@page import="cn.dmdream.service.SnChapterService"%>
+<%@page import="cn.dmdream.entity.SnChapter"%>
+<%@page import="cn.dmdream.entity.SnNovel"%>
+<%@page import="cn.dmdream.service.impl.SnNovelServiceImpl"%>
+<%@page import="cn.dmdream.service.SnNovelService"%>
+<%@page import="cn.dmdream.entity.SnUser"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	//确认用户是否登录
-	
+	SnUser user=(SnUser)session.getAttribute("user");
 	//查询每周排行榜
+	SnNovelService novelservice=new SnNovelServiceImpl();
+	List<SnNovel> weekranklist=novelservice.getWeekRank();
 	//查询最近更新章节
+	SnChapterService chapterservice=new SnChapterServiceImpl();
+	List<SnChapter> updatelist=chapterservice.findRecentUpdate(3, 15);
 	//查询最新入库小说
 
 
@@ -28,6 +39,9 @@
 	<div class="container-fluid" id="head">
 		<div class="container">
 			<div class="col-lg-4">
+				<%
+					if(user==null){
+				%>
 				<div class="col-lg-6" id="logintip">
 					<span>亲,请登录</span> <a href="javascript:openmodel()">登录</a>
 				</div>
@@ -35,9 +49,15 @@
 					<a href="#"> <font color="red">注册</font>
 					</a>
 				</div>
+					<%}else{ %>
+					<div class="col-lg-6" id="logintip">
+						<span><%=user.getUserUsername() %></span>
+					</div>	
+					<% }%>
+
 			</div>
 			<div class="col-lg-4 col-lg-offset-4 ">
-				<a href="#" class="pull-right">我的收藏</a> <a href="#"
+				<a href="mainpage.jsp" class="pull-right">我的收藏</a> <a href="#"
 					class="pull-right">个人中心&nbsp;</a>
 			</div>
 		</div>
@@ -83,23 +103,23 @@
 			<table border="0" cellspacing="1" cellpadding="0" id="classify-table"
 				class="table table-striped">
 				<tr>
-					<td><a href="#">玄幻</a></td>
-					<td><a href="#">玄幻</a></td>
+					<td><a href="#">奇幻玄幻</a></td>
+					<td><a href="#">武侠仙侠</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">玄幻</a></td>
-					<td><a href="#">玄幻</a></td>
+					<td><a href="#">都市娱乐</a></td>
+					<td><a href="#">历史军事</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">玄幻</a></td>
-					<td><a href="#">玄幻</a></td>
+					<td><a href="#">游戏竞技</a></td>
+					<td><a href="#">二次元</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">玄幻</a></td>
-					<td><a href="#">玄幻</a></td>
+					<td><a href="#">青春浪漫</a></td>
+					<td><a href="#">悬疑灵异</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">玄幻</a></td>
+					<td><a href="#">都市言情</a></td>
 					<td><a href="#">更多</a></td>
 				</tr>
 			</table>
@@ -309,66 +329,18 @@
 					<th>作者</th>
 					<th>更新日期</th>
 				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+				<%
+					for(SnChapter chapter:updatelist){
+					%>
+					<tr>
+						<td><a href="#"><%=chapter.getSnNovel().getNovelTitle()%></a></td>
+						<td><a href="#"><%=chapter.getChapterTitle() %> </a></td>
+						<td><a href="#"><%=chapter.getSnNovel().getNovelAuthor() %></a></td>
+						<td><a href="#"><%=chapter.getChapterUpdatetime() %></a></td>
+					</tr>
+					<%
+					}
+				 %>
 			</table>
 		</div>
 		<div class="col-lg-3" id="newbook">
@@ -453,7 +425,7 @@
 						</div>
 						<div class="form-group">
 							<div style="float: left">
-								<input type="checkbox" name="autoLogin" value="auto">记住密码
+								<input type="checkbox"  value="auto">记住密码
 							</div>
 							<div style="float: right">
 								<a href="#" class="text-right">忘记密码</a>

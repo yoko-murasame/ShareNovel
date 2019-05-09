@@ -100,4 +100,10 @@ public class TestSnChapterDao {
 		List<SnChapter> chapterList = chapterDao.findByNovelByOrdersByPage(novel,SnChapterDao.DESC ,null,null, 10, 1);
 		chapterList.forEach(System.out::println);
 	}
+	@Test
+	public void testfindRecentUpdate(){
+		long t=1000*60*60;
+		List<SnChapter> chapterList = chapterDao.findRecentUpdate(t,10);
+		chapterList.forEach(System.out::println);
+	}
 }
