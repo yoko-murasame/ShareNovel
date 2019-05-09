@@ -9,8 +9,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<head>
 		<meta charset="utf-8">
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="js/kindeditor/themes/default/default.css" />
-		<script src="js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../js/kindeditor/themes/default/default.css" />
+		<script src="../js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script charset="utf-8" src="../js/kindeditor/kindeditor-all-min.js"></script>
 		<script charset="utf-8" src="../js/kindeditor/lang/zh-CN.js"></script>
 		<style type="text/css">

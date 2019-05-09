@@ -10,47 +10,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta charset="utf-8">
 		<title>小说详情</title>
 		<link rel="stylesheet" type="text/css" href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/mainpage.css"/>
 		<script src="js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
-			* {
-				margin: 0;
-				padding: 0;
-			}
 
-			#head {
-				background: #f2f2f2;
-				height: 40px;
-				line-height: 40px;
-				font-size: 20px;
-			}
-
-			#search-bar {
-				height: 100px;
-			}
-
-			#logo {
-				line-height: 100px;
-			}
-
-			#navsearch form {
-				margin-top: 40px;
-			}
-						.navbar-brand {
-				color: whitesmoke;
-			}
-			
-			.navbar-brand:hover {
-				color: white;
-			}
-			
-			.navbar-nav li a {
-				color: white;
-			}
-			
-			.navbar-nav li a:hover {
-				color: black;
-			}
 			#bookpageimg{
 				margin-left: 20px;
 			}
@@ -104,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div class="container" id="search-bar">
 			<div class="col-lg-4" id="logo">
-				<a href="#"><img src="img/logo.beebc.png"></a>
+				<a href="mainpage.jsp"><img src="img/logo.beebc.png"></a>
 			</div>
 			<!--搜索框-->
 			<div class="col-lg-8" id="navsearch">
@@ -155,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a href="" class="btn btn-default">在线阅读</a>
 					<a href="" class="btn btn-default">加入书架</a>
 					<a href="" class="btn btn-default">下载</a>
-				</div>
+			</div>
 			</div>
 			<div class="clearfix"></div>
 			<hr>
@@ -185,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$(e).parent().addClass("active");
 		}
 		function setIframeHeight(iframe) {
-			iframe.height=0;
+			iframe.height=500;
 			if (iframe) {
 			var iframeWin = iframe.contentWindow;
 			if (iframeWin.document.body) {

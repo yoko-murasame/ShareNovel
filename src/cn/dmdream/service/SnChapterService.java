@@ -82,5 +82,11 @@ public interface SnChapterService {
 	 * @return 分页查询
 	 */
 	public List<SnChapter> findByNovelByOrdersByPage(SnNovel snNovel, String idOrder,String titleOrder,String updatetimeOrder, int pageSize, int page);
+	/**
+	 * 获取最近更新小说章节
+	 * @param  day 前day天 到现在的时间间隔 必须大于0  默认为3.
+	 * @return 最近更新的小说章节
+	 */
+	public List<SnChapter> findRecentUpdate(Integer day,Integer limit);
 
 }
