@@ -10,7 +10,20 @@
     <servlet-name>TestServlet</servlet-name>
     <url-pattern>/testServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>novCk</servlet-name>
+    <url-pattern>/novCk.do</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>mainpage.jsp</welcome-file>
   </welcome-file-list>
+  <filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>cn.dmdream.controller.filter.CharacterEncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
 </web-app>
