@@ -333,7 +333,7 @@
 					for(SnChapter chapter:updatelist){
 					%>
 					<tr>
-						<td><a href="#"><%=chapter.getSnNovel().getNovelTitle()%></a></td>
+						<td><a href="novelinfo.jsp?nid=<%=chapter.getSnNovel().getNovelId() %>"><%=chapter.getSnNovel().getNovelTitle()%></a></td>
 						<td><a href="#"><%=chapter.getChapterTitle() %> </a></td>
 						<td><a href="#"><%=chapter.getSnNovel().getNovelAuthor() %></a></td>
 						<td><a href="#"><%=chapter.getChapterUpdatetime() %></a></td>

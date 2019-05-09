@@ -123,5 +123,23 @@ public class SnChapterServiceImpl implements SnChapterService {
 		return chapterDao.findRecentUpdate((long) (day*24*60*60*1000), limit);
 	}
 
+	@Override
+	public List<SnChapter> findRecentUpdate(SnNovel novel,Integer day, Integer limit) {
+		if(day==null) {
+			day=3;
+		}
+		if(day<0) {
+			day=0;
+		}
+		return chapterDao.findRecentUpdate(novel, (long) (day*24*60*60*1000), limit);
+	}
+
+	@Override
+	public int findNovelChapterTotalCount(SnNovel novel) {
+		// TODO Auto-generated method stub
+		return chapterDao.findNovelChapterTotalCount(novel);
+	}
+	
+
 
 }
