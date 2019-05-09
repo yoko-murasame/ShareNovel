@@ -64,4 +64,12 @@ public interface SnCategoryDao {
 	 * @return
 	 */
 	public List<SnCategory> findByCatGender(Integer gender);
+
+	/**
+	 * 查询改父分类id下的所有子分类分页版
+	 * @return
+	 */
+	public List<SnCategory> findByParentIdByPage(int id , int pageSize ,int page);
+
+	public Integer findCount(Integer id);
 }
