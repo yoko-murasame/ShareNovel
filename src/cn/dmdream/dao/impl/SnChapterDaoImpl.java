@@ -27,14 +27,13 @@ public class SnChapterDaoImpl implements SnChapterDao {
 	 * @return
 	 */
 	public int save(SnChapter snChapter) {
-		String sql = "insert into sn_chapter values(null,?,?,?,?,?)";
+		String sql = "insert into sn_chapter values(null,?,?,?,?)";
 		// 取得外键指向的小说id
 		Integer novelId = snChapter.getSnNovel().getNovelId();
-		Integer chatpternum=snChapter.getChapterNum();
 		String chapterTitle = snChapter.getChapterTitle();
 		String chapterContent = snChapter.getChapterContent();
 		String chapterUpdatetime = DateTimeUtils.getCurrentFormatDateTime();
-		int i = dbUtil.update(sql, novelId,chatpternum ,chapterTitle, chapterContent, chapterUpdatetime);
+		int i = dbUtil.update(sql, novelId,chapterTitle, chapterContent, chapterUpdatetime);
 		return i;
 	};
 
@@ -57,15 +56,14 @@ public class SnChapterDaoImpl implements SnChapterDao {
 	 * @return
 	 */
 	public int update(SnChapter snChapter) {
-		String sql = "update sn_chapter set chapter_novelid = ?,chapter_num=?,chapter_title=?,chapter_content=?,chapter_updatetime=? where chapter_id=?";
+		String sql = "update sn_chapter set chapter_novelid = ?,chapter_title=?,chapter_content=?,chapter_updatetime=? where chapter_id=?";
 		// 取得外键指向的小说id
 		Integer novelId = snChapter.getSnNovel().getNovelId();
-		Integer chatpternum=snChapter.getChapterNum();
 		String chapterTitle = snChapter.getChapterTitle();
 		String chapterContent = snChapter.getChapterContent();
 		String chapterUpdatetime = DateTimeUtils.getCurrentFormatDateTime();
 		Integer chapterId = snChapter.getChapterId();
-		int i = dbUtil.update(sql, novelId, chatpternum,chapterTitle, chapterContent, chapterUpdatetime, chapterId);
+		int i = dbUtil.update(sql, novelId,chapterTitle, chapterContent, chapterUpdatetime, chapterId);
 		return i;
 	};
 
@@ -104,7 +102,7 @@ public class SnChapterDaoImpl implements SnChapterDao {
 	public List<SnChapter> findByNovelByPage(SnNovel snNovel, int pageSize, int page) {
 		if (page <= 0)
 			page = 1;
-		String sql = "select chapter_id,chapter_title from sn_chapter where chapter_novelid = ? order by chapter_num limit ?,?";
+		String sql = "select chapter_id,chapter_title from sn_chapter where chapter_novelid = ? order by chapter_id limit ?,?";
 		ResultSet rs = dbUtil.query(sql, snNovel.getNovelId(), pageSize * (page - 1), pageSize);
 		List<SnChapter> list = new ArrayList<SnChapter>();
 		try {
@@ -209,7 +207,6 @@ public class SnChapterDaoImpl implements SnChapterDao {
 				// SnNovel chapterNovel = snNovelDao.findById(novelId);
 				SnNovel chapterNovel = new SnNovel();
 				chapterNovel.setNovelId(novelId);
-				Integer chapternum=rs.getInt("chapter_num");
 				String chapterTitle = rs.getString("chapter_title");
 				String chapterContent = rs.getString("chapter_content");
 				// 获取章节最近的更近时间
@@ -217,7 +214,6 @@ public class SnChapterDaoImpl implements SnChapterDao {
 				// 封装数据
 				chapter.setChapterId(chapterId);
 				chapter.setSnNovel(chapterNovel);
-				chapter.setChapterNum(chapternum);
 				chapter.setChapterTitle(chapterTitle);
 				chapter.setChapterContent(chapterContent);
 				chapter.setChapterUpdatetime(chapterUpdatetime);
