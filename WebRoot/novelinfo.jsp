@@ -9,14 +9,15 @@
 String id=request.getParameter("nid");
 int totalnum=0;
 SnNovel novel=null;
-if(id!=null){
+if("".equals(id)||id==null){
+	response.sendRedirect("mainpage.jsp");
+	return;
+}else{
 	int nid=Integer.parseInt(id);
 	SnNovelService ss=new SnNovelServiceImpl();
 	SnChapterService sd=new SnChapterServiceImpl();
 	novel=ss.findById(nid);
 	totalnum=sd.findNovelChapterTotalCount(novel);
-}else{
-	request.getRequestDispatcher("mainpage.jsp").forward(request, response);
 }
 %>
 
