@@ -34,7 +34,7 @@
 				<ul class="list-group" id="fc">
 					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/userinfo.jsp' class="list-group-item active">个人信息</a>
 					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/changepwd.jsp' class="list-group-item">修改密码</a>
-					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/uploadnovel.jsp' class="list-group-item active">上传小说</a>
+					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/uploadnovel.jsp' class="list-group-item">上传小说</a>
 					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/myupload.jsp' class="list-group-item">我的上传</a>
 					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/mybookshelf.jsp' class="list-group-item">我的书架</a>
 					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/mycomment.jsp' class="list-group-item">我的评价</a>
