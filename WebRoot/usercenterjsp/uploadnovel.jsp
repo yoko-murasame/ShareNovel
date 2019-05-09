@@ -17,7 +17,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				margin: 0;
 				padding: 0;
 			}
-			
+			.myContainer{
+			    width:800px;
+			    height:600px;
+			}
 			#novelSummary {
 				height: 300px;
 				font-size: medium;
@@ -78,6 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<body>
 		<div class="container">
+		    <div class="myContainer">
 				<form class="form-horizontal" action="#" method="post" onsubmit="">
 					<div id="contentLeft">
 					<div class="form-group form-group-lg">
@@ -157,6 +161,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					</div>
 				</form>
+			</div>
 		</div>
 	</body>
 </html>
