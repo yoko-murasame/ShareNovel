@@ -31,6 +31,10 @@
 		<servlet-name>BaseServlet</servlet-name>
 		<url-pattern>/base</url-pattern>
 	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UsercenterServlet</servlet-name>
+    <url-pattern>/servlet/usercenter.do</url-pattern>
+  </servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>mainpage.jsp</welcome-file>
 	</welcome-file-list>
