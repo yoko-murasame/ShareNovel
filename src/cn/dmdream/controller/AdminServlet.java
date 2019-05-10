@@ -48,4 +48,11 @@ public class AdminServlet extends BaseServlet {
 		return null;
 	}
 
+	//管理员注销
+	public String adminLogout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		// 删除session
+		HttpSession session = req.getSession();
+		session.removeAttribute("admin");
+		return "/admin/login.jsp";
+	}
 }

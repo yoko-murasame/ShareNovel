@@ -100,8 +100,8 @@ public class SnCategoryDaoImpl implements SnCategoryDao {
 	 * 根据分类名模糊查询
 	 */
 	public List<SnCategory> findByCatName(String catName) {
-		String sql = "select * from sn_category where cat_name like ?";
-		RowSet rs = dbUtil.query(sql, "%" + catName + "%");
+		String sql = "select * from sn_category where cat_name = ?";
+		RowSet rs = dbUtil.query(sql, catName);
 		List<SnCategory> list = new ArrayList<SnCategory>();
 		handleData(rs, list);
 		return list.size() > 0 ? list : null;
