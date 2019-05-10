@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.sql.RowSet;
+import javax.sql.rowset.CachedRowSet;
 
 import cn.dmdream.dao.SnCategoryDao;
 import cn.dmdream.dao.SnNovelDao;
@@ -252,5 +253,14 @@ public class SnNovelDaoImpl implements SnNovelDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<SnNovel> queryByCategory(int cid) {
+		String sql="select * from sn_novel where novel_categoryid=?";
+		List<SnNovel> list=new ArrayList<SnNovel>();
+		CachedRowSet rs = dbUtil.query(sql, cid);
+		handleData(rs, list);
+		return list.size()>0?list:null;
 	}
 }

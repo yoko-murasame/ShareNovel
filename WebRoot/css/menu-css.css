@@ -1,0 +1,51 @@
+.menu ul li {
+	display: block;
+	background: url(../img/zakladka.png) top left no-repeat;
+	list-style: none;
+	overflow: visible
+}
+
+.menu ul li a {
+	display: block;
+	height: 40px;
+	line-height:40px;
+	width: 85%;
+	margin-left:10%;
+	font-size: 20px;
+	color: #82846f;
+	outline: 0
+}
+
+.menu ul li .active {
+	background: url(../img/on.png) top right no-repeat
+}
+
+.menu ul li .inactive {
+	background: url(../img/off.png) top right no-repeat
+}
+
+.menu ul li ul {
+	display: none;
+}
+
+.menu ul li ul li ul {
+	margin-bottom: 5px
+}
+
+.menu ul li ul li {
+	display: block;
+	background: 0 0;
+	font-size: 12px;
+	list-style: circle;
+	color: #8f9d4c;
+	margin-left: 20px
+}
+
+.menu ul li ul li a {
+	background: 0 0;
+	font-size: 18px;
+	height: 40px;
+	line-height:40px;
+	color: #8f9d4c;
+	padding-left: 0
+}

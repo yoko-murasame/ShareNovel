@@ -167,6 +167,12 @@ public class SnNovelServiceImpl implements SnNovelService {
 	public List<SnNovel> getWeekRank() {
 		// 
 		return null;
+	}
+
+	@Override
+	public List<SnNovel> queryByCategory(int cid) {
+		// TODO Auto-generated method stub
+		return snNovelDao.queryByCategory(cid);
 	};
 
 }
