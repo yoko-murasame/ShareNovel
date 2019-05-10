@@ -375,12 +375,23 @@
                                   <th></th>
                               </tr>
                               </thead>
-                              <tbody>
+                              <tbody id="tb-insert">
+                              <!--<tr>
+                                  <td><a href="basic_table.html#" data-toggle="modal" data-target="#myModal" >虚构推理</a></td>
+                                  <td class="hidden-phone">片濑茶柴</td>
+                                  <td>推理 </td>
+                                  <td><span class="label label-warning label-mini">unchecked</span></td>
+                                  <td>
+                                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                  </td>
+                              </tr>
                               <tr>
-                                  <td><a href="basic_table.html#">片濑茶柴</a></td>
-                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                  <td>12000.00$ </td>
-                                  <td><span class="label label-info label-mini">Due</span></td>
+                                  <td><a href="basic_table.html#" data-toggle="modal" data-target="#myModal">刺客信条</a></td>
+                                  <td class="hidden-phone">育碧</td>
+                                  <td>穿越 </td>
+                                  <td><span class="label label-danger label-mini">deny</span></td>
                                   <td>
                                       <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
                                       <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
@@ -390,27 +401,12 @@
                               <tr>
                                   <td>
                                       <a href="basic_table.html#">
-                                          Dashgum co
+                                         	 冰菓
                                       </a>
                                   </td>
-                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                  <td>17900.00$ </td>
-                                  <td><span class="label label-warning label-mini">Due</span></td>
-                                  <td>
-                                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <a href="basic_table.html#">
-                                          Another Co
-                                      </a>
-                                  </td>
-                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                  <td>14400.00$ </td>
-                                  <td><span class="label label-success label-mini">Paid</span></td>
+                                  <td class="hidden-phone">米泽穗信</td>
+                                  <td>校园 </td>
+                                  <td><span class="label label-success label-mini">pass</span></td>
                                   <td>
                                       <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
                                       <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
@@ -442,7 +438,7 @@
                                       <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
                                       <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
                                   </td>
-                              </tr>
+                              </tr>-->
                               </tbody>
                           </table>
                       </div><!-- /content-panel -->
@@ -465,9 +461,31 @@
       <!--footer end-->
   </section>
 
+   
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">小说简介</h4>
+        </div>
+        <div class="modal-body" >
+          <p id="model-body" style="text-indent: 2em;font-size: 18px;line-height: 1.8;">
+
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <a href="#" class="btn btn-primary">前往详情...</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="../js/jquery-3.4.0.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
@@ -481,8 +499,95 @@
   <script>
       //custom select box
 
+    //   $(function(){
+    //       $('select.styled').customSelect();
+    //   });
+
+      //model
+
       $(function(){
-          $('select.styled').customSelect();
+      	
+      	var snNovel;
+      	var novel;
+
+        $.ajax({
+            url:"../novCk.do",
+            data:{
+            	"method":"init"
+            },
+            dataType:"json",
+            type:"GET",
+            async:false,
+            success:function(data){
+            	snNovel=data;
+//	            console.log(data);
+//	            alert(data.data.list[0].novelAuthor);
+							alert("准备初始化");
+							novel=snNovel.data.list;
+							var tbpart="<td><a href='basic_table.html#' data-toggle='modal' data-target='#myModal' > </a></td>"
+			                  +"<td class='hidden-phone'> </td>"
+			                  +"<td> </td>"
+			                  +"<td><span class='label  label-mini'> </span></td>"
+			                  +"<td>"
+			                      +"<button class='btn btn-success btn-xs'><i class='fa fa-check'></i></button>"
+			                      +"<button class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i></button>"
+			                      +"<button class='btn btn-danger btn-xs'><i class='fa fa-trash-o '></i></button>"
+			                  +"</td>";
+                              
+	            var novStatus=new Array("Unchecked","Pass","Deny");
+	            var ckColor=new Array("label-warning","label-success","label-danger");
+	            alert("完成初始化");
+              
+				for(var i=0;i<novel.length;i++){
+					
+					
+					var insert=$("#tb-insert");
+					var tr=$("<tr></tr>")
+					insert.append(tr);
+//					console.log("tbody子节点:");
+//					console.log(insert.children().last())
+					insert.children().last().html(tbpart);
+					var sons=insert.children().last().children();
+					//alert("出现了吗？");
+//					console.log(sons);
+//					console.log(sons[0]);
+					$(sons[0]).children().last().html(novel[i].novelTitle);
+					$(sons[1]).html(novel[i].novelAuthor);
+					$(sons[2]).html(novel[i].snCategory.catName);
+					$(sons[3]).children().last().html(novStatus[novel[i].novelCheck]);
+					$(sons[3]).children().last().addClass(ckColor[novel[i].novelCheck]);
+					
+				}
+				
+				alert("完成页面初始化");
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){  
+            	alert("初始化失败");
+            	console.log(XMLHttpRequest.readyState);
+            	console.log("");
+            	console.log(XMLHttpRequest.status);
+            	console.log("");
+            	console.log(XMLHttpRequest.responseText);
+    				} 
+        });
+
+
+
+        var list=$("tbody a");
+        $(list).click(function(){
+        	alert("1");
+            var name=$(this).html();
+            for(var i=0;i<novel.length;i++){
+            	if(name==novel[i].novelTitle){
+                $("#model-body").html(novel[i].novelSummary);
+           		 }
+            }
+            
+            
+        });
+
+
+
       });
 
   </script>

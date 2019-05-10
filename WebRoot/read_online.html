@@ -8,7 +8,106 @@
 		<link rel="stylesheet" type="text/css" href="css/read_online.css"/>
 		<script src="js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-		
+		<script type="text/javascript">
+			$(function(){
+				var flag=0;
+				
+				$(".float-opt").first().click(function(){
+					if(flag==0){
+						$(".float-opt:eq(1)").css({
+							'visibility':'visible',
+							'opacity':'1',
+							'transition-property': 'opacity',
+							'transition-duration': '1s',
+							'transition-timing-function': 'ease',
+						});
+						$(".float-opt:eq(2)").css({
+							'visibility':'visible',
+							'opacity':'1',
+							'transition-property': 'opacity',
+							'transition-duration': '1s',
+							'transition-timing-function': 'ease',
+							'transition-delay': '0.1s'
+						});
+						$(".float-opt:eq(3)").css({
+							'visibility':'visible',
+							'opacity':'1',
+							'transition-property': 'opacity',
+							'transition-duration': '1s',
+							'transition-timing-function': 'ease',
+							'transition-delay': '0.2s'
+						});
+						$(".float-opt:eq(4)").css({
+							'visibility':'visible',
+							'opacity':'1',
+							'transition-property': 'opacity',
+							'transition-duration': '1s',
+							'transition-timing-function': 'ease',
+							'transition-delay': '0.3s'
+						});
+						flag=1;
+					}
+				});
+				
+				$(".float-opt").last().click(function(){
+					if(flag==1){
+						$(".float-opt:eq(1)").css({
+						'opacity':'0',
+						'transition-property': 'opacity',
+						'transition-property': 'visibility',
+						'transition-duration': '1s',
+						'transition-timing-function': 'ease',
+						'transition-delay': '0.3s',
+						});
+						$(".float-opt:eq(2)").css({
+						'opacity':'0',
+						'transition-property': 'opacity',
+						'transition-duration': '1s',
+						'transition-timing-function': 'ease',
+						'transition-delay': '0.2s',
+						});
+						$(".float-opt:eq(3)").css({
+						'opacity':'0',
+						'transition-property': 'opacity',
+						'transition-duration': '1s',
+						'transition-timing-function': 'ease',
+						'transition-delay': '0.1s',
+						});
+						$(".float-opt:eq(4)").css({
+						'opacity':'0',
+						'transition-property': 'opacity',
+						'transition-duration': '1s',
+						'transition-timing-function': 'ease',
+						});
+//						$(".float-opt:eq(1)").css({
+//						'visibility':'hidden',
+//						'transition-property': 'visibility',
+//						'transition-timing-function': 'ease',
+//						'transition-delay': '1s',
+//						});
+//						$(".float-opt:eq(2)").css({
+//						'visibility':'hidden',
+//						'transition-property': 'visibility',
+//						'transition-timing-function': 'ease',
+//						'transition-delay': '1s',
+//						});
+//						$(".float-opt:eq(3)").css({
+//						'visibility':'hidden',
+//						'transition-property': 'visibility',
+//						'transition-timing-function': 'ease',
+//						'transition-delay': '1s',
+//						});
+//						$(".float-opt:eq(4)").css({
+//						'visibility':'hidden',
+//						'transition-property': 'visibility',
+//						'transition-timing-function': 'ease',
+//						'transition-delay': '1s',
+//						});
+					}
+					flag=0;
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<div class="container-fluid" id="header">
@@ -21,19 +120,19 @@
 					<div class="float-opt">
 						<div><span class="glyphicon glyphicon-menu-down"></span></div>
 					</div>
-					<div class="float-opt">
+					<div class="float-opt" style="opacity: 0;visibility: hidden;">
 						<div><span class="glyphicon glyphicon-menu-hamburger"></span></div>
 						<p>目录</p>
 					</div>
-					<div class="float-opt">
+					<div class="float-opt" style="opacity: 0;visibility: hidden;">
 						<div><span class="glyphicon glyphicon-cog"></span></div>
 						<p>设置</p>
 					</div>
-					<div class="float-opt">
+					<div class="float-opt" style="opacity: 0;visibility: hidden;">
 						<div><span class="glyphicon glyphicon-th-list"></span></div>
 						<p>书架</p>
 					</div>
-					<div class="float-opt">
+					<div class="float-opt" style="opacity: 0;visibility: hidden;">
 						<div><span class="glyphicon glyphicon-menu-up"></span></div>
 					</div>
 				</div>
@@ -57,7 +156,7 @@
 						</p>
 						<p>然而，在家裏睡着的話也沒什麽問題，但從記事時開始，她知道，在屋外睡着是最舒服的事，因爲沒有什麽會遮斷雨聲。
 						</p>
-						<p>隻要一下雨，要麽在有遮擋的公園長椅上，要麽在巴士站裏，琴子就會迷糊地睡去。隻要天氣預報上出現了下雨的标識，她就會從早上就開始想着——今天該到哪裏去打盹呢。
+						<!--<p>隻要一下雨，要麽在有遮擋的公園長椅上，要麽在巴士站裏，琴子就會迷糊地睡去。隻要天氣預報上出現了下雨的标識，她就會從早上就開始想着——今天該到哪裏去打盹呢。
 						</p>
 						<p>現在，她已經是十七歲的高中生了，這習慣卻還是一點兒沒變。在學校交到的朋友，會一邊笑着，一邊訝異地這麽說。
 						</p>
@@ -114,7 +213,7 @@
 						<p>“那實在是怎麽都看不出來呢。”
 						</p>
 						<p>她喜歡在雨天打盹這個習慣，連護士們也都知道，然而她會診從來沒有遲到過。岩永有着不到一百五十公分的身高以及不到四十公斤的體重，是很嬌小的體型。當她戴着貝雷帽優雅地就着手杖走着，又或者毫無俗世煩擾的樣子說着話時，看起來就像個不食人間煙火的大家閨秀，根本與跟可靠二字背道而馳。不過，在大家閨秀這一點上，倒是一萬個不假。
-						</p>
+						</p>-->
 					</div>
 				</div>
 				<div class="back-top">

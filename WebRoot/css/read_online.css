@@ -45,6 +45,7 @@
 			
 			.text-wrap{
 				/*height: 2000px;*/
+				min-height: 90vh;
 				background-color: papayawhip;
 				padding: 50px 64px;
 			}

@@ -8,6 +8,10 @@
 		<servlet-name>TestServlet</servlet-name>
 		<servlet-class>cn.dmdream.controller.TestServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>novCk</servlet-name>
+		<servlet-class>cn.dmdream.controller.novelCheck.novCk</servlet-class>
+	</servlet>
 
 
   <servlet-mapping>
