@@ -51,20 +51,11 @@
 				
 				$(".float-opt").last().click(function(){
 					if(flag==1){
-						$(".float-opt:eq(1)").css({
-						'opacity':'0',
-						'transition-property': 'opacity',
-						'transition-property': 'visibility',
-						'transition-duration': '1s',
-						'transition-timing-function': 'ease',
-						'transition-delay': '0.3s',
-						});
-						$(".float-opt:eq(2)").css({
+						$(".float-opt:eq(4)").css({
 						'opacity':'0',
 						'transition-property': 'opacity',
 						'transition-duration': '1s',
 						'transition-timing-function': 'ease',
-						'transition-delay': '0.2s',
 						});
 						$(".float-opt:eq(3)").css({
 						'opacity':'0',
@@ -73,35 +64,46 @@
 						'transition-timing-function': 'ease',
 						'transition-delay': '0.1s',
 						});
-						$(".float-opt:eq(4)").css({
+						
+						$(".float-opt:eq(2)").css({
 						'opacity':'0',
 						'transition-property': 'opacity',
 						'transition-duration': '1s',
 						'transition-timing-function': 'ease',
+						'transition-delay': '0.2s',
 						});
+						$(".float-opt:eq(1)").css({
+						'opacity':'0',
+						'transition-property': 'opacity',
+						'transition-duration': '1s',
+						'transition-timing-function': 'ease',
+						'transition-delay': '0.3s',
+						});
+						
+						
 //						$(".float-opt:eq(1)").css({
 //						'visibility':'hidden',
 //						'transition-property': 'visibility',
 //						'transition-timing-function': 'ease',
-//						'transition-delay': '1s',
+//						'transition-delay': '2s',
 //						});
 //						$(".float-opt:eq(2)").css({
 //						'visibility':'hidden',
 //						'transition-property': 'visibility',
 //						'transition-timing-function': 'ease',
-//						'transition-delay': '1s',
+//						'transition-delay': '2s',
 //						});
 //						$(".float-opt:eq(3)").css({
 //						'visibility':'hidden',
 //						'transition-property': 'visibility',
 //						'transition-timing-function': 'ease',
-//						'transition-delay': '1s',
+//						'transition-delay': '2s',
 //						});
 //						$(".float-opt:eq(4)").css({
 //						'visibility':'hidden',
 //						'transition-property': 'visibility',
 //						'transition-timing-function': 'ease',
-//						'transition-delay': '1s',
+//						'transition-delay': '2s',
 //						});
 					}
 					flag=0;
