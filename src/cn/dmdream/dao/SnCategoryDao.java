@@ -3,6 +3,7 @@ package cn.dmdream.dao;
 import java.util.List;
 
 import cn.dmdream.entity.SnCategory;
+import cn.dmdream.entity.SnNovel;
 
 /**
  * CategoryDao层接口
@@ -64,4 +65,29 @@ public interface SnCategoryDao {
 	 * @return
 	 */
 	public List<SnCategory> findByCatGender(Integer gender);
+	/**
+	 * 
+	 * @param 分类名 
+	 * @return 返回改类的所有小说
+	 */
+	public List<SnNovel> queryAllNovelByCategoryName(String name);
+	/**
+	 * 分页版
+	 * @param 分类名 
+	 * @return 返回改类的所有小说
+	 */
+	public List<SnNovel> queryAllNovelByCategoryName(int cid,int pagesize,int page);
+	/**
+	 * 
+	 * @param 分类id 
+	 * @return 返回该类的所有小说
+	 */
+	public List<SnNovel> queryAllNovelByCategoryName(int cid);
+	/**
+	 * 分页版
+	 * @param 分类id
+	 * @return 返回该类的所有小说
+	 */
+	public List<SnNovel> queryAllNovelByCategoryName(String name,int pagesize,int page);
+	
 }

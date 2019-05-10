@@ -8,6 +8,7 @@ import javax.sql.RowSet;
 
 import cn.dmdream.dao.SnCategoryDao;
 import cn.dmdream.entity.SnCategory;
+import cn.dmdream.entity.SnNovel;
 import cn.dmdream.utils.DbUtil;
 
 /**
@@ -120,7 +121,6 @@ public class SnCategoryDaoImpl implements SnCategoryDao {
 				String catName = rs.getString("cat_name");
 				int catParentid = rs.getInt("cat_parentid");
 				int catGender = rs.getInt("cat_gender");
-
 				snCategory.setCatId(catId);
 				snCategory.setCatName(catName);
 				snCategory.setCatParentid(catParentid);
@@ -136,6 +136,42 @@ public class SnCategoryDaoImpl implements SnCategoryDao {
 				e.printStackTrace();
 			}
 		}
+	}
+	/**
+	 * @param 分类名
+	 * @return 返回给定类名的所有小说
+	 */
+	@Override
+	public List<SnNovel> queryAllNovelByCategoryName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 * @param 分类名
+	 * @return 返回给定类名的所有小说
+	 */
+	@Override
+	public List<SnNovel> queryAllNovelByCategoryName(String name, int pagesize, int page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**分页版
+	 * @param 分类id
+	 * @return 返回给定类名的所有小说
+	 */
+	@Override
+	public List<SnNovel> queryAllNovelByCategoryName(int cid, int pagesize, int page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 * @param 分类id
+	 * @return 返回给定类名的所有小说
+	 */
+	@Override
+	public List<SnNovel> queryAllNovelByCategoryName(int cid) {
+	
+		return null;
 	}
 
 }

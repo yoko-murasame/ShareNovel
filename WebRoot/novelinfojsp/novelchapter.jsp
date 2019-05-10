@@ -12,7 +12,7 @@
 	}
 	String id = request.getParameter("nid");
 	List<SnChapter> list = null;
-	List<SnChapter> newlist = null;
+	List<SnChapter> newlist =null;
 	if (id != null) {
 		int nid = Integer.parseInt(id);
 		SnNovel novel = new SnNovel();
@@ -20,10 +20,15 @@
 		SnChapterService ss = new SnChapterServiceImpl();
 		list = ss.findByNovelByPage(novel, 60, pagenum);
 		if(pagenum<2){
-			newlist=ss.findRecentUpdate(novel,1, 12);
+			newlist=ss.findRecentUpdate(novel, 2, 12);
 		}
 	} else {
 		request.getRequestDispatcher("mainpage.jsp").forward(request, response);
+	}
+	if(list==null){
+		//判断小说有没有章节
+		response.getWriter().write("<h1 style='text-align:center;'>该小说没有章节信息,建议下载全部小说<h1>");
+		return;
 	}
 %>
 

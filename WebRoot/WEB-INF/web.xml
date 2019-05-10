@@ -31,6 +31,15 @@
 		<servlet-name>BaseServlet</servlet-name>
 		<url-pattern>/base</url-pattern>
 	</servlet-mapping>
+	<!--分类页面Servlet  -->
+	<servlet>
+		<servlet-name>CategoryServlet</servlet-name>
+		<servlet-class>cn.dmdream.servlet.CategoryServelt</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryServlet</servlet-name>
+		<url-pattern>/category.do</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>mainpage.jsp</welcome-file>
 	</welcome-file-list>

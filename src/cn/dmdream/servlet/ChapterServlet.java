@@ -26,7 +26,11 @@ public class ChapterServlet extends BaseServlet{
 		SnChapterService cs=new SnChapterServiceImpl();
 		String cid=req.getParameter("cid");
 		if(cid!=null) {
-			SnChapter chapter = cs.findById(Integer.parseInt(cid));
+			int c1=Integer.parseInt(cid);
+			if(c1<0) {
+				return "/mainpage.jsp";
+			}
+			SnChapter chapter = cs.findById(c1);
 			req.setAttribute("chapter", chapter);
 			return "/readonline.jsp";
 			
