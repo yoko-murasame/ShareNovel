@@ -45,11 +45,12 @@
     <servlet-name>AdminCategoryServlet</servlet-name>
     <url-pattern>/adminCategory.do</url-pattern>
   </servlet-mapping>
-  
-  <welcome-file-list>
-    <welcome-file>mainpage.jsp</welcome-file>
-  </welcome-file-list>
-  <filter>
+
+
+	<welcome-file-list>
+		<welcome-file>mainpage.jsp</welcome-file>
+	</welcome-file-list>
+	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>cn.dmdream.controller.filter.CharacterEncodingFilter</filter-class>
 	</filter>
@@ -57,8 +58,13 @@
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-	
-
-	
-
+    <filter>
+        <filter-name>AdminAuthFilter</filter-name>
+        <filter-class>cn.dmdream.controller.filter.AdminAuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminAuthFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+        <url-pattern>/adminCategory.do</url-pattern>
+    </filter-mapping>
 </web-app>
