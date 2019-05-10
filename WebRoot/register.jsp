@@ -9,9 +9,20 @@
 <html>
 <head>
 <title>注册页面</title>
-<link rel="stylesheet" href="css/bootstrap.css" />
+<link rel="stylesheet" href="js/bootstrap-3.3.7-dist/css/bootstrap.css" />
 <script src="js/jquery-3.4.0.js"></script>
-<script src="js/bootstrap.js"></script>
+<script src="js/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<style type="text/css">
+*{
+    margin:0;
+    padding:0;
+}
+h3{
+    margin-top:40px;
+    margin-bottom:40px;
+    margin-right:40px;
+}
+</style>
 <script type="text/javascript">
 
 	$(function() {
@@ -52,10 +63,8 @@
 <body>
 	<div class="container">
 		<div class="row">
-		    <div>
-		        <center><h3>用户注册</h3></center>
-		        <br/>
-		        <br/>
+		    <div style="text-align: center">
+		        <h3>用户注册</h3>
 		    </div>
 		    <div>
 			<form class="form-horizontal" action="reg.do" method="post"

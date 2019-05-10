@@ -17,7 +17,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				margin: 0;
 				padding: 0;
 			}
-			
+			.myContainer{
+			    width:800px;
+			    height:600px;
+			    margin-top:30px;
+			}
 			#novelSummary {
 				height: 300px;
 				font-size: medium;
@@ -77,7 +81,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
 
 	<body>
-		<div class="container">
+	    <div class="container">
+		    <div class="myContainer">
 				<form class="form-horizontal" action="#" method="post" onsubmit="">
 					<div id="contentLeft">
 					<div class="form-group form-group-lg">
@@ -151,12 +156,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
-						<div class="" style="border: dashed 1px;width: 300px;height: 380px;">
+						<div class="" style="border: dashed 1px;width: 300px;height: 350px;">
 
 						</div>
 					</div>
+					<div class="form-group form-group-lg">
+					    <div>
+					        <input type="submit" class="btn btn-danger btn-lg" value="点击上传">
+					    </div>
+					</div>
 					</div>
 				</form>
+			</div>
 		</div>
 	</body>
 </html>

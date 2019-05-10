@@ -59,4 +59,5 @@ public interface SnUserService {
 	 * @return
 	 */
 	public SnUser findByUsername(String username);
+	public Boolean login(String name,String pwd);
 }

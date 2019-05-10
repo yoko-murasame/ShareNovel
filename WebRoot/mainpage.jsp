@@ -46,7 +46,7 @@
 					<span>亲,请登录</span> <a href="javascript:openmodel()">登录</a>
 				</div>
 				<div class="col-lg-6">
-					<a href="#"> <font color="red">注册</font>
+					<a href="${pageContext.request.contextPath}/register.jsp"> <font color="red">注册</font>
 					</a>
 				</div>
 					<%}else{ %>
@@ -416,7 +416,7 @@
 					</div>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form id="loginform">
 						<div class="form-group">
 							<input type="text" class="form-control" id="username"  name="username" placeholder="手机/邮箱/用户名">
 						</div>
@@ -435,7 +435,7 @@
 				</div>
 				<div class="modal-footer">
 					<center>
-						<button type="button" class="btn btn-danger btn-block">登录</button>
+						<button type="button" class="btn btn-danger btn-block" id="loginbt">登录</button>
 					</center>
 					<center>
 						<div>
@@ -454,6 +454,14 @@ function openmodel(){
 	  keyboard: false,
 	})
 }
+$("#loginbt").click(function(){
+	var data=$("#loginform").serialize();
+	$.ajax({
+		url:"user.do",
+		method:"post",
+		data:data,
+	});
+});
 </script>
 
 

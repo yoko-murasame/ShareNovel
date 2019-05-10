@@ -75,4 +75,10 @@ public class SnUserServiceImpl implements SnUserService{
 		return snUser;
 	}
 
+	@Override
+	public Boolean login(String name, String pwd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

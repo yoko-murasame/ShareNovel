@@ -32,7 +32,7 @@
 					<span>亲,请登录</span> <a href="javascript:openmodel()">登录</a>
 				</div>
 				<div class="col-lg-6">
-					<a href="#"> <font color="red">注册</font>
+					<a href="${pageContext.request.contextPath}/register.jsp"> <font color="red">注册</font>
 					</a>
 				</div>
 				<%
