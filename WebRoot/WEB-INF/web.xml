@@ -8,11 +8,33 @@
 		<servlet-name>TestServlet</servlet-name>
 		<servlet-class>cn.dmdream.controller.TestServlet</servlet-class>
 	</servlet>
+  <servlet>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>cn.dmdream.controller.AdminServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminCategoryServlet</servlet-name>
+    <servlet-class>cn.dmdream.controller.AdminCategoryServlet</servlet-class>
+  </servlet>
+
+
 
 	<servlet-mapping>
 		<servlet-name>TestServlet</servlet-name>
 		<url-pattern>/testServlet.do</url-pattern>
 	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/admin.do</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminCategoryServlet</servlet-name>
+    <url-pattern>/adminCategory.do</url-pattern>
+  </servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>mainpage.jsp</welcome-file>
@@ -25,4 +47,13 @@
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
+    <filter>
+        <filter-name>AdminAuthFilter</filter-name>
+        <filter-class>cn.dmdream.controller.filter.AdminAuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminAuthFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+        <url-pattern>/adminCategory.do</url-pattern>
+    </filter-mapping>
 </web-app>

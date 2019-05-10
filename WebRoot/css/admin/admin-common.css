@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+.black-bg {
+	background-color: #424A5D;
+	border-color: #666;
+}
+
+.pagination {
+	float: right;
+}
+
+.content-panel {
+	padding-top: 0px;
+	margin-top: 5px;
+}
+.mygritter{
+	left:30%;
+	right:30%;
+}
+.modal-header{
+ 	background:#424a5d;
+}
+.modal.in .modal-dialog {
+    margin-top: 200px;
+}
+.site-footer {
+    background: #424a5d;
+}
+.ds h3 {
+    background: #424a5d;
+}
+.custom-bar-chart .bar .value {
+    background: #aeb2b7;
+}
