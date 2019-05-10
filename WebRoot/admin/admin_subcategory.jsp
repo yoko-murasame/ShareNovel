@@ -48,16 +48,16 @@ $(function(){
 			showSkipInputFlag: true, //是否支持跳转,不填默认不显示
 			getPage: function() {
 				//获取当前页数跳转
-				window.location.href = "${pageContext.request.contextPath}/adminCategory.do?method=toCategoryPage&curPage="+this.curPage + "&pageSize="+this.pageAmount;
+				window.location.href = "${pageContext.request.contextPath}/adminCategory.do?method=toSubCategoryPage&curPage="+this.curPage + "&pageSize="+this.pageAmount +"&topCatId=" + ${topCat.catId};
 			}
 		});
 		//新增按钮事件			
 		$("#catSaveBtn").click(function(){
 			var obj = {};
 			obj.catId = null;
-			obj.catName = $("#topCatNameId").val();
-			obj.catGender = $("#topCatGenderId").val();
-			if(obj.catName == null || obj.catName == "" || obj.catGender == -1){
+			obj.catName = $("#subCatNameId").val();
+			obj.catParentid = ${topCat.catId};//获取父类id
+			if(obj.catName == null || obj.catName == ""){
 	           $.gritter.add({
 		            title: '消息',
 		            text: "表单未完成",
@@ -77,8 +77,8 @@ $(function(){
 			var obj = {};
 			obj.catId = $("#catEditId").val();
 			obj.catName = $("#catEditNameId").val();
-			obj.catGender = $("#catEditGenderId").val();
-			if(obj.catName == null || obj.catName == "" || obj.catGender == -1){
+			obj.catParentid = ${topCat.catId};//获取父类id
+			if(obj.catName == null || obj.catName == ""){
 	           $.gritter.add({
 		            title: '消息',
 		            text: "表单未完成",
@@ -97,9 +97,9 @@ function catSave(catObj,modalId){
           data:{
           	  catId:catObj.catId,
               catName:catObj.catName,
-              catGender:catObj.catGender
+              catParentid:catObj.catParentid,
           },
-          url:"${pageContext.request.contextPath}/adminCategory.do?method=addCategory",
+          url:"${pageContext.request.contextPath}/adminCategory.do?method=addSubCategory",
           type:"POST",
           success:function(data){
               console.log(data);
@@ -189,16 +189,13 @@ function toggleSelectAll(){
 	}
 }
 //表格单选绿色按钮
-function showGritterSuccess(obj) {
+function showGritterSuccess() {
 	$.gritter.add({
 				title:'消息',
-         text: "正在查询,稍后将跳转子分类页面······",
+         text: "无事发生······",
          sticky: false,
          time: 3000
     });
-    setTimeout(function() {
-    	window.location.href = "${pageContext.request.contextPath}/adminCategory.do?method=toSubCategoryPage&topCatId=" + obj.value;
-    }, 1000)
 }
 //显示修改modal并回显数据
 function showEditModal(obj){
@@ -223,7 +220,6 @@ function showEditModal(obj){
 		        //回填数据
 		        $("#catEditId").val(obj.catId);
 		        $("#catEditNameId").val(obj.catName);
-		        $("#catEditGenderId>option[value="+obj.catGender+"]").prop("selected",true);
 		        //显示修改窗口
                 $("#modalEdit").modal("show");
                }else{
@@ -310,10 +306,10 @@ function showEditModal(obj){
 							<i class="fa fa-tasks"></i> <span>分类管理</span>
 					</a>
 						<ul class="sub">
-							<li class="active"><a
+							<li ><a
 								href="${pageContext.request.contextPath }/adminCategory.do?method=toCategoryPage">顶级分类管理</a>
 							</li>
-							<li><a href="${pageContext.request.contextPath }/adminCategory.do?method=toCategoryPage">子分类分类管理</a></li>
+							<li class="active"><a href="${pageContext.request.contextPath }/adminCategory.do?method=toSubCategoryPage&topCatId=${topCat.catId}">子分类分类管理</a></li>
 						</ul></li>
 				</ul>
 				<!-- sidebar menu end-->
@@ -328,11 +324,11 @@ function showEditModal(obj){
 		<section id="main-content">
 			<section class="wrapper site-min-height">
 				<h3>
-					<i class="fa fa-angle-right"></i> 顶级分类管理
+					<i class="fa fa-angle-right"></i> 子分类分类管理
 				</h3>
 				<div class="row mt">
 					<div class="col-lg-12">
-						<p>在这里新增、修改、删除顶级分类.</p>
+						<p>在这里新增、修改、删除分类  <font color="red">${topCat.catName}</font> 的子分类.</p>
 					</div>
 				</div>
 				<div id="nav"
@@ -353,7 +349,7 @@ function showEditModal(obj){
 									<tr>
 										<th><i class="fa fa-bookmark" onclick="toggleSelectAll()"></i></th>
 										<th><i class="fa fa-bullhorn"></i> 分类名称</th>
-										<th><i class=" fa fa-question-circle"></i> 性别分类</th>
+										<th><i class=" fa fa-question-circle"></i> 父分类</th>
 										<th><i class=" fa fa-edit"></i> 操作</th>
 									</tr>
 								</thead>
@@ -363,13 +359,10 @@ function showEditModal(obj){
 											<td><input name="catIds" value="${cat.catId }"
 												type="checkbox" /></td>
 											<td>${cat.catName }</td>
-											<td><c:if test="${cat.catGender == 0}">
-													<span class="label label-info label-mini">男频</span>
-												</c:if> <c:if test="${cat.catGender == 1}">
-													<span class="label label-success label-mini">女频</span>
-												</c:if></td>
 											<td>
-												<button value="${cat.catId }" onclick="showGritterSuccess(this)"
+												${topCat.catName }
+											<td>
+												<button value="${cat.catId }" onclick="showGritterSuccess()"
 													class="btn btn-success btn-xs">
 													<i class="fa fa-check"></i>
 												</button>
@@ -414,23 +407,11 @@ function showEditModal(obj){
 
 							<div class="form-group has-success">
 								<label class="col-sm-4 control-label col-lg-4 col-md-4"
-									for="topCatName">请输入父分类名称</label>
+									for="subCatName">请输入分类名称</label>
 								<div class="col-lg-10">
-									<input type="hidden" id="topCatId">
-									<input type="text" name="topCatName" class="form-control"
-										id="topCatNameId">
-								</div>
-							</div>
-							<div class="form-group has-success">
-								<label class="col-sm-4 control-label col-lg-4 col-md-4"
-									for="topCatGender">请选择性别类型</label>
-								<div class="col-lg-10">
-									<select name="topCatGender" class="form-control"
-										id="topCatGenderId">
-										<option value="-1">--请选择--</option>
-										<option value="0">男频</option>
-										<option value="1">女频</option>
-									</select>
+									<input type="hidden" id="subCatId">
+									<input type="text" name="subCatName" class="form-control"
+										id="subCatNameId">
 								</div>
 							</div>
 
@@ -487,19 +468,6 @@ function showEditModal(obj){
 										id="catEditNameId">
 								</div>
 							</div>
-							<div class="form-group has-success">
-								<label class="col-sm-4 control-label col-lg-4 col-md-4"
-									for="catEditGender">请选择性别类型</label>
-								<div class="col-lg-10">
-									<select name="catEditGender" class="form-control"
-										id="catEditGenderId">
-										<option value="-1">--请选择--</option>
-										<option value="0">男频</option>
-										<option value="1">女频</option>
-									</select>
-								</div>
-							</div>
-
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"

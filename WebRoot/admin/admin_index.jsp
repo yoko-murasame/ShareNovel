@@ -24,12 +24,8 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-		<style type="text/css">
-			.black-bg {
-				background-color: #424A5D;
-				border-color: #666;
-			}
-		</style>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/admin/admin-common.css">
 </head>
 <body>
 		<section id="container">
@@ -65,7 +61,7 @@
 					<ul class="sidebar-menu" id="nav-accordion">
 
 						<p class="centered">
-							<a href="#"><img src="${admin.adminNickpic}" class="img-circle" width="60"></a>
+							<a href="#"><img src="${admin.adminNickpic}" class="img-rounded" width="100"></a>
 						</p>
 						<h5 class="centered">${admin.adminUsername}</h5>
 
@@ -120,7 +116,7 @@
 									<a href="${pageContext.request.contextPath}/adminCategory.do?method=toCategoryPage">顶级分类管理</a>
 								</li>
 								<li>
-									<a href="admin_subcategory.jsp">子分类分类管理</a>
+									<a href="${pageContext.request.contextPath}/adminCategory.do?method=toCategoryPage">子分类分类管理</a>
 								</li>
 							</ul>
 						</li>

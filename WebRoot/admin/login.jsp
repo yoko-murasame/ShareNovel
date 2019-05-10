@@ -8,10 +8,10 @@
 		<link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.css" rel="stylesheet">
 		<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
 		<script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/js/bootstrap.js"></script>
-		<script type="text/javascript" src="js/admin/jquery.backstretch.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/admin/jquery.backstretch.min.js"></script>
 		<!--toast-->
-		<link rel="stylesheet" type="text/css" href="css/bootoast.css">
-		<script type="text/javascript" src="js/bootoast.js"></script>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootoast.css">
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootoast.js"></script>
 
 		<title>管理员登录</title>
 		<style type="text/css">
@@ -31,7 +31,7 @@
 
 				$.ajax({
 					type: "POST",
-					url: "admin.do?method=adminLogin",
+					url: "${pageContext.request.contextPath}/admin.do?method=adminLogin",
 					data: {
 						username: $("#username").val(),
 						password: $("#password").val(),
@@ -91,7 +91,7 @@
 		</div>
 
 		<script>
-			$.backstretch("img/backgroundImg.jpg", {
+			$.backstretch("${pageContext.request.contextPath}/img/backgroundImg.jpg", {
 				speed: 800
 			});
 		</script>

@@ -36,7 +36,14 @@ public class BaseServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			String message = e.getMessage();
+			System.out.println(message);
+			if(message.indexOf("Admin") > 0){
+				//访问不到方法时跳转
+				req.getRequestDispatcher("/admin/login.jsp").forward(req, resp);
+			}else{
+				req.getRequestDispatcher("/login.jsp").forward(req, resp);
+			}
 		}
 
 	}
