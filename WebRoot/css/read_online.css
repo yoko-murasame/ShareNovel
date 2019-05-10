@@ -45,6 +45,7 @@
 			
 			.text-wrap{
 				/*height: 2000px;*/
+				min-height: 90vh;
 				background-color: papayawhip;
 				padding: 50px 64px;
 			}
@@ -54,7 +55,7 @@
 				height: 80px;
 				position: fixed;
 				top: 640px;
-				left:1210px;
+				left:1290px;
 				z-index: 2;
 				/*background-color: navajowhite;*/
 			}
