@@ -40,6 +40,15 @@
 		<servlet-name>CategoryServlet</servlet-name>
 		<url-pattern>/category.do</url-pattern>
 	</servlet-mapping>
+	<!-- 个人中心Servelt -->
+	<servlet>
+		<servlet-name>UserCenterServlet</servlet-name>
+		<servlet-class>cn.dmdream.servlet.UserCenterServelt</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserCenterServlet</servlet-name>
+		<url-pattern>/usercenter.do</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>mainpage.jsp</welcome-file>
 	</welcome-file-list>
