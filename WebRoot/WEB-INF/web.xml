@@ -8,6 +8,17 @@
 		<servlet-name>TestServlet</servlet-name>
 		<servlet-class>cn.dmdream.controller.TestServlet</servlet-class>
 	</servlet>
+  <servlet>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>cn.dmdream.controller.AdminServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminCategoryServlet</servlet-name>
+    <servlet-class>cn.dmdream.controller.AdminCategoryServlet</servlet-class>
+  </servlet>
+
+
+
 
 
   <servlet-mapping>
@@ -17,6 +28,18 @@
   <servlet-mapping>
     <servlet-name>novCk</servlet-name>
     <url-pattern>/novCk.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/admin.do</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminCategoryServlet</servlet-name>
+    <url-pattern>/adminCategory.do</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
@@ -31,4 +54,7 @@
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 	
+
+	
+
 </web-app>

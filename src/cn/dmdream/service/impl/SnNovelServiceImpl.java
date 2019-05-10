@@ -157,6 +157,16 @@ public class SnNovelServiceImpl implements SnNovelService {
 	 */
 	public List<SnNovel> findByCheckByPage(Integer check,int pageSize , int page){
 		return snNovelDao.findByCheckByPage(check, pageSize, page);
+	}
+
+	/**
+	 * 获取每周排行榜 前10的小说信息
+	 * @param null
+	 * @return List<SnNovel> 数量10
+	 */
+	public List<SnNovel> getWeekRank() {
+		// 
+		return null;
 	};
 
 }
