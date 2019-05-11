@@ -75,4 +75,13 @@ public class SnUserServiceImpl implements SnUserService{
 		return snUser;
 	}
 
+	@Override
+	public boolean countByUsername(String username) {
+
+		snUserDao=new SnUserDaoImpl();
+		int count=snUserDao.countByUsername(username);
+		//false代表用户名不可用
+		return count>0?false:true;
+	}
+
 }

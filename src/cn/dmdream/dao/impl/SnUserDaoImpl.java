@@ -131,4 +131,31 @@ public class SnUserDaoImpl implements SnUserDao {
 			dbUtil.closeAll();
 		}
 	}
+
+	@Override
+	public int countByUsername(String username) {
+
+        String sql="select count(*) from sn_user where user_username=?"	;
+        dbUtil=new DbUtil();
+        CachedRowSet rs = dbUtil.query(sql, username);
+        int count=1;
+        try {
+			while(rs.next()){
+				count=rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if (rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return count;
+	}
 }

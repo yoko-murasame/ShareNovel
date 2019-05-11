@@ -9,9 +9,10 @@
 		<servlet-class>cn.dmdream.controller.TestServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>RegisterAndLogin</servlet-name>
-		<servlet-class>cn.dmdream.controller.registerAndLogin.RegisterAndLogin</servlet-class>
+		<servlet-name>UserRegisterServlet</servlet-name>
+		<servlet-class>cn.dmdream.controller.UserRegisterServlet</servlet-class>
 	</servlet>
+
 
 
 	<servlet-mapping>
@@ -19,8 +20,8 @@
 		<url-pattern>/testServlet.do</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>RegisterAndLogin</servlet-name>
-		<url-pattern>/rl.do</url-pattern>
+		<servlet-name>UserRegisterServlet</servlet-name>
+		<url-pattern>/userRegister.do</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>mainpage.jsp</welcome-file>

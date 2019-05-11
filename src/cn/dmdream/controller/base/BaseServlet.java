@@ -12,10 +12,10 @@ public class BaseServlet extends HttpServlet {
 	
 	
 	@Override
-	public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// localhost:8080/store/productServlet?method=addProduct
-		String method = req.getParameter("method");
+		String method = request.getParameter("method");
 
 		if (null == method || "".equals(method) || method.trim().equals("")) {
 			method = "execute";
@@ -30,9 +30,9 @@ public class BaseServlet extends HttpServlet {
 			// 查找子类对象对应的字节码中的名称为method的方法.这个方法的参数类型是:HttpServletRequest.class,HttpServletResponse.class
 			Method md = clazz.getMethod(method, HttpServletRequest.class, HttpServletResponse.class);
 			if(null!=md){
-				String jspPath = (String) md.invoke(this, req, resp);
+				String jspPath = (String) md.invoke(this, request, response);
 				if (null != jspPath) {
-					req.getRequestDispatcher(jspPath).forward(req, resp);
+					request.getRequestDispatcher(jspPath).forward(request, response);
 				}
 			}
 		} catch (Exception e) {
@@ -42,7 +42,7 @@ public class BaseServlet extends HttpServlet {
 	}
 
 	// 默认方法
-	public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		return null;
 	}
 

@@ -59,4 +59,6 @@ public interface SnUserService {
 	 * @return
 	 */
 	public SnUser findByUsername(String username);
+	
+	public boolean countByUsername(String username);
 }
