@@ -40,236 +40,221 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/kindeditor/kindeditor-all.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/kindeditor/lang/zh-CN.js"></script>
 <script>
-			$(function() {
-				//分页
-				new Page({
-					id: 'pagination',
-					pageTotal: ${
-						pageModel.totalPage
-					}, //必填,总页数
-					pageAmount: ${
-						pageModel.pageSize
-					}, //每页多少条
-					dataTotal: ${
-						pageModel.totalCount
-					}, //总共多少条数据
-					curPage: ${
-						pageModel.currPage
-					}, //初始页码,不填默认为1
-					pageSize: 5, //分页个数,不填默认为5
-					showPageTotalFlag: true, //是否显示数据统计,不填默认不显示
-					showSkipInputFlag: true, //是否支持跳转,不填默认不显示
-					getPage: function() {
-						//获取当前页数跳转
-						window.location.href = "${pageContext.request.contextPath}/adminNovel.do?method=toNovelList&curPage="+this.curPage + "&pageSize="+this.pageAmount;
-					}
-				});
-				//新增按钮前的数据准备 1.获取所有父category
-				$("#novelNewPrepareBtn").click(function(){
-					if($("#novelTopCategoryId").children().length > 1){
-						$("#novelTopCategoryId").empty();
-					}
-					var promiseObj = getAjaxPostRequest("${pageContext.request.contextPath}/adminCategory.do?method=findAllCatById&catId=0",null);
-					promiseObj.then(function(res){
-						console.log(res);
-						if(res.status == 200) {
-							var catList=res.data;
-							for(var i=0 ; i< catList.length ;i++){
-								var cat = catList[i];
-								var opt = $("<option value='"+cat.catId+"'>"+ cat.catName +"</option>");
-								$("#novelTopCategoryId").append(opt);
-							}
-							
-						} else {
-							showGritter('失败', res.msg);
-						}
-					})
-				
-				});
-				//新增按钮事件,级联监听父categoryid的改变
-				$("#novelTopCategoryId").change(function(){
-					$("#novelSubCategoryId").empty();
-					var data = {catId : this.value};
-					var promiseObj = getAjaxPostRequest("${pageContext.request.contextPath}/adminCategory.do?method=findAllCatById",data);
-					promiseObj.then(function(res){
-						console.log(res);
-						if(res.status == 200) {
-							var catList=res.data;
-							for(var i=0 ; i< catList.length ;i++){
-								var cat = catList[i];
-								var opt = $("<option value='"+cat.catId+"'>"+ cat.catName +"</option>");
-								$("#novelSubCategoryId").append(opt);
-							}
-							
-						} else {
-							showGritter('失败', res.msg);
-						}
-					})
-				});
-				//确认删除点击事件
-				$("#catDelBtn").click(function() {
-					delCats(ck_val, "#modalDel");
-				});
-				//新增保存点击事件
-				$("#novelSaveBtn").click(function() {
-					var obj = {};
-					obj.novelId = $("#novelId").val();
-					obj.novelTitle = $("#novelTitleId").val();
-					obj.novelAuthor = $("#novelAuthorId").val();
-					obj.novelSummary = $("#novelSummaryId").val();
-					obj.novelCategory = $("#novelSubCategoryId").val();
-					obj.novelIsEnd = $("#novelIsEndId").val();
-					obj.novelCheck = $("#novelCheckId").val();
-					obj.novelDownloadurl = $("#novelDownloadurlId").val();
-					obj.novelCover = $("#novelCoverId").val();
-					if(obj.novelTitle == "" || obj.novelAuthor == ""|| obj.novelCategory == -1 || obj.novelIsEnd == -1 || obj.novelCover == "") {
-						showGritter('消息', "表单未完成");
-						return;
-					}
-					//console.log(obj);
-					novelSave(obj, "#modalNew");
-				});
-				//修改保存按钮事件
-				$("#catEditBtn").click(function() {
-					var obj = {};
-					obj.catId = $("#catEditId").val();
-					obj.catName = $("#catEditNameId").val();
-					if(obj.catName == null || obj.catName == "") {
-						showGritter('消息', "表单未完成");
-						return;
-					}
-					novelSave(obj, "#modalEdit");
-				});
-				//富文本监听事件
-				$("#modalNovelSummaryBtn").click(function(){
-					var txt = editor.html();
-					editor.sync();//同步后可以直接从页面稳文本域中获取值
-					new Promise(function(res,rej){
-						$("#novelSummaryId").val(txt);//将值赋给novelSummaryId的隐藏input标签
-						res("");
-					}).then(function(res){
-						//editor.html("");
-						console.log($("#novelSummaryId").val())
-						$("#modalNovelSummary").modal("hide");
-						showGritter("消息", "简介已更新!");
-					});
-				});
-				//富文本监听事件-回显操作
-				$("#changeBackBtn").click(function(){
-					var txt2 = $("#reShowText").val();
-					//console.log(txt2);
-					new Promise(function(res,rej){
-						editor.html(txt2);//回显
-						res("");
-					}).then(function(res){
-						$("#reShowText").val(res);
-					});
-				});
+	$(function() {
+		//分页
+		new Page({
+			id: 'pagination',
+			pageTotal: ${
+				pageModel.totalPage
+			}, //必填,总页数
+			pageAmount: ${
+				pageModel.pageSize
+			}, //每页多少条
+			dataTotal: ${
+				pageModel.totalCount
+			}, //总共多少条数据
+			curPage: ${
+				pageModel.currPage
+			}, //初始页码,不填默认为1
+			pageSize: 5, //分页个数,不填默认为5
+			showPageTotalFlag: true, //是否显示数据统计,不填默认不显示
+			showSkipInputFlag: true, //是否支持跳转,不填默认不显示
+			getPage: function() {
+				//获取当前页数跳转
+				window.location.href = "${pageContext.request.contextPath}/adminNovel.do?method=toNovelList&curPage="+this.curPage + "&pageSize="+this.pageAmount;
+			}
+		});
 
-			})
-			//保存方法(save和update通用)
-			function novelSave(novelObj, modalId) {
-				var promiseObj = getAjaxPostRequest("${pageContext.request.contextPath}/adminNovel.do?method=addNovel", novelObj);
-				promiseObj.then(function(res){
-					console.log(res);
-					if(res.status == 200) {
-						showGritter('成功', res.msg);
-						$(modalId).modal("hide");
-						setTimeout(function() {
-							window.location.reload();
-						}, 500);
-					} else {
-						showGritter('失败', res.msg);
+		//新增按钮事件,级联监听父categoryid的改变
+		$("#novelTopCategoryId").change(function(){
+			$("#novelSubCategoryId").empty();
+			var data = {catId : this.value};
+			var promiseObj = getPostAjaxPromise("${pageContext.request.contextPath}/adminCategory.do?method=findAllCatById",data);
+			promiseObj.then(function(res){
+				console.log(res);
+				if(res.status == 200) {
+					var catList=res.data;
+					for(var i=0 ; i< catList.length ;i++){
+						var cat = catList[i];
+						var opt = $("<option value='"+cat.catId+"'>"+ cat.catName +"</option>");
+						$("#novelSubCategoryId").append(opt);
 					}
-				});
-			}
-			
-			//删除函数
-			function delCats(ids, modalId) {
-				$.ajax({
-					data: {
-						catIds: ids
-					},
-					url: "${pageContext.request.contextPath}/adminCategory.do?method=delCategory",
-					type: "POST",
-					dataType: "json",
-					traditional: true,
-					success: function(data) {
-						console.log(data);
-						if(data.status == 200) {
-							showGritter('成功', data.msg);
-							$(modalId).modal("hide");
-							setTimeout(function() {
-								window.location.reload();
-							}, 1000);
-						} else {
-							showGritter('失败', data.msg);
-							$(modalId).modal("hide");
-						}
-					}
-				});
-			}
-			//存放删除id列表
-			var ck_val = [];
-			//显示删除确认框
-			function showDeleteConfirmModal(obj) {
-				ck_val = []; //每次初始化清空
-				console.log(obj.value)
-				var cklength = $('input[type=checkbox]:checked').length;
-				if(obj.value != "") {
-					ck_val.push(obj.value);
-					cklength++;
-				}
-				$("#modalDelBody").html("你确认要删除这 <strong><font color='red'>" + cklength + "</font></strong>项吗?")
-				$("#modalDel").modal("toggle");
-				$.each($('input:checkbox:checked'), function() {
-					ck_val.push($(this).val())
-				});
-				console.log(ck_val)
-			}
-			//checkbox全选和反选
-			function toggleSelectAll() {
-				var length = $('input:checkbox[name=catIds]:checked').length;
-				var lenAll = $('input:checkbox[name=catIds]').length
-				if(length < lenAll) {
-					$('input:checkbox[name=catIds]').prop("checked", true);
+					
 				} else {
-					$('input:checkbox[name=catIds]').prop("checked", false);
+					showGritter('失败', res.msg);
 				}
+			})
+		});
+		//确认删除点击事件
+		$("#catDelBtn").click(function() {
+			delNovels(ck_val, "#modalDel");
+		});
+		//新增保存点击事件
+		$("#novelSaveBtn").click(function() {
+			var obj = {};
+			obj.novelId = $("#novelId").val();
+			obj.novelTitle = $("#novelTitleId").val();
+			obj.novelAuthor = $("#novelAuthorId").val();
+			obj.novelSummary = $("#novelSummaryId").val();
+			obj.novelCategory = $("#novelSubCategoryId").val();
+			obj.novelIsEnd = $("#novelIsEndId").val();
+			obj.novelCheck = $("#novelCheckId").val();
+			obj.novelDownloadurl = $("#novelDownloadurlId").val();
+			obj.novelCover = $("#novelCoverId").val();
+			if(obj.novelTitle == "" || obj.novelAuthor == ""|| obj.novelCategory == -1 || obj.novelIsEnd == -1 || obj.novelCover == "") {
+				showGritter('消息', "表单未完成");
+				return;
 			}
-			//表格单选绿色按钮
-			function showGritterSuccess() {
-				showGritter('消息', "无事发生······");
+			//console.log(obj);
+			novelSave(obj, "#modalNew");
+		});
+		//富文本监听事件
+		$("#modalNovelSummaryBtn").click(function(){
+			var txt = editor.html();
+			editor.sync();//同步后可以直接从页面稳文本域中获取值
+			new Promise(function(res,rej){
+				$("#novelSummaryId").val(txt);//将值赋给novelSummaryId的隐藏input标签
+				res("");
+			}).then(function(res){
+				//editor.html("");
+				console.log($("#novelSummaryId").val())
+				$("#modalNovelSummary").modal("hide");
+				showGritter("消息", "简介已更新!");
+			});
+		});
+	})
+	//保存方法(save和update通用)
+	function novelSave(novelObj, modalId) {
+		var promiseObj = getPostAjaxPromise("${pageContext.request.contextPath}/adminNovel.do?method=addNovel", novelObj);
+		promiseObj.then(function(res){
+			console.log(res);
+			if(res.status == 200) {
+				showGritter('成功', res.msg);
+				$(modalId).modal("hide");
+				setTimeout(function() {
+					window.location.reload();
+				}, 500);
+			} else {
+				showGritter('失败', res.msg);
 			}
-			//显示修改modal并回显数据
-			function showEditModal(obj) {
-				var catId = obj.value;
-				$.ajax({
-					data: {
-						id: catId
-					},
-					url: "${pageContext.request.contextPath}/adminCategory.do?method=findById",
-					type: "POST",
-					dataType: "json",
-					success: function(data) {
-						console.log(data);
-						if(data.status == 200) {
-							showGritter('成功', data.msg);
-							var obj = data.data;
-							//回填数据
-							$("#catEditId").val(obj.catId);
-							$("#catEditNameId").val(obj.catName);
-							//显示修改窗口
-							$("#modalEdit").modal("show");
-						} else {
-							showGritter('失败', data.msg);
-						}
-					}
-				});
+		});
+	}
+	
+	//删除函数
+	function delNovels(ids, modalId) {
+		var promiseObj = getPostAjaxPromiseForArray("${pageContext.request.contextPath}/adminNovel.do?method=delNovel",{novelIds:ids});
+		promiseObj.then(function(res){
+			console.log(res);
+			if(res.status == 200) {
+				showGritter('成功', res.msg);
+				$(modalId).modal("hide");
+				setTimeout(function() {
+					window.location.reload();
+				}, 1000);
+			} else {
+				showGritter('失败', res.msg);
+				$(modalId).modal("hide");
 			}
-
-			
-		</script>
+		});
+	}
+	//存放删除id列表
+	var ck_val = [];
+	//显示删除确认框
+	function showDeleteConfirmModal(obj) {
+		ck_val = []; //每次初始化清空
+		console.log(obj.value)
+		var cklength = $('input[type=checkbox]:checked').length;
+		if(obj.value != "") {
+			ck_val.push(obj.value);
+			cklength++;
+		}
+		$("#modalDelBody").html("你确认要删除这 <strong><font color='red'>" + cklength + "</font></strong>项吗?")
+		$("#modalDel").modal("toggle");
+		$.each($('input:checkbox:checked'), function() {
+			ck_val.push($(this).val())
+		});
+		console.log(ck_val)
+	}
+	//checkbox全选和反选
+	function toggleSelectAll() {
+		var length = $('input:checkbox[name=novelIds]:checked').length;
+		var lenAll = $('input:checkbox[name=novelIds]').length
+		if(length < lenAll) {
+			$('input:checkbox[name=novelIds]').prop("checked", true);
+		} else {
+			$('input:checkbox[name=novelIds]').prop("checked", false);
+		}
+	}
+	//表格单选绿色按钮
+	function showGritterSuccess() {
+		showGritter('消息', "无事发生······");
+	}
+	//显示修改modal并回显数据
+	function showEditModal(obj) {
+		var o = {novelId:obj.value};
+		var promiseObj = getPostAjaxPromise("${pageContext.request.contextPath}/adminNovel.do?method=findById",o);
+		promiseObj.then(function(res) {
+			console.log(res);
+			if(res.status == 200) {
+				showGritter('成功', res.msg);
+				var obj = res.data;
+				//回填前清空简介和两个地址
+				$("#novelSummaryId").val("");
+				$("#novelDownloadurlId").val("");
+				$("#novelCoverId").val("");
+				//回填数据
+			 	$("#novelId").val(obj.novelId);
+			 	$("#novelTitleId").val(obj.novelTitle);
+				$("#novelAuthorId").val(obj.novelAuthor);
+				$("#novelSummaryId").val(obj.novelSummary);//值回填
+				editor.html($("#novelSummaryId").val());//回填富文本
+				//级联的回选
+				new Promise(function(res,rej){
+					prepareTopCategory();//初始化父category
+					console.log("finish")
+					setTimeout(function() {
+						res("");
+					}, 1000);
+				}).then(function(res){
+					$("#novelTopCategoryId").val(obj.snCategory.catParentid).trigger('change');
+					setTimeout(function() {
+						$("#novelSubCategoryId").val(obj.snCategory.catId);
+					}, 1000);
+				})
+				$("#novelIsEndId").val(obj.novelIsEnd);
+				$("#novelCheckId").val(obj.novelCheck);
+				$("#novelDownloadurlId").val(obj.novelDownloadurl.url);
+				$("#novelCoverId").val(obj.novelCover);
+				//显示新增窗口
+				$("#modalNew").modal("show");
+			} else {
+				showGritter('失败', res.msg);
+			}
+		});
+	}
+	//新增/修改按钮前的数据准备 1.获取所有父category,需要写成函数,方便更新时调用
+	function prepareTopCategory(){
+		if($("#novelTopCategoryId").children().length > 1){
+			$("#novelTopCategoryId").empty();
+		}
+		var promiseObj = getPostAjaxPromise("${pageContext.request.contextPath}/adminCategory.do?method=findAllCatById&catId=0",null);
+		promiseObj.then(function(res){
+			console.log(res);
+			if(res.status == 200) {
+				var catList=res.data;
+				for(var i=0 ; i< catList.length ;i++){
+					var cat = catList[i];
+					var opt = $("<option value='"+cat.catId+"'>"+ cat.catName +"</option>");
+					$("#novelTopCategoryId").append(opt);
+				}
+				
+			} else {
+				showGritter('失败', res.msg);
+			}
+		});
+	}
+	
+</script>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -279,7 +264,7 @@
 	href="${pageContext.request.contextPath}/css/admin/admin-common.css">
 <style type="text/css">
 .modal.in .modal-dialog {
-	margin-top: 20px;
+	margin-top: 10px;
 }
 </style>
 </head>
@@ -356,7 +341,7 @@
 								href="${pageContext.request.contextPath }/adminCategory.do?method=toCategoryPage">顶级分类管理</a>
 							</li>
 							<li><a
-								href="${pageContext.request.contextPath }/adminCategory.do?method=toSubCategoryPage&topCatId=${topCat.catId}">子分类分类管理</a>
+								href="${pageContext.request.contextPath }/adminCategory.do?method=toCategoryPage">子分类分类管理</a>
 							</li>
 						</ul></li>
 				</ul>
@@ -382,7 +367,7 @@
 				<div id="nav"
 					style="width:100px;display:flex;margin:5px;justify-content:space-between;">
 					<!--新增Modal button -->
-					<button class="btn btn-theme03 btn-sm" id="novelNewPrepareBtn" data-toggle="modal"
+					<button class="btn btn-theme03 btn-sm" onclick="prepareTopCategory()" data-toggle="modal"
 						data-backdrop="true" data-target="#modalNew">新增</button>
 					<!-- 删除Modal button -->
 					<button onclick="showDeleteConfirmModal(this)"
@@ -410,7 +395,7 @@
 								<tbody>
 									<c:forEach items="${pageModel.list }" var="novel">
 										<tr>
-											<td><input name="catIds" value="${novel.novelId }"
+											<td><input name="novelIds" value="${novel.novelId }"
 												type="checkbox" /></td>
 											<td><img src="${novel.novelCover }" class="img-rounded"
 												width="30"></td>
@@ -447,16 +432,16 @@
 											</td>
 											<!-- 表格的操作按钮 -->
 											<td>
-												<button value="${cat.catId }" onclick="showGritterSuccess()"
+												<button value="${novel.novelId }" onclick="showGritterSuccess()"
 													class="btn btn-success btn-xs">
 													<i class="fa fa-check"></i>
 												</button>
-												<button value="${cat.catId }" onclick="showEditModal(this)"
+												<button value="${novel.novelId }" onclick="showEditModal(this)"
 													class="btn btn-primary btn-xs">
 													<i class="fa fa-pencil"></i>
 												</button>
 												<button onclick="showDeleteConfirmModal(this)"
-													value="${cat.catId }" class="btn btn-danger btn-xs">
+													value="${novel.novelId }" class="btn btn-danger btn-xs">
 													<i class="fa fa-trash-o "></i>
 												</button>
 											</td>
@@ -496,7 +481,7 @@
 								<label
 									class="col-sm-4 control-label col-lg-4 col-md-4 col-sm-offset-1 col-md-offset-1 col-lg-offset-1"
 									for="novelTitle">请输入小说名称</label>
-								<div class="col-lg-10 col-lg-offset-1">
+								<div class="col-lg-10 col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 									<input type="text" name="novelTitle" class="form-control"
 										id="novelTitleId">
 								</div>
@@ -506,7 +491,7 @@
 								<label
 									class="col-sm-4 control-label col-lg-4 col-md-4 col-sm-offset-1 col-md-offset-1 col-lg-offset-1"
 									for="novelAuthor">请输入作者名称</label>
-								<div class="col-lg-10 col-lg-offset-1">
+								<div class="col-lg-10 col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 									<input type="text" name="novelAuthor" class="form-control"
 										id="novelAuthorId">
 								</div>
@@ -516,7 +501,7 @@
 								<label
 									class="col-sm-4 control-label col-lg-4 col-md-4 col-sm-offset-1 col-md-offset-1 col-lg-offset-1"
 									for="novelAuthor">小说简介</label>
-								<div class="col-lg-10 col-lg-offset-1">
+								<div class="col-lg-10 col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 									<input type="hidden" name="novelAuthor" class="form-control"
 										id="novelSummaryId">
 									<button data-toggle="modal" data-backdrop="true" data-target="#modalNovelSummary" type="button" class="btn btn-default btn-lg btn-block">点我添加小说简介</button>
@@ -545,7 +530,7 @@
 								<label
 									class="col-sm-4 control-label col-lg-4 col-md-4 col-sm-offset-1 col-md-offset-1 col-lg-offset-1"
 									for="novelIsEnd">是否完结</label>
-								<div class="col-lg-10 col-lg-offset-1">
+								<div class="col-lg-10 col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 									<select name="novelIsEnd" class="form-control"
 										id="novelIsEndId">
 										<option value="-1">--请选择--</option>
@@ -559,7 +544,7 @@
 								<label
 									class="col-sm-4 control-label col-lg-4 col-md-4 col-sm-offset-1 col-md-offset-1 col-lg-offset-1"
 									for="novelCheck">审核状态</label>
-								<div class="col-lg-10 col-lg-offset-1">
+								<div class="col-lg-10 col-md-10 col-sm-10 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 									<select name="novelCheck" class="form-control"
 										id="novelCheckId">
 										<option value="0">未审核</option>
@@ -590,20 +575,14 @@
 											form.append("file", file);
 											if(/\.(txt|TXT|epub|EPUB|pdf|PDF|rar|RAR|zip|ZIP|7z|7Z)$/.test(file.name)){
 												showStikyGritter('消息', "正在上传文件······");
-												$.ajax({
-													url : "${pageContext.request.contextPath}/adminNovel.do?method=ajaxFileUpload",
-													type : "POST",
-													data : form,
-													contentType : false,
-													processData : false,
-													success : function(data) {
-														removeAllGritters()
-														setTimeout(function() {showGritter('消息', "文件上传成功！");}, 500);
-														console.log(data);
-														$("#novelDownloadurlId").val(data.data)
-														$("#reShowFileNamelId").val(file.name);
-														$("#reShowFileNamelId").attr("type","text");
-													}
+												var formPromiseObj = getPostAjaxPromiseForForm("${pageContext.request.contextPath}/adminNovel.do?method=ajaxFileUpload",form);
+												formPromiseObj.then(function(res){
+													removeAllGritters()
+													setTimeout(function() {showGritter('消息', "文件上传成功！");}, 500);
+													console.log(res);
+													$("#novelDownloadurlId").val(res.data)
+													$("#reShowFileNamelId").val(file.name);
+													$("#reShowFileNamelId").attr("type","text");
 												});
 											}else{
 												showGritter('错误',"不支持的文件格式!支持以下格式:txt、epub、pdf、rar、zip、7z")
@@ -636,18 +615,12 @@
 											form.append("file", file);
 											if(/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(file.name)){
 												showStikyGritter('消息',"正在上传图片······");
-												$.ajax({
-													url : "${pageContext.request.contextPath}/adminNovel.do?method=ajaxFileUpload",
-													type : "POST",
-													data : form,
-													contentType : false,
-													processData : false,
-													success : function(data) {
-														removeAllGritters();
-														setTimeout(function() {showGritter('消息',"图片上传成功！");}, 500);
-														console.log(data);
-														$("#novelCoverId").val(data.data)
-													}
+												var formPromiseObj = getPostAjaxPromiseForForm("${pageContext.request.contextPath}/adminNovel.do?method=ajaxFileUpload",form);
+												formPromiseObj.then(function(res){
+													removeAllGritters();
+													setTimeout(function() {showGritter('消息',"图片上传成功！");}, 500);
+													console.log(res);
+													$("#novelCoverId").val(res.data)
 												});
 											}else{
 												showGritter('错误',"不支持的图片格式!支持以下格式:gif、jpg、jpeg、png");
@@ -686,18 +659,6 @@
 						<textarea id="editor_id" name="content" style="width:100%;height:400px;">
 							&lt;strong&gt;请在这里添加你的小说简介&lt;/strong&gt;
 						</textarea>
-						<!-- 富文本正文区域-->
-						<script type="text/javascript">
-							var editor;
-							KindEditor.ready(function(K) {
-								editor = K.create('#editor_id', {
-									allowFileManager: true,
-									resizeType: 1
-								});
-							});
-						</script>
-						<!-- 富文本正文区域 /-->
-						
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -727,39 +688,6 @@
 			</div>
 		</div>
 
-		<!-- 修改Modal -->
-		<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="modalEditTitle">修改</h4>
-					</div>
-					<form class="form-horizontal tasi-form" id="catEditForm">
-						<div class="modal-body">
-							<input type="hidden" id="catEditId">
-							<div class="form-group has-success">
-								<label
-									class="col-sm-4 control-label col-lg-4 col-md-4 col-sm-offset-1 col-md-offset-1 col-lg-offset-1"
-									for="catEditName">请输入父分类名称</label>
-								<div class="col-lg-10 col-lg-offset-1">
-									<input type="text" name="catEditName" class="form-control"
-										id="catEditNameId">
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">关闭</button>
-							<input type="button" id="catEditBtn" class="btn btn-primary"
-								value="保存" />
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
 		<!-- Model结束 -->
 
 		<!--main content end-->
@@ -803,7 +731,17 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/js/admin/assets/js/gritter-conf.js"></script>
 
-
+	<!-- 富文本正文区域-->
+	<script type="text/javascript">
+		var editor;
+		KindEditor.ready(function(K) {
+			editor = K.create('#editor_id', {
+				allowFileManager: true,
+				resizeType: 1
+			});
+		});
+	</script>
+	<!-- 富文本正文区域 /-->
 
 </body>
 

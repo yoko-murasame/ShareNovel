@@ -37,3 +37,11 @@
 .ke-container {
     width: 100%;
 }
+.dcjq-icon {
+    background: url(../img/nav-expand.png) no-repeat bottom;
+    background-size:100% 100%;
+}
+.active .dcjq-icon {
+    background: url(../img/nav-expand.png) no-repeat bottom;
+    background-size:100% 100%;
+}

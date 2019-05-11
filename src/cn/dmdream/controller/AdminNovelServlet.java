@@ -195,13 +195,13 @@ public class AdminNovelServlet extends BaseServlet {
 					String fullName = item.getName();
 					String extName = fullName.substring(fullName.lastIndexOf(".") + 1);
 					// 调用fastDFS上传文件
-					// path = fds.uploadFile(is, extName);
+					path = fds.uploadFile(is, extName);
 					// 从配置文件获取拼接的前串http://193.112.41.124/
 					ResourceBundle resourceBundle = ResourceBundle.getBundle("resources");
 					String head = resourceBundle.getString("IMAGE_SERVER_URL");
 					// 最终图片路径
-					// path = head + path;
-					path = "http://193.112.41.124/group1/M00/00/00/rBAABVzVPXuAb0s0AAAouX6YDHQ53.jpeg";
+					path = head + path;
+					//path = "http://193.112.41.124/group1/M00/00/00/rBAABVzVPXuAb0s0AAAouX6YDHQ53.jpeg";测试用地址
 					// System.out.println(path);
 					jsonMsg = JsonMsg.makeSuccess("上传成功", path);
 				}
@@ -213,8 +213,51 @@ public class AdminNovelServlet extends BaseServlet {
 		// 6.将图片地址返回
 		// http://193.112.41.124/group1/M00/00/00/rBAABVzNloqAZyZpAAebYAJE1TA251.jpg
 		resp.getWriter().write(jsonStr);
-		;
+		return null;
+	}
+	
+	//查询单个Novel
+	public String findById(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String novelId = req.getParameter("novelId");
+		try {
+			SnNovel novelFind = novelService.findById(Integer.parseInt(novelId));
+			if(novelFind != null){
+				jsonMsg = JsonMsg.makeSuccess("查询成功", novelFind);
+			}else{
+				throw new Exception("查询失败!");
+			}
+		} catch (Exception e) {
+			jsonMsg = JsonMsg.makeFail("错误: ", null);
+		}
+		String jsonStr = objectMapper.writeValueAsString(jsonMsg);
+		resp.getWriter().write(jsonStr);
 		return null;
 	}
 
+	//删除
+	public String delNovel(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		
+		//ids在前端判断一次,后端一次
+		String[] ids = req.getParameterValues("novelIds");
+		if(ids == null){
+			jsonMsg = JsonMsg.makeFail("删除失败,没有选择id", null);
+		}else{
+			try {
+				for (String id : ids) {
+					SnNovel novel = new SnNovel();
+					novel.setNovelId(Integer.parseInt(id));
+					novelService.delete(novel);
+				}
+				jsonMsg = JsonMsg.makeSuccess("成功删除"+ ids.length +"条数据!", null);
+			} catch (Exception e) {
+				jsonMsg = JsonMsg.makeFail("删除失败!错误信息: "+e.getMessage(), null);
+			}
+		}
+		
+		String jsonStr = objectMapper.writeValueAsString(jsonMsg);
+		resp.getWriter().write(jsonStr);
+		return null;
+	}
 }

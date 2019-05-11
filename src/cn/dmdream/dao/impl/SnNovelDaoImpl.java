@@ -102,7 +102,7 @@ public class SnNovelDaoImpl implements SnNovelDao {
 	 * @return
 	 */
 	public SnNovel findById(Integer id) {
-		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_id = ?";
+		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_category.cat_parentid,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_id = ?";
 		RowSet rs = dbUtil.query(sql, id);
 		List<SnNovel> list = new ArrayList<SnNovel>();
 		handleData(rs, list);
@@ -113,7 +113,7 @@ public class SnNovelDaoImpl implements SnNovelDao {
 	 * 查询所有,包括未审核的
 	 */
 	public List<SnNovel> findAll() {
-		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id";
+		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_category.cat_parentid,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id";
 		RowSet rs = dbUtil.query(sql);
 		List<SnNovel> list = new ArrayList<SnNovel>();
 		handleData(rs, list);
@@ -128,7 +128,7 @@ public class SnNovelDaoImpl implements SnNovelDao {
 	public List<SnNovel> findAllByPage(int pageSize, int page) {
 		if (page < 0)
 			page = 1;
-		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" limit ?,?";
+		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_category.cat_parentid,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" limit ?,?";
 		RowSet rs = dbUtil.query(sql, (page - 1) * pageSize, pageSize);
 		List<SnNovel> list = new ArrayList<SnNovel>();
 		handleData(rs, list);
@@ -142,7 +142,7 @@ public class SnNovelDaoImpl implements SnNovelDao {
 	 * @return
 	 */
 	public List<SnNovel> findByTitle(String title) {
-		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_title like ?";
+		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_category.cat_parentid,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_title like ?";
 		RowSet rs = dbUtil.query(sql, "%" + title + "%");
 		List<SnNovel> list = new ArrayList<SnNovel>();
 		handleData(rs, list);
@@ -156,7 +156,7 @@ public class SnNovelDaoImpl implements SnNovelDao {
 	 * @return
 	 */
 	public List<SnNovel> findByAuthor(String author) {
-		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_author like ?";
+		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_category.cat_parentid,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_author like ?";
 		RowSet rs = dbUtil.query(sql, "%" + author + "%");
 		List<SnNovel> list = new ArrayList<SnNovel>();
 		handleData(rs, list);
@@ -170,7 +170,7 @@ public class SnNovelDaoImpl implements SnNovelDao {
 	 * @return
 	 */
 	public List<SnNovel> findByTitleByPage(String title, int pageSize, int page) {
-		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_title like ? limit ?,?";
+		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_category.cat_parentid,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_title like ? limit ?,?";
 		RowSet rs = dbUtil.query(sql, "%" + title + "%", (page - 1) * pageSize, pageSize);
 		List<SnNovel> list = new ArrayList<SnNovel>();
 		handleData(rs, list);
@@ -184,7 +184,7 @@ public class SnNovelDaoImpl implements SnNovelDao {
 	 * @return
 	 */
 	public List<SnNovel> findByAuthorByPage(String author, int pageSize, int page) {
-		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_author like ? limit ?,?";
+		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_category.cat_parentid,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_author like ? limit ?,?";
 		RowSet rs = dbUtil.query(sql, "%" + author + "%", (page - 1) * pageSize, pageSize);
 		List<SnNovel> list = new ArrayList<SnNovel>();
 		handleData(rs, list);
@@ -199,7 +199,7 @@ public class SnNovelDaoImpl implements SnNovelDao {
 	 * @return
 	 */
 	public List<SnNovel> findByCheck(Integer check) {
-		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_check = ?";
+		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_category.cat_parentid,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_check = ?";
 		RowSet rs = dbUtil.query(sql, check);
 		List<SnNovel> list = new ArrayList<SnNovel>();
 		handleData(rs, list);
@@ -214,7 +214,7 @@ public class SnNovelDaoImpl implements SnNovelDao {
 	 * @return
 	 */
 	public List<SnNovel> findByCheckByPage(Integer check, int pageSize, int page) {
-		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"
+		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_category.cat_parentid,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"
 				+ " where novel_check = ? limit ?,?";
 		RowSet rs = dbUtil.query(sql, check, (page - 1) * pageSize, pageSize);
 		List<SnNovel> list = new ArrayList<SnNovel>();
@@ -241,9 +241,11 @@ public class SnNovelDaoImpl implements SnNovelDao {
 				SnCategory snCategory = new SnCategory();
 				// 修改->查询catId和catName
 				Integer snCategoryId = rs.getInt("novel_categoryid");
+				Integer catParentid = rs.getInt("cat_parentid");
 				String catName = rs.getString("cat_name");
 				snCategory.setCatId(snCategoryId);
 				snCategory.setCatName(catName);
+				snCategory.setCatParentid(catParentid);
 
 				// 时间需要查询
 				String novelUpdatetime = rs.getString("novel_updatetime");
@@ -324,7 +326,7 @@ public class SnNovelDaoImpl implements SnNovelDao {
 	 * @return
 	 */
 	public List<SnNovel> findByTitleStrict(String novelTitle) {
-		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_title = ?";
+		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_category.cat_parentid,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id"+" where novel_title = ?";
 		RowSet rs = dbUtil.query(sql, novelTitle);
 		List<SnNovel> list = new ArrayList<SnNovel>();
 		handleData(rs, list);

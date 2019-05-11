@@ -54,77 +54,56 @@
 			<!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
-			<!--sidebar start-->
-			<aside>
-				<div id="sidebar" class="nav-collapse ">
-					<!-- sidebar menu start-->
-					<ul class="sidebar-menu" id="nav-accordion">
+		<!--sidebar start-->
+		<aside>
+			<div id="sidebar" class="nav-collapse ">
+				<!-- sidebar menu start-->
+				<ul class="sidebar-menu" id="nav-accordion">
 
-						<p class="centered">
-							<a href="#"><img src="${admin.adminNickpic}" class="img-rounded" width="100"></a>
-						</p>
-						<h5 class="centered">${admin.adminUsername}</h5>
+					<p class="centered">
+						<a href="#"><img src="${admin.adminNickpic}"
+							class="img-rounded" width="100"></a>
+					</p>
+					<h5 class="centered"> ${admin.adminUsername}</h5>
+					<li class="mt"><a  class="active"
+						href="${pageContext.request.contextPath }/admin/admin_index.jsp">
+							<i class="fa fa-dashboard"></i> <span>首页</span>
+					</a></li>
 
-						<li class="mt">
-							<a class="active" href="admin_index.jsp">
-								<i class="fa fa-dashboard"></i>
-								<span>首页</span>
-							</a>
-						</li>
-
-						<li class="sub-menu">
-							<a href="javascript:;">
-								<i class="fa fa-cogs"></i>
-								<span>用户管理</span>
-							</a>
-							<ul class="sub">
-								<li>
-									<a href="admin_userlist.jsp">用户列表</a>
-								</li>
-								<li>
-									<a href="admin_userupdate.jsp">用户修改</a>
-								</li>
-								<li>
-									<a href="admin_userfind.jsp">用户查询</a>
-								</li>
-							</ul>
-						</li>
-						<li class="sub-menu">
-							<a href="javascript:;">
-								<i class="fa fa-book"></i>
-								<span>小说管理</span>
-							</a>
-							<ul class="sub">
-								<li>
-									<a href="${pageContext.request.contextPath}/adminNovel.do?method=toNovelList">小说列表</a>
-								</li>
-								<li>
-									<a href="admin_novecheck.jsp">小说审核</a>
-								</li>
-								<li>
-									<a href="admin_noveadd.jsp">小说添加</a>
-								</li>
-							</ul>
-						</li>
-						<li class="sub-menu">
-							<a href="javascript:;">
-								<i class="fa fa-tasks"></i>
-								<span>分类管理</span>
-							</a>
-							<ul class="sub">
-								<li>
-									<a href="${pageContext.request.contextPath}/adminCategory.do?method=toCategoryPage">顶级分类管理</a>
-								</li>
-								<li>
-									<a href="${pageContext.request.contextPath}/adminCategory.do?method=toCategoryPage">子分类分类管理</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-					<!-- sidebar menu end-->
-				</div>
-			</aside>
-			<!--sidebar end-->
+					<li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-cogs"></i> <span>用户管理</span>
+					</a>
+						<ul class="sub">
+							<li><a href="admin_userlist.jsp">用户列表</a></li>
+							<li><a href="admin_userupdate.jsp">用户修改</a></li>
+							<li><a href="admin_userfind.jsp">用户查询</a></li>
+						</ul></li>
+					<li class="sub-menu"><a href="javascript:;">
+							<i class="fa fa-book"></i> <span>小说管理</span>
+					</a>
+						<ul class="sub">
+							<li><a
+								href="${pageContext.request.contextPath}/adminNovel.do?method=toNovelList">小说列表</a>
+							</li>
+							<li><a href="admin_novecheck.jsp">小说审核</a></li>
+							<li><a href="admin_noveadd.jsp">小说添加</a></li>
+						</ul></li>
+					<li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-tasks"></i> <span>分类管理</span>
+					</a>
+						<ul class="sub">
+							<li><a
+								href="${pageContext.request.contextPath }/adminCategory.do?method=toCategoryPage">顶级分类管理</a>
+							</li>
+							<li><a
+								href="${pageContext.request.contextPath }/adminCategory.do?method=toCategoryPage">子分类分类管理</a>
+							</li>
+						</ul></li>
+				</ul>
+				<!-- sidebar menu end-->
+			</div>
+		</aside>
+		<!--sidebar end-->
 
 			<!-- **********************************************************************************************************************************************************
       MAIN CONTENT

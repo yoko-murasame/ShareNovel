@@ -25,7 +25,7 @@ function removeAllGritters(){
 	return false;
 }
 //通用ajax请求函数,需要用promise接收
-function getAjaxPostRequest(url,data){
+function getPostAjaxPromise(url,data){
 	
 	return new Promise(function(res,rej){
 		$.ajax({
@@ -36,5 +36,38 @@ function getAjaxPostRequest(url,data){
 				res(data);
 			}
 		});		
+	});
+}
+//通用ajax请求函数,数组版本,需要用promise接收
+function getPostAjaxPromiseForArray(url,data){
+	
+	return new Promise(function(res,rej){
+		$.ajax({
+			url: url,
+			data: data,
+			type: "POST",
+			dataType: "json",
+			traditional: true,
+			success: function(data) {
+				res(data);
+			}
+		});		
+	});
+}
+//通用ajax请求函数,表单版本,需要用promise接收
+function getPostAjaxPromiseForForm(url,form){
+	
+	return new Promise(function(res,rej){
+		$.ajax({
+			url: url,
+			data: form,
+			type: "POST",
+			dataType: "json",
+			contentType : false,
+			processData : false,
+			success: function(data) {
+				res(data);
+			}
+		});
 	});
 }
