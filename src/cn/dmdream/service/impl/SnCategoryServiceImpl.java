@@ -91,4 +91,15 @@ public class SnCategoryServiceImpl implements SnCategoryService {
 		return snCategoryDao.findByCatGender(gender);
 	};
 
+	/**
+	 * 查询改父分类id下的所有子分类分页版
+	 * @return
+	 */
+	public List<SnCategory> findByParentIdByPage(int id , int pageSize ,int page){
+		return snCategoryDao.findByParentIdByPage(id,pageSize,page);
+	}
+
+	public Integer findCount(Integer id) {
+		return snCategoryDao.findCount(id);
+	};
 }

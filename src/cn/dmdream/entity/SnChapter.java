@@ -53,6 +53,8 @@ public class SnChapter {
 		this.chapterUpdatetime = chapterUpdatetime;
 	}
 
+
+
 	public SnChapter(Integer chapterId, SnNovel snNovel, String chapterTitle, String chapterContent,
 			String chapterUpdatetime) {
 		super();
@@ -68,4 +70,8 @@ public class SnChapter {
 		return "SnChapter [chapterId=" + chapterId + ", snNovel=" + snNovel + ", chapterTitle=" + chapterTitle
 				+ ", chapterContent=" + chapterContent + ", chapterUpdatetime=" + chapterUpdatetime + "]";
 	}
+	
+
+
+	
 }

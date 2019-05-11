@@ -12,10 +12,11 @@ public class BaseServlet extends HttpServlet {
 	
 	
 	@Override
-	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		// localhost:8080/store/productServlet?method=addProduct
-		String method = request.getParameter("method");
+
+		String method = req.getParameter("method");
 
 		if (null == method || "".equals(method) || method.trim().equals("")) {
 			method = "execute";
@@ -30,19 +31,26 @@ public class BaseServlet extends HttpServlet {
 			// 查找子类对象对应的字节码中的名称为method的方法.这个方法的参数类型是:HttpServletRequest.class,HttpServletResponse.class
 			Method md = clazz.getMethod(method, HttpServletRequest.class, HttpServletResponse.class);
 			if(null!=md){
-				String jspPath = (String) md.invoke(this, request, response);
+				String jspPath = (String) md.invoke(this, req, resp);
 				if (null != jspPath) {
-					request.getRequestDispatcher(jspPath).forward(request, response);
+					req.getRequestDispatcher(jspPath).forward(req, resp);
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			String message = e.getMessage();
+			System.out.println(message);
+			if(message.indexOf("Admin") > 0){
+				//访问不到方法时跳转
+				req.getRequestDispatcher("/admin/login.jsp").forward(req, resp);
+			}else{
+				req.getRequestDispatcher("/login.jsp").forward(req, resp);
+			}
 		}
 
 	}
 
 	// 默认方法
-	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		return null;
 	}
 

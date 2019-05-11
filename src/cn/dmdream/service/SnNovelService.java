@@ -106,4 +106,6 @@ public interface SnNovelService {
 	 * @return
 	 */
 	public List<SnNovel> findByCheckByPage(Integer check,int pageSize , int page);
+	public List<SnNovel> getWeekRank();
+	public List<SnNovel> queryByCategory(int cid);
 }

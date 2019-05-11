@@ -107,6 +107,24 @@ public class SnChapterServiceImpl implements SnChapterService {
 	 */
 	public List<SnChapter> findByNovelByOrdersByPage(SnNovel snNovel, String idOrder,String titleOrder,String updatetimeOrder, int pageSize, int page){
 		return chapterDao.findByNovelByOrdersByPage(snNovel, idOrder, titleOrder, updatetimeOrder, pageSize, page);
+	}
+
+	@Override
+	public List<SnChapter> findRecentUpdate(Integer day, Integer limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SnChapter> findRecentUpdate(SnNovel novel, Integer day, Integer limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int findNovelChapterTotalCount(SnNovel novel) {
+		// TODO Auto-generated method stub
+		return 0;
 	};
 
 }

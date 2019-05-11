@@ -157,6 +157,18 @@ public class SnNovelServiceImpl implements SnNovelService {
 	 */
 	public List<SnNovel> findByCheckByPage(Integer check,int pageSize , int page){
 		return snNovelDao.findByCheckByPage(check, pageSize, page);
+	}
+
+	@Override
+	public List<SnNovel> getWeekRank() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SnNovel> queryByCategory(int cid) {
+		// TODO Auto-generated method stub
+		return null;
 	};
 
 }
