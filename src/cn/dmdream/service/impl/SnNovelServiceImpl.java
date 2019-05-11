@@ -170,5 +170,24 @@ public class SnNovelServiceImpl implements SnNovelService {
 		// TODO Auto-generated method stub
 		return null;
 	};
+	
+	@Override
+	public Integer findCount() {
+		return snNovelDao.findCount();
+	}
+
+	@Override
+	public Integer findCountByStatus(Integer status) {
+		return snNovelDao.findCountByStatus(status);
+	}
+
+	/**
+	 * 根据小说名查重
+	 * @param novelTitle
+	 * @return
+	 */
+	public List<SnNovel> findByTitleStrict(String novelTitle) {
+		return snNovelDao.findByTitleStrict(novelTitle);
+	}
 
 }

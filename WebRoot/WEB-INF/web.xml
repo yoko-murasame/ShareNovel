@@ -20,6 +20,11 @@
     <servlet-name>AdminCategoryServlet</servlet-name>
     <servlet-class>cn.dmdream.controller.AdminCategoryServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AdminNovelServlet</servlet-name>
+    <servlet-class>cn.dmdream.controller.AdminNovelServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -43,12 +48,15 @@
     <servlet-name>AdminCategoryServlet</servlet-name>
     <url-pattern>/adminCategory.do</url-pattern>
   </servlet-mapping>
-
+  <servlet-mapping>
+    <servlet-name>AdminNovelServlet</servlet-name>
+    <url-pattern>/adminNovel.do</url-pattern>
+  </servlet-mapping>
+  
 	<servlet>
 		<servlet-name>ChapterServlet</servlet-name>
 		<servlet-class>cn.dmdream.servlet.ChapterServlet</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>ChapterServlet</servlet-name>
 		<url-pattern>/chapter.do</url-pattern>
@@ -99,5 +107,6 @@
         <filter-name>AdminAuthFilter</filter-name>
         <url-pattern>/admin/*</url-pattern>
         <url-pattern>/adminCategory.do</url-pattern>
+        <url-pattern>/adminNovel.do</url-pattern>
     </filter-mapping>
 </web-app>

@@ -150,6 +150,8 @@ public class SnCategoryDaoImpl implements SnCategoryDao {
 		}
 	}
 
+
+
 	@Override
 	public Integer findCount(Integer id) {
 		String sql = "select count(*) from sn_category where cat_parentid = ?";
@@ -166,3 +168,5 @@ public class SnCategoryDaoImpl implements SnCategoryDao {
 	}
 
 }
+
+

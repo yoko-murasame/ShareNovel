@@ -96,7 +96,7 @@
 							</a>
 							<ul class="sub">
 								<li>
-									<a href="admin_novellist.jsp">小说列表</a>
+									<a href="${pageContext.request.contextPath}/adminNovel.do?method=toNovelList">小说列表</a>
 								</li>
 								<li>
 									<a href="admin_novecheck.jsp">小说审核</a>
