@@ -241,5 +241,27 @@ public class AdminCategoryServlet extends BaseServlet {
 		return null;
 	}
 	
+
+	//adminNovellist页面根据id异步获取所有Category
+	public String findAllCatById(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		try {
+			String catId = req.getParameter("catId");
+			List<SnCategory> allCats = categoryService.findByParentId(Integer.parseInt(catId));
+			if(allCats != null){
+				jsonMsg = JsonMsg.makeSuccess("查询成功!", allCats);
+			}else{
+				throw new Exception("无子分类!");
+			}
+		} catch (Exception e) {
+			jsonMsg = JsonMsg.makeFail("查询失败! "+e.getMessage(), null);
+		}
+
+		String jsonStr = objectMapper.writeValueAsString(jsonMsg);
+		resp.getWriter().write(jsonStr);
+		return null;
+	}
+	
+	
 	
 }

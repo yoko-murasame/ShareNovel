@@ -363,11 +363,13 @@ function showEditModal(obj){
 											<td><input name="catIds" value="${cat.catId }"
 												type="checkbox" /></td>
 											<td>${cat.catName }</td>
-											<td><c:if test="${cat.catGender == 0}">
+											<td>
+												<c:if test="${cat.catGender == 0}">
 													<span class="label label-info label-mini">男频</span>
 												</c:if> <c:if test="${cat.catGender == 1}">
 													<span class="label label-success label-mini">女频</span>
-												</c:if></td>
+												</c:if>
+											</td>
 											<td>
 												<button value="${cat.catId }" onclick="showGritterSuccess(this)"
 													class="btn btn-success btn-xs">

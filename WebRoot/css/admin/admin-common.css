@@ -31,3 +31,9 @@
 .custom-bar-chart .bar .value {
     background: #aeb2b7;
 }
+.form-download{
+	display:inline-block;
+}
+.ke-container {
+    width: 100%;
+}
