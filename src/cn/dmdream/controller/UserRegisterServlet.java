@@ -49,7 +49,7 @@ public class UserRegisterServlet extends BaseServlet {
 		return null;
 	}
 
-	public String UserSave(HttpServletRequest request, HttpServletResponse response)
+	public String userSave(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String username = request.getParameter("username");
@@ -69,7 +69,9 @@ public class UserRegisterServlet extends BaseServlet {
 		
 		String surl="fail.jsp";
 		if(isok){
-			surl="login.jsp";
+			
+			//发送邮件
+			surl="mainpage.jsp";
 		}
 
 		return surl;
