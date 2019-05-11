@@ -89,7 +89,7 @@
 			<div>
 				<ul class="nav navbar-nav">
 					<!-- 这里是导航栏内容-->
-					<li><a href="#">全部作品</a></li>
+					<li><a href="classfiypage.jsp">全部作品</a></li>
 					<li><a href="#">排行榜</a></li>
 					<li><a href="#">最近更新</a></li>
 					<li><a href="#">全本小说</a></li>

@@ -8,6 +8,7 @@ import javax.sql.RowSet;
 
 import cn.dmdream.dao.SnCategoryDao;
 import cn.dmdream.entity.SnCategory;
+import cn.dmdream.entity.SnNovel;
 import cn.dmdream.utils.DbUtil;
 
 /**
@@ -132,7 +133,6 @@ public class SnCategoryDaoImpl implements SnCategoryDao {
 				String catName = rs.getString("cat_name");
 				int catParentid = rs.getInt("cat_parentid");
 				int catGender = rs.getInt("cat_gender");
-
 				snCategory.setCatId(catId);
 				snCategory.setCatName(catName);
 				snCategory.setCatParentid(catParentid);
@@ -149,6 +149,8 @@ public class SnCategoryDaoImpl implements SnCategoryDao {
 			}
 		}
 	}
+
+
 
 	@Override
 	public Integer findCount(Integer id) {

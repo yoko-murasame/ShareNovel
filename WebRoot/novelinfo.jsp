@@ -9,14 +9,15 @@
 String id=request.getParameter("nid");
 int totalnum=0;
 SnNovel novel=null;
-if(id!=null){
+if("".equals(id)||id==null){
+	response.sendRedirect("mainpage.jsp");
+	return;
+}else{
 	int nid=Integer.parseInt(id);
 	SnNovelService ss=new SnNovelServiceImpl();
 	SnChapterService sd=new SnChapterServiceImpl();
 	novel=ss.findById(nid);
 	totalnum=sd.findNovelChapterTotalCount(novel);
-}else{
-	request.getRequestDispatcher("mainpage.jsp").forward(request, response);
 }
 %>
 
@@ -33,6 +34,12 @@ if(id!=null){
 
 			#bookpageimg{
 				margin-left: 20px;
+				wdith:200px;
+				height: 290px;
+			}
+			#bookpageimg img{
+				wdith:200px;
+				height: 290px;
 			}
 			#bookdetial{
 				padding: 10px 10px;
@@ -122,7 +129,7 @@ if(id!=null){
 			<div id="bookdetial" >
 				<div class="col-lg-3">
 					<div id="bookpageimg">
-						<img src="img/180.jpg" >
+						<img src="<%=novel.getNovelCover() %>" >
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -141,7 +148,7 @@ if(id!=null){
 			<hr>
 			<div class="col-lg-12">
 				<ul class="nav nav-tabs">
-				  <li  class="active" id="li1"><a href="javascript:void(0)" onclick="setIframe(this)" iframeurl="novelinfojsp/novelchapter.jsp">章节</a></li>
+				  <li  class="active" id="li1"><a href="javascript:void(0)" onclick="setIframe(this)" iframeurl="novelinfojsp/novelchapter.jsp?totalnum=<%=totalnum %>&nid=<%=novel.getNovelId() %>">章节</a></li>
 				  <li id="li2"><a href="javascript:void(0)" onclick="setIframe(this)" iframeurl="novelinfojsp/novelcomment.jsp" >评价<span id="commentnum">123</a></li>
 				  <li id="li3"><a href="#">其它</a></li>
 				</ul>

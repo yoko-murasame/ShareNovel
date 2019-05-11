@@ -2,7 +2,9 @@ package cn.dmdream.dao;
 
 import java.util.List;
 
+import cn.dmdream.entity.SnChapter;
 import cn.dmdream.entity.SnNovel;
+import cn.dmdream.servlet.ChapterServlet;
 
 /**
  * 小说Dao层接口
