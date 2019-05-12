@@ -80,5 +80,17 @@ public class SnUserServiceImpl implements SnUserService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	/**
+	 *  修改邮箱已验证
+	 */
+	@Override
+	public Boolean emailActive(SnUser u) {
+		u.setUserEmailActive(1);
+		int ret = snUserDao.update(u);
+		if(ret==1) {
+			return true;
+		}else
+		return false;
+	}
 
 }

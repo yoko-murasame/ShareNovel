@@ -8,12 +8,19 @@
 		<servlet-name>TestServlet</servlet-name>
 		<servlet-class>cn.dmdream.controller.TestServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>RegisterAndLogin</servlet-name>
+		<servlet-class>cn.dmdream.controller.registerAndLogin.RegisterAndLogin</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegisterAndLogin</servlet-name>
+		<url-pattern>/rl.do</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>TestServlet</servlet-name>
 		<url-pattern>/testServlet.do</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<servlet-name>ChapterServlet</servlet-name>
 		<servlet-class>cn.dmdream.servlet.ChapterServlet</servlet-class>
@@ -59,5 +66,13 @@
 	<filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
-	</filter-mapping>
+	</filter-mapping>	
+	<servlet>
+		<servlet-name>CommentServlet</servlet-name>
+		<servlet-class>cn.dmdream.servlet.CommentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommentServlet</servlet-name>
+		<url-pattern>/comment.do</url-pattern>
+	</servlet-mapping>
 </web-app>

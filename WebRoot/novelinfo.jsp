@@ -149,11 +149,11 @@ if("".equals(id)||id==null){
 			<div class="col-lg-12">
 				<ul class="nav nav-tabs">
 				  <li  class="active" id="li1"><a href="javascript:void(0)" onclick="setIframe(this)" iframeurl="novelinfojsp/novelchapter.jsp?totalnum=<%=totalnum %>&nid=<%=novel.getNovelId() %>">章节</a></li>
-				  <li id="li2"><a href="javascript:void(0)" onclick="setIframe(this)" iframeurl="novelinfojsp/novelcomment.jsp" >评价<span id="commentnum">123</a></li>
+				  <li id="li2"><a href="javascript:void(0)" onclick="setIframe(this)" iframeurl="novelinfojsp/comments.jsp?nid=<%=novel.getNovelId() %>" >评价<span id="commentnum">123</a></li>
 				  <li id="li3"><a href="#">其它</a></li>
 				</ul>
 			</div>
-		<iframe src="novelinfojsp/novelchapter.jsp?totalnum=<%=totalnum %>&nid=<%=novel.getNovelId() %>" frameborder="0" scrolling="no" id="myiframe" onload="setIframeHeight(this)" class="col-lg-12"></iframe>
+		<iframe src="novelinfojsp/novelchapter.jsp?totalnum=<%=totalnum %>&nid=<%=novel.getNovelId() %>" frameborder="0" scrolling="" id="myiframe" onload="setIframeHeight(this)" class="col-lg-12"></iframe>
 		<div class="clearfix"></div>
 		<div class="container footer text-center" style="height: 200px;">
 			<hr>

@@ -1,6 +1,11 @@
 package cn.dmdream.servlet;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,21 +17,75 @@ import cn.dmdream.controller.base.BaseServlet;
 import cn.dmdream.entity.SnCollection;
 import cn.dmdream.entity.SnNovel;
 import cn.dmdream.entity.SnUser;
+import cn.dmdream.service.SnUserService;
 import cn.dmdream.service.impl.SnCollectionServiceImpl;
+import cn.dmdream.service.impl.SnUserServiceImpl;
+import cn.dmdream.utils.EmailUitl;
 import cn.dmdream.vo.JsonMsg;
 
 public class UserCenterServelt extends BaseServlet{
-	//默认方法
-	public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		return null;
-	}
 	//修改密码
 	public String changePWD(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String oldpwd=req.getParameter("oldpwd");
+		String newpwd=req.getParameter("newpwd");
+		SnUser user=(SnUser)req.getSession().getAttribute("user");
+		if(oldpwd.equals(user.getUserPassword())) {
+			user.setUserPassword(newpwd);
+			SnUserService sss=new SnUserServiceImpl();
+			boolean ret = sss.update(user);
+			JsonMsg msg;
+			if(ret) {
+				msg = JsonMsg.makeSuccess("密码修改成功",null);
+			}else {
+				msg=JsonMsg.makeFail("密码修改失败", null);
+			}
+			ObjectMapper mapper=new ObjectMapper();
+			String jstr=mapper.writeValueAsString(msg);
+			resp.getWriter().print(jstr);
+		}else {
+			JsonMsg msg = JsonMsg.makeError("访问不合法", null);
+			ObjectMapper mapper=new ObjectMapper();
+			String jstr=mapper.writeValueAsString(msg);
+			resp.getWriter().print(jstr);
+			
+		}
 		return null;
 	}
 	//验证邮箱
 	public String authEmail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		SnUser user=(SnUser)req.getSession().getAttribute("user");
+		if(user.getUserEmailActive()==0) {//判断为 未激活
+			Date date = new Date();
+			byte[] bar=date.toString().getBytes();
+			Encoder encode=Base64.getEncoder();
+			String str=encode.encodeToString(bar);
+			String ip = InetAddress.getLocalHost().getHostAddress();   
+			String url="https://"+ip+":8080"+req.getContextPath()+"/usercenter.do?method=confirmEmail&authcode="+str;
+			System.out.println(url);
+			EmailUitl.AuthUserEmail("675274398@qq.com", url);
+			req.getSession().setAttribute("authcode", str);
+			JsonMsg msg = JsonMsg.makeAuth("验证信息已发生",null);
+			ObjectMapper mapper=new ObjectMapper();
+			String jstr=mapper.writeValueAsString(msg);
+			resp.getWriter().print(jstr);
+		}else {
+			JsonMsg msg = JsonMsg.makeError("用户信息错误",null);
+			ObjectMapper mapper=new ObjectMapper();
+			String jstr=mapper.writeValueAsString(msg);
+			resp.getWriter().print(jstr);
+			
+		}
 		return null;
+
+	}
+	//确认验证邮箱
+	public String confirmEmail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String code1=(String)req.getParameter("authcode");
+		String code2=(String)req.getSession().getAttribute("authcode");
+		if(code1!=null&&code2!=null&&code1.equals(code2)) {
+			req.setAttribute("authemailok",true);
+		}
+		return "/authemail.jsp";
 	}
 	//上传小说
 	public String uploadNovel(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

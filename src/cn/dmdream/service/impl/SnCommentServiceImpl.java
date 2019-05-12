@@ -1,5 +1,7 @@
 package cn.dmdream.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import cn.dmdream.dao.SnCommentDao;
@@ -7,6 +9,7 @@ import cn.dmdream.dao.impl.SnCommentDaoImpl;
 import cn.dmdream.entity.SnComment;
 import cn.dmdream.entity.SnNovel;
 import cn.dmdream.entity.SnUser;
+import cn.dmdream.entity.JsonEntity.CommentJSON;
 import cn.dmdream.service.SnCommentService;
 
 public class SnCommentServiceImpl implements SnCommentService {
@@ -117,5 +120,15 @@ public class SnCommentServiceImpl implements SnCommentService {
 	 */
 	public List<SnComment> findAllChildCommentByPage(SnComment comment , int pageSize , int page){
 		return commentDao.findAllChildCommentByPage(comment, pageSize, page);
+	}
+
+	public List<CommentJSON> getCommentJsonByNovel(SnNovel novel) {
+		List<SnComment> list=commentDao.findByNovel(novel);
+		List<CommentJSON> jsonlist=new ArrayList<CommentJSON>();
+		Collections.sort(list, (o1,o2)->{
+			return o1.getCommId()-o2.getCommId();
+		});
+		
+		return null;
 	};
 }

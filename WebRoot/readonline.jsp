@@ -14,11 +14,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/read_online.css"/>
 		<script src="js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 		
 	</head>
 	<body>

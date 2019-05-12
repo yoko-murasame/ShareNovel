@@ -23,9 +23,12 @@ h3{
     margin-right:40px;
 }
 </style>
+<link rel="stylesheet" href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+<script src="js/kindeditor/jquery-3.4.0.min.js"></script>
+<script src="js/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <script type="text/javascript">
 
-	$(function() {
+	/*$(function() {
 		$("#username").blur(function() {
 			var username = $("#username").val();
 			//alert(username);
@@ -48,7 +51,7 @@ h3{
 				}
 			});
 		});
-	});
+	});*/
 
 	function submitForm() {
 		var pwd = $("#password").val();
@@ -67,7 +70,7 @@ h3{
 		        <h3>用户注册</h3>
 		    </div>
 		    <div>
-			<form class="form-horizontal" action="reg.do" method="post"
+			<form class="form-horizontal" action="rl.do" method="post"
 				onsubmit="return submitForm()">
 				<div class="form-group">
 					<label for="inputusername" class="col-lg-offset-2 col-lg-2 control-label">用户名</label>

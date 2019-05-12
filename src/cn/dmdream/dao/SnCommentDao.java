@@ -92,4 +92,5 @@ public interface SnCommentDao {
 	 * @return
 	 */
 	public List<SnComment> findAllChildCommentByPage(SnComment comment , int pageSize , int page);
+
 }

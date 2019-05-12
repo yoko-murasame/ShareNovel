@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
 
 	<body>
-		<div class="container">
+		<div class="container-f">
 				<form class="form-horizontal" action="#" method="post" onsubmit="">
 					<div id="content">
 					<div class="form-group form-group-lg">
