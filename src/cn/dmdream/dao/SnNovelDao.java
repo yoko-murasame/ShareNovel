@@ -94,11 +94,23 @@ public interface SnNovelDao {
 	 * @return
 	 */
 	public List<SnNovel> findByCheckByPage(Integer check,int pageSize , int page);
+
+	
 	/**
 	 * 
 	 * @param cid 类别id
 	 * @return 该类别的所有小说
 	 */
 	public List<SnNovel> queryByCategory(int cid);
+	
+	public Integer findCount();
 
+	public Integer findCountByStatus(Integer status);
+
+	/**
+	 * 根据小说名查重
+	 * @param novelTitle
+	 * @return
+	 */
+	public List<SnNovel> findByTitleStrict(String novelTitle);
 }

@@ -84,13 +84,25 @@ public class SnCategoryDaoImpl implements SnCategoryDao {
 		handleData(rs, list);
 		return list.size() > 0 ? list : null;
 	}
+	
+	/**
+	 * 查询改父分类id下的所有子分类分页版
+	 * @return
+	 */
+	public List<SnCategory> findByParentIdByPage(int id , int pageSize ,int page){
+		String sql = "select * from sn_category where cat_parentid = ? limit ?,?";
+		RowSet rs = dbUtil.query(sql, id ,(page-1)*pageSize , pageSize );
+		List<SnCategory> list = new ArrayList<SnCategory>();
+		handleData(rs, list);
+		return list.size() > 0 ? list : null;
+	};
 
 	/**
 	 * 根据分类名模糊查询
 	 */
 	public List<SnCategory> findByCatName(String catName) {
-		String sql = "select * from sn_category where cat_name like ?";
-		RowSet rs = dbUtil.query(sql, "%" + catName + "%");
+		String sql = "select * from sn_category where cat_name = ?";
+		RowSet rs = dbUtil.query(sql, catName);
 		List<SnCategory> list = new ArrayList<SnCategory>();
 		handleData(rs, list);
 		return list.size() > 0 ? list : null;
@@ -137,41 +149,22 @@ public class SnCategoryDaoImpl implements SnCategoryDao {
 			}
 		}
 	}
-	/**
-	 * @param 分类名
-	 * @return 返回给定类名的所有小说
-	 */
+
+
+
 	@Override
-	public List<SnNovel> queryAllNovelByCategoryName(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	/**
-	 * @param 分类名
-	 * @return 返回给定类名的所有小说
-	 */
-	@Override
-	public List<SnNovel> queryAllNovelByCategoryName(String name, int pagesize, int page) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	/**分页版
-	 * @param 分类id
-	 * @return 返回给定类名的所有小说
-	 */
-	@Override
-	public List<SnNovel> queryAllNovelByCategoryName(int cid, int pagesize, int page) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	/**
-	 * @param 分类id
-	 * @return 返回给定类名的所有小说
-	 */
-	@Override
-	public List<SnNovel> queryAllNovelByCategoryName(int cid) {
-	
-		return null;
+	public Integer findCount(Integer id) {
+		String sql = "select count(*) from sn_category where cat_parentid = ?";
+		RowSet rs = dbUtil.query(sql , id);
+		Integer count = 0;
+		try {
+			while(rs.next()){
+				count = Integer.parseInt(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 }
