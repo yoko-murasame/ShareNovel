@@ -105,4 +105,5 @@ public interface SnChapterDao {
 	 * @return 章节数
 	 */
 	public int findNovelChapterTotalCount(SnNovel novel);
+
 }

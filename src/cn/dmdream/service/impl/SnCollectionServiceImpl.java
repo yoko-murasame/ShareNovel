@@ -9,7 +9,7 @@ import cn.dmdream.entity.SnCollection;
 import cn.dmdream.entity.SnNovel;
 import cn.dmdream.entity.SnUser;
 
-public class SnCollectionService implements cn.dmdream.service.SnCollectionService {
+public class SnCollectionServiceImpl implements cn.dmdream.service.SnCollectionService {
 	
 	private SnCollectionDao collectionDao = new SnCollectionDaoImpl();
 

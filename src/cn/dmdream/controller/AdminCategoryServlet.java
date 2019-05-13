@@ -15,8 +15,10 @@ import cn.dmdream.entity.SnAdmin;
 import cn.dmdream.entity.SnCategory;
 import cn.dmdream.service.SnCategoryService;
 import cn.dmdream.service.impl.SnCategoryServiceImpl;
+import cn.dmdream.utils.JedisUtils;
 import cn.dmdream.vo.JsonMsg;
 import cn.dmdream.vo.PageModel;
+import redis.clients.jedis.Jedis;
 
 public class AdminCategoryServlet extends BaseServlet {
 
@@ -43,7 +45,7 @@ public class AdminCategoryServlet extends BaseServlet {
 			}
 			if(defaultCurrPage < 1)defaultCurrPage = 1;
 			if(defaultPageSize < 1)defaultPageSize = 10;
-			//2.查询小说分类
+			//2.查询小说分类(后台不做改变,前台查询的时候优先从Redis中查询)
 			List<SnCategory> parentCategory = categoryService.findByParentIdByPage(0,defaultPageSize,defaultCurrPage);
 			Integer count = categoryService.findCount(0);//总记录数
 			PageModel<SnCategory> pageModel = new PageModel<SnCategory>();
@@ -65,6 +67,7 @@ public class AdminCategoryServlet extends BaseServlet {
 		String topCatId = req.getParameter("catId");
 		String topCatName = req.getParameter("catName");
 		String topCatGender = req.getParameter("catGender");
+
 		//走的是修改方法
 		if(topCatId != null && !"".equals(topCatId)){
 			try {
@@ -118,8 +121,7 @@ public class AdminCategoryServlet extends BaseServlet {
 		}else{
 			try {
 				for (String id : ids) {
-					SnCategory category = new SnCategory();
-					category.setCatId(Integer.parseInt(id));
+					SnCategory category = categoryService.findById(Integer.parseInt(id));
 					categoryService.delete(category);
 				}
 				jsonMsg = JsonMsg.makeSuccess("成功删除"+ ids.length +"条数据!", null);
@@ -202,6 +204,7 @@ public class AdminCategoryServlet extends BaseServlet {
 			try {
 				SnCategory catFindById = categoryService.findById(Integer.parseInt(subCatId));
 				catFindById.setCatName(subCatName);
+				catFindById.setCatParentid(Integer.parseInt(subCatParentid));//设置父id
 				boolean isok = categoryService.update(catFindById);
 				if(isok){
 					jsonMsg = JsonMsg.makeSuccess("修改成功!", null);
@@ -240,6 +243,28 @@ public class AdminCategoryServlet extends BaseServlet {
 		resp.getWriter().write(jsonStr);
 		return null;
 	}
+	
+
+	//adminNovellist页面根据id异步获取所有Category
+	public String findAllCatById(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		try {
+			String catId = req.getParameter("catId");
+			List<SnCategory> allCats = categoryService.findByParentId(Integer.parseInt(catId));
+			if(allCats != null){
+				jsonMsg = JsonMsg.makeSuccess("查询成功!", allCats);
+			}else{
+				throw new Exception("无子分类!");
+			}
+		} catch (Exception e) {
+			jsonMsg = JsonMsg.makeFail("查询失败! "+e.getMessage(), null);
+		}
+
+		String jsonStr = objectMapper.writeValueAsString(jsonMsg);
+		resp.getWriter().write(jsonStr);
+		return null;
+	}
+	
 	
 	
 }
