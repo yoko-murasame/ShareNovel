@@ -9,17 +9,17 @@
 <head>
 <title>小说分类</title>
 
-<link rel="stylesheet" type="text/css" href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="css/mainpage.css">
 <link rel="stylesheet" type="text/css" href="css/menu-css.css">
-<script src="js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/menu_min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery-3.4.0.min.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js"
+	type="text/javascript" charset="utf-8"></script>
 <style type="text/css">
 <
-style type ="text/css"> 
-< !-- 标签选中css-->
-.select {
+style type ="text /css"> < !-- 标签选中css-->.select {
 	list-style: none;
 }
 
@@ -75,14 +75,16 @@ style type ="text/css">
 .result-context {
 	overflow: auto;
 	margin-bottom: 20px;
-	width:50%;
+	width: 50%;
 	float: left;
 	background: #F2F2F2;
 }
+
 .book-title {
-	font-size: 30px;
+	font-size: 25px;
 	font-weight: bold;
 	margin-bottom: 5px;
+	text-overflow：ellipsis;
 }
 
 .book-author {
@@ -101,13 +103,15 @@ style type ="text/css">
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 2;
 	overflow: hidden;
-	font-size:10px;
-	height:30px;
+	font-size: 10px;
+	height: 30px;
 	margin-bottom: 5px;
 }
-.book-updatetime{
-margin-bottom: 5px;
+
+.book-updatetime {
+	margin-bottom: 5px;
 }
+
 .result-context-right a {
 	margin-top: 40px;
 }
@@ -124,7 +128,8 @@ margin-bottom: 5px;
 					<span>亲,请登录</span> <a href="javascript:openmodel()">登录</a>
 				</div>
 				<div class="col-lg-6">
-					<a href="${pageContext.request.contextPath}/register.jsp"> <font color="red">注册</font>
+					<a href="${pageContext.request.contextPath}/register.jsp"> <font
+						color="red">注册</font>
 					</a>
 				</div>
 				<%
@@ -185,33 +190,20 @@ margin-bottom: 5px;
 		<div class="col-lg-3">
 			<div class="menu">
 				<ul>
-					<li><a class="active" href="javascript:void(0)" onclick="classifiedQuery(this)">男生</a>
-						<ul style="display: block;">
-							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)" cid="1">玄幻</a></li>
-							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">言情</a>
-								<ul>
-									<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">都市言情</a></li>
-									<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">古装言情</a></li>
-									<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 3</a></li>
-									<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 4</a></li>
-								</ul></li>
-							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 3</a></li>
-							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 4</a>
-								<ul>
-									<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 1</a></li>
-									<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 2</a></li>
-								</ul></li>
-							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 5</a></li>
-						</ul></li>
-					<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">女生</a>
-						<ul>
-							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 1</a></li>
-							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 2</a></li>
-							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 3</a></li>
-							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 4</a></li>
-						</ul></li>
-					<li><a href="javascript:void(0)" >Item without subitems</a></li>
-					<li><a href="javascript:void(0)" >Item without subitems</a></li>
+				
+					<li><a href="javascript:void(0)">男生</a>
+						<ul style="display: block;" id="malelike">
+
+						</ul>
+					</li>
+					<li><a href="javascript:void(0)">女生</a>
+						<ul id="femalelike">
+
+						</ul>
+						
+					</li>
+					<li><a href="javascript:void(0)">Item without subitems</a></li>
+					<li><a href="javascript:void(0)">Item without subitems</a></li>
 				</ul>
 			</div>
 		</div>
@@ -230,8 +222,8 @@ margin-bottom: 5px;
 					<p class='book-updatetime'>2019-1-1-17:00:00</p>
 					<p class="book-summry">到奥斯卡大撒旦啦萨达是你打莱克斯诺可惜了撒好大声点卡螺丝刀卡拉斯科你先看兰千万我哦亲活动撒好is怕被你萨卡下你砸sad
 						圣诞节卡了坚实的抛弃我就怕是啊大胜靠德看的刷卡了的奥斯卡了看了撒好可怜对话框萨拉赫克痢痧弹劳拉西安开两三年</p>
-					<a href="#" class="btn btn-warning">加入书架</a> 
-					<a href="#" class="btn btn-default">在线阅读</a>
+					<a href="#" class="btn btn-warning">加入书架</a> <a href="#"
+						class="btn btn-default">在线阅读</a>
 				</div>
 			</div>
 			<div class="result-context">
@@ -248,26 +240,8 @@ margin-bottom: 5px;
 					<p class='book-updatetime'>2019-1-1-17:00:00</p>
 					<p class="book-summry">到奥斯卡大撒旦啦萨达是你打莱克斯诺可惜了撒好大声点卡螺丝刀卡拉斯科你先看兰千万我哦亲活动撒好is怕被你萨卡下你砸sad
 						圣诞节卡了坚实的抛弃我就怕是啊大胜靠德看的刷卡了的奥斯卡了看了撒好可怜对话框萨拉赫克痢痧弹劳拉西安开两三年</p>
-					<a href="#" class="btn btn-warning">加入书架</a> 
-					<a href="#" class="btn btn-default">在线阅读</a>
-				</div>
-			</div>			
-			<div class="result-context">
-				<div class="result-context-left col-lg-5">
-					<img src="img/180.jpg">
-				</div>
-				<div class="result-context-middle col-lg-7">
-					<p class="book-title">斗破苍穹</p>
-					<p class="book-author">天蚕土豆</p>
-					<p class="book-catagorys">
-						<span class="book-catagory">玄幻</span><span class="book-catagory">
-							热血</span>
-					</p>
-					<p class='book-updatetime'>2019-1-1-17:00:00</p>
-					<p class="book-summry">到奥斯卡大撒旦啦萨达是你打莱克斯诺可惜了撒好大声点卡螺丝刀卡拉斯科你先看兰千万我哦亲活动撒好is怕被你萨卡下你砸sad
-						圣诞节卡了坚实的抛弃我就怕是啊大胜靠德看的刷卡了的奥斯卡了看了撒好可怜对话框萨拉赫克痢痧弹劳拉西安开两三年</p>
-					<a href="#" class="btn btn-warning">加入书架</a> 
-					<a href="#" class="btn btn-default">在线阅读</a>
+					<a href="#" class="btn btn-warning">加入书架</a> <a href="#"
+						class="btn btn-default">在线阅读</a>
 				</div>
 			</div>
 			<div class="result-context">
@@ -284,8 +258,26 @@ margin-bottom: 5px;
 					<p class='book-updatetime'>2019-1-1-17:00:00</p>
 					<p class="book-summry">到奥斯卡大撒旦啦萨达是你打莱克斯诺可惜了撒好大声点卡螺丝刀卡拉斯科你先看兰千万我哦亲活动撒好is怕被你萨卡下你砸sad
 						圣诞节卡了坚实的抛弃我就怕是啊大胜靠德看的刷卡了的奥斯卡了看了撒好可怜对话框萨拉赫克痢痧弹劳拉西安开两三年</p>
-					<a href="#" class="btn btn-warning">加入书架</a> 
-					<a href="#" class="btn btn-default">在线阅读</a>
+					<a href="#" class="btn btn-warning">加入书架</a> <a href="#"
+						class="btn btn-default">在线阅读</a>
+				</div>
+			</div>
+			<div class="result-context">
+				<div class="result-context-left col-lg-5">
+					<img src="img/180.jpg">
+				</div>
+				<div class="result-context-middle col-lg-7">
+					<p class="book-title">斗破苍穹</p>
+					<p class="book-author">天蚕土豆</p>
+					<p class="book-catagorys">
+						<span class="book-catagory">玄幻</span><span class="book-catagory">
+							热血</span>
+					</p>
+					<p class='book-updatetime'>2019-1-1-17:00:00</p>
+					<p class="book-summry">到奥斯卡大撒旦啦萨达是你打莱克斯诺可惜了撒好大声点卡螺丝刀卡拉斯科你先看兰千万我哦亲活动撒好is怕被你萨卡下你砸sad
+						圣诞节卡了坚实的抛弃我就怕是啊大胜靠德看的刷卡了的奥斯卡了看了撒好可怜对话框萨拉赫克痢痧弹劳拉西安开两三年</p>
+					<a href="#" class="btn btn-warning">加入书架</a> <a href="#"
+						class="btn btn-default">在线阅读</a>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -365,26 +357,52 @@ function openmodel(){
 	  keyboard: false,
 	})
 }
+$(function(){
+		$.ajax({
+			url:"${pageContext.request.contextPath}/category.do?method=getCategorys",
+			type:"post",
+			dataType:"json",
+			async:false,
+			success:function(data){
+				if(data.status==200){
+					cateload(data.data);
+				}
+			}
+		});	
+	});
 $(document).ready(function (){
   $(".menu ul li").menu();
 }); 
 //分类查询
 function classifiedQuery(a){
-	var txt=$(a).attr("cid");
+	var id=$(a).attr("cid");
+	if(id==null){
+		return;
+	}
 	var cate=$(a).text();
 	$.ajax({
-		url:"category.do?method=categoryQuery&cid="+txt,
+		url:"category.do?method=categoryQuery&cid="+id,
 		type:"post",
 		async:true,
 		dataType:"json",
 		success:function(json){
-			novelload(json.data,cate);
+			if(json.status==200){
+				novelload(json.data,cate);
+			}else{
+				alert(json.msg);
+			}
 			
 		}
 	});
 }
 	function novelload(list,txt){
-		$(".result-context").remove();
+		
+		if(list==null){
+			$(".result-context").remove();
+			$("#searchresultbox").prepend("<div class='result-context'><h1>该分类暂无小说</h1></div>");
+			return;
+		}
+			$(".result-context").remove();
 			for(var i=0;i<list.length;i++){
 				console.log(list[i]);
 				var line="<div class='result-context'><div class='result-context-left col-lg-5'><img src='"
@@ -392,12 +410,42 @@ function classifiedQuery(a){
 				+list[i].novelTitle+"</p><p class='book-author'>"
 				+list[i].novelAuthor+"<p class='book-categorys'><span class='book-category'>"
 				+txt+"</span></p><p class='book-updatetime'>"
-				+list[i].novelUpdatetime+"</p><p class='book-summry'>"+list[i].novelSummary+"</p><a href='"
+				+list[i].novelUpdatetime+"</p><div class='book-summry'>"+list[i].novelSummary+"</div><a href='"
 				+"#"+"' class='btn btn-warning'>加入书架</a> <a href='"
 				+"novelinfo.jsp?nid="+list[i].novelId+"' class='btn btn-default'>在线阅读</a></div></div>";
 				$("#searchresultbox").prepend(line);
 				
 			}
 	}
+	/*
+<li><a href="javascript:void(0)" onclick="classifiedQuery(this)" cid="1">奇幻玄幻</a>
+	<ul>
+		<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">东方玄幻</a></li>
+		<li><a href="javascript:void(0)" nclick="classifiedQuery(this)">异界大陆</a></li>
+		<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">异界争霸</a></li>
+		<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">远古神话</a></li>
+	</ul>
+</li>
+	*/
+function cateload(data){
+    for(var i=0;i<data.length;i++){
+    	var line="<li><a href='javascript:void(0)' onclick='classifiedQuery(this)' cid='"+data[i].catId+"'>"+data[i].catName+"</a><ul>";
+    	for(var j=i+1;j<data.length;j++){
+    		if(data[j].catParentid==data[i].catId){
+    			line+="<li><a href='javascript:void(0)' onclick='classifiedQuery(this)' cid='"+data[j].catId+"'>"+data[j].catName+"</a></li>";
+    			data.splice(j, 1);
+    			j--;
+    		}
+    	
+    	}
+    	line+="	</ul></li>";
+    	console.log(line);
+    	if(data[i].catGender==0)
+    		$("#malelike").append(line);
+    	else
+    		$("#femalelike").append(line);
+    }
+}
 </script>
+<script src="js/menu_min.js" type="text/javascript" charset="utf-8"></script>
 </html>

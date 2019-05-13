@@ -16,45 +16,45 @@
 		<servlet-name>RegisterAndLogin</servlet-name>
 		<url-pattern>/rl.do</url-pattern>
 	</servlet-mapping>
-  <servlet>
-    <servlet-name>AdminServlet</servlet-name>
-    <servlet-class>cn.dmdream.controller.AdminServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>AdminCategoryServlet</servlet-name>
-    <servlet-class>cn.dmdream.controller.AdminCategoryServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>AdminNovelServlet</servlet-name>
-    <servlet-class>cn.dmdream.controller.AdminNovelServlet</servlet-class>
-  </servlet>
+	<servlet>
+		<servlet-name>AdminServlet</servlet-name>
+		<servlet-class>cn.dmdream.controller.AdminServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AdminCategoryServlet</servlet-name>
+		<servlet-class>cn.dmdream.controller.AdminCategoryServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AdminNovelServlet</servlet-name>
+		<servlet-class>cn.dmdream.controller.AdminNovelServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>TestServlet</servlet-name>
 		<url-pattern>/testServlet.do</url-pattern>
 	</servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>AdminServlet</servlet-name>
-    <url-pattern>/admin.do</url-pattern>
-  </servlet-mapping>
-    <servlet-mapping>
-    <servlet-name>AdminServlet</servlet-name>
-    <url-pattern>/admin</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>AdminCategoryServlet</servlet-name>
-    <url-pattern>/adminCategory.do</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>AdminNovelServlet</servlet-name>
-    <url-pattern>/adminNovel.do</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AdminServlet</servlet-name>
+		<url-pattern>/admin.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AdminServlet</servlet-name>
+		<url-pattern>/admin</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AdminCategoryServlet</servlet-name>
+		<url-pattern>/adminCategory.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AdminNovelServlet</servlet-name>
+		<url-pattern>/adminNovel.do</url-pattern>
+	</servlet-mapping>
 	<servlet>
-		<servlet-name>ChapterServlet</servlet-name>
-		<servlet-class>cn.dmdream.servlet.ChapterServlet</servlet-class>
+		<servlet-name>ReadOnlineServlet</servlet-name>
+		<servlet-class>cn.dmdream.servlet.ReadOnlineServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ChapterServlet</servlet-name>
-		<url-pattern>/chapter.do</url-pattern>
+		<servlet-name>ReadOnlineServlet</servlet-name>
+		<url-pattern>/readonline.do</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>BaseServlet</servlet-name>
@@ -64,7 +64,7 @@
 		<servlet-name>BaseServlet</servlet-name>
 		<url-pattern>/base</url-pattern>
 	</servlet-mapping>
-	<!--分类页面Servlet  -->
+	<!--分类页面Servlet -->
 	<servlet>
 		<servlet-name>CategoryServlet</servlet-name>
 		<servlet-class>cn.dmdream.servlet.CategoryServelt</servlet-class>
@@ -82,6 +82,15 @@
 		<servlet-name>UserCenterServlet</servlet-name>
 		<url-pattern>/usercenter.do</url-pattern>
 	</servlet-mapping>
+	<!-- 主页相关servlet -->
+	<servlet>
+		<servlet-name>MainPageServlet</servlet-name>
+		<servlet-class>cn.dmdream.servlet.MainPageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MainPageServlet</servlet-name>
+		<url-pattern>/mainpage.do</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>mainpage.jsp</welcome-file>
 	</welcome-file-list>
@@ -92,7 +101,7 @@
 	<filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
-	</filter-mapping>	
+	</filter-mapping>
 	<servlet>
 		<servlet-name>CommentServlet</servlet-name>
 		<servlet-class>cn.dmdream.servlet.CommentServlet</servlet-class>
@@ -101,22 +110,15 @@
 		<servlet-name>CommentServlet</servlet-name>
 		<url-pattern>/comment.do</url-pattern>
 	</servlet-mapping>
+
 	<filter>
-		<filter-name>CharacterEncodingFilter</filter-name>
-		<filter-class>cn.dmdream.controller.filter.CharacterEncodingFilter</filter-class>
+		<filter-name>AdminAuthFilter</filter-name>
+		<filter-class>cn.dmdream.controller.filter.AdminAuthFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>CharacterEncodingFilter</filter-name>
-		<url-pattern>*.do</url-pattern>
+		<filter-name>AdminAuthFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>/adminCategory.do</url-pattern>
+		<url-pattern>/adminNovel.do</url-pattern>
 	</filter-mapping>
-    <filter>
-        <filter-name>AdminAuthFilter</filter-name>
-        <filter-class>cn.dmdream.controller.filter.AdminAuthFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>AdminAuthFilter</filter-name>
-        <url-pattern>/admin/*</url-pattern>
-        <url-pattern>/adminCategory.do</url-pattern>
-        <url-pattern>/adminNovel.do</url-pattern>
-    </filter-mapping>
 </web-app>

@@ -27,32 +27,6 @@ h3{
 <script src="js/kindeditor/jquery-3.4.0.min.js"></script>
 <script src="js/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <script type="text/javascript">
-
-	/*$(function() {
-		$("#username").blur(function() {
-			var username = $("#username").val();
-			//alert(username);
-			//把用户名异步穿个服务器，进行重复校验
-			$.ajax({
-				data : {
-					username : username
-				},
-				url : "ckun.do",
-				type : "POST",
-				success : function(data) {
-					console.log(data);
-					var jsonData = JSON.parse(data);
-					console.log(jsonData.status, jsonData.data, jsonData.msg);
-					if (jsonData.status == 400) {
-						$("#usernameTip").html(jsonData.msg);
-					} else {
-						$("#usernameTip").html("");
-					}
-				}
-			});
-		});
-	});*/
-
 	function submitForm() {
 		var pwd = $("#password").val();
 		pwd = md5(pwd);

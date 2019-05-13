@@ -4,7 +4,7 @@ import java.util.List;
 
 import cn.dmdream.entity.SnChapter;
 import cn.dmdream.entity.SnNovel;
-import cn.dmdream.servlet.ChapterServlet;
+import cn.dmdream.servlet.ReadOnlineServlet;
 
 /**
  * 小说Dao层接口
@@ -113,4 +113,5 @@ public interface SnNovelDao {
 	 * @return
 	 */
 	public List<SnNovel> findByTitleStrict(String novelTitle);
+	public List<SnNovel> findNewestNovel(Integer size);
 }

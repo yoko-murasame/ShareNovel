@@ -167,4 +167,13 @@ public class SnCategoryDaoImpl implements SnCategoryDao {
 		return count;
 	}
 
+	@Override
+	public List<SnCategory> queryAll() {
+		String sql="select * from sn_category";
+		RowSet rs = dbUtil.query(sql);
+		List<SnCategory> list = new ArrayList<SnCategory>();
+		handleData(rs, list);
+		return list.size() > 0 ? list : null;
+	}
+
 }

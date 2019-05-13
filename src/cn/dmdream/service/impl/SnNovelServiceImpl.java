@@ -194,4 +194,10 @@ public class SnNovelServiceImpl implements SnNovelService {
 		return snNovelDao.findByTitleStrict(novelTitle);
 	}
 
+	@Override
+	public List<SnNovel> findNewestNovel(Integer size) {
+		// TODO Auto-generated method stub
+		return snNovelDao.findNewestNovel(size);
+	}
+
 }

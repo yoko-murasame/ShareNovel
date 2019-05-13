@@ -72,4 +72,9 @@ public interface SnCategoryDao {
 	public List<SnCategory> findByParentIdByPage(int id , int pageSize ,int page);
 
 	public Integer findCount(Integer id);
+	/**
+	 * 查询分类
+	 * @return
+	 */
+	public List<SnCategory> queryAll();
 }

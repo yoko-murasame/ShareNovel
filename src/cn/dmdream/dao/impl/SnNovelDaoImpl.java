@@ -2,6 +2,7 @@ package cn.dmdream.dao.impl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -338,7 +339,116 @@ public class SnNovelDaoImpl implements SnNovelDao {
 		String sql="select * from sn_novel where novel_categoryid=?";
 		List<SnNovel> list=new ArrayList<SnNovel>();
 		CachedRowSet rs = dbUtil.query(sql, cid);
-		handleData(rs, list);
+		try {
+			while (rs.next()) {
+				SnNovel snNovel = new SnNovel();
+
+				Integer novelId = rs.getInt("novel_id");
+				String novelTitle = rs.getString("novel_title");
+				String novelAuthor = rs.getString("novel_author");
+				// 从 ->查询cat对象 -> 创建cat对象
+				SnCategory snCategory = new SnCategory();
+				// 修改->查询catId和catName
+				Integer snCategoryId = rs.getInt("novel_categoryid");
+				// 时间需要查询
+				String novelUpdatetime = rs.getString("novel_updatetime");
+				Integer novelIsEnd = rs.getInt("novel_isEnd");
+				String novelSummary = rs.getString("novel_summary");
+				// 从 查询用户对象 -> 改变成创建用户对象
+				SnUser snUser = new SnUser();
+				// 修改->查询 user_nickname user_nickpic
+				Integer userId = rs.getInt("novel_share_userid");
+				// 将map字符串转回map
+				Map<String, String> novelDownloadurl = null;
+				try {
+					novelDownloadurl = StringUtils.mapStringToMap(rs.getString("novel_downloadurl"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				Integer novelCheck = rs.getInt("novel_check");
+				String novelCover = rs.getString("novel_cover");
+
+				// 封装
+				snNovel.setNovelId(novelId);
+				snNovel.setNovelTitle(novelTitle);
+				snNovel.setNovelAuthor(novelAuthor);
+				snNovel.setSnCategory(snCategory);
+				snNovel.setNovelUpdatetime(novelUpdatetime);
+				snNovel.setNovelIsEnd(novelIsEnd);
+				snNovel.setNovelSummary(novelSummary);
+				snNovel.setNovelShareUser(snUser);
+				snNovel.setNovelDownloadurl(novelDownloadurl);
+				snNovel.setNovelCheck(novelCheck);
+				snNovel.setNovelCover(novelCover);
+				list.add(snNovel);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return list.size()>0?list:null;
 	}
+
+	@Override
+	public List<SnNovel> findNewestNovel(Integer size) {
+		String sql;
+		RowSet rs;
+		if(size==null) {
+			sql="select * from sn_novel order by novel_updatetime desc";
+			rs = dbUtil.query(sql);
+		}else {
+			sql="select * from sn_novel order by novel_updatetime desc limit ?";
+			rs = dbUtil.query(sql,size);
+		}
+		List<SnNovel> list = new ArrayList<SnNovel>();
+		try {
+			while (rs.next()) {
+				SnNovel snNovel = new SnNovel();
+
+				Integer novelId = rs.getInt("novel_id");
+				String novelTitle = rs.getString("novel_title");
+				String novelAuthor = rs.getString("novel_author");
+				// 从 ->查询cat对象 -> 创建cat对象
+				SnCategory snCategory = new SnCategory();
+				// 修改->查询catId和catName
+				Integer snCategoryId = rs.getInt("novel_categoryid");
+				// 时间需要查询
+				String novelUpdatetime = rs.getString("novel_updatetime");
+				Integer novelIsEnd = rs.getInt("novel_isEnd");
+				String novelSummary = rs.getString("novel_summary");
+				// 从 查询用户对象 -> 改变成创建用户对象
+				SnUser snUser = new SnUser();
+				// 修改->查询 user_nickname user_nickpic
+				Integer userId = rs.getInt("novel_share_userid");
+				// 将map字符串转回map
+				Map<String, String> novelDownloadurl = null;
+				try {
+					novelDownloadurl = StringUtils.mapStringToMap(rs.getString("novel_downloadurl"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				Integer novelCheck = rs.getInt("novel_check");
+				String novelCover = rs.getString("novel_cover");
+
+				// 封装
+				snNovel.setNovelId(novelId);
+				snNovel.setNovelTitle(novelTitle);
+				snNovel.setNovelAuthor(novelAuthor);
+				snNovel.setSnCategory(snCategory);
+				snNovel.setNovelUpdatetime(novelUpdatetime);
+				snNovel.setNovelIsEnd(novelIsEnd);
+				snNovel.setNovelSummary(novelSummary);
+				snNovel.setNovelShareUser(snUser);
+				snNovel.setNovelDownloadurl(novelDownloadurl);
+				snNovel.setNovelCheck(novelCheck);
+				snNovel.setNovelCover(novelCover);
+				list.add(snNovel);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list.size() > 0 ? list : null;
+	}
+
+
 }

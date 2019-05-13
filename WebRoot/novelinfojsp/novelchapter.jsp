@@ -89,7 +89,7 @@ h3 {
 			<%
 				for (SnChapter chapter : newlist) {
 			%>
-			<li class="chapter"><a href="../chapter.do?method=readOnline&cid=<%=chapter.getChapterId() %>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
+			<li class="chapter"><a href="../readonline.do?method=readOnline&cid=<%=chapter.getChapterId() %>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
 			<%
 				}
 			%>
@@ -103,7 +103,7 @@ h3 {
 			<%
 				for (SnChapter chapter : list) {
 			%>
-			<li class="chapter"><a href="../chapter.do?method=readOnline&cid=<%=chapter.getChapterId()%>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
+			<li class="chapter"><a href="../readonline.do?method=readOnline&cid=<%=chapter.getChapterId()%>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
 			<%
 			}
 			%>

@@ -107,6 +107,7 @@ String nid=request.getParameter("nid");
     }
     $(getComments(1));
     function loadcomment(data){
+    if(data!=null){
     	data.sort(function(a,b){
     		return b.commId-a.commId;
     	});
@@ -119,6 +120,7 @@ String nid=request.getParameter("nid");
     		console.log(line);
     		$('#info-show ul').append(line);
     	}
+    }
     }
     
 </script>

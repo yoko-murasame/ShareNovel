@@ -11,7 +11,7 @@ import cn.dmdream.entity.SnChapter;
 import cn.dmdream.service.SnChapterService;
 import cn.dmdream.service.impl.SnChapterServiceImpl;
 
-public class ChapterServlet extends BaseServlet{
+public class ReadOnlineServlet extends BaseServlet{
 	/**
 	 * 
 	 */

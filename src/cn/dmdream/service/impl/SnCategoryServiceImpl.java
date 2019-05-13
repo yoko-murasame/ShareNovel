@@ -101,5 +101,11 @@ public class SnCategoryServiceImpl implements SnCategoryService {
 
 	public Integer findCount(Integer id) {
 		return snCategoryDao.findCount(id);
+	}
+
+	@Override
+	public List<SnCategory> queryAll() {
+		// TODO Auto-generated method stub
+		return snCategoryDao.queryAll();
 	};
 }

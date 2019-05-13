@@ -236,7 +236,7 @@ public class SnChapterDaoImpl implements SnChapterDao {
 			snchapter.setSnNovel(snoveldao.findById(novelId));
 		});*/
 		//多表查询
-		String sql1="select sn_chapter.*,sn_novel.novel_title,novel_author from sn_chapter join sn_novel where sn_chapter.chapter_novelid=sn_novel.novel_id and chapter_updatetime>=? order by chapter_updatetime DESC";
+		String sql1="select sn_chapter.chapter_id,sn_chapter.chapter_novelid,sn_chapter.chapter_title,sn_chapter.chapter_updatetime,sn_novel.novel_title,sn_novel.novel_author from sn_chapter join sn_novel where sn_chapter.chapter_novelid=sn_novel.novel_id and chapter_updatetime>=? order by chapter_updatetime DESC";
 		if(limit==null) {
 			rs = dbUtil.query(sql1,since);			
 		}else {
@@ -253,7 +253,6 @@ public class SnChapterDaoImpl implements SnChapterDao {
 				SnNovel chapterNovel = new SnNovel();
 				chapterNovel.setNovelId(novelId);
 				String chapterTitle = rs.getString("chapter_title");
-				String chapterContent = rs.getString("chapter_content");
 				// 获取章节最近的更近时间
 				String chapterUpdatetime = rs.getString("chapter_updatetime");
 				String noveltitle=rs.getString("novel_title");
@@ -262,7 +261,6 @@ public class SnChapterDaoImpl implements SnChapterDao {
 				chapter.setChapterId(chapterId);
 				chapter.setSnNovel(chapterNovel);
 				chapter.setChapterTitle(chapterTitle);
-				chapter.setChapterContent(chapterContent);
 				chapter.setChapterUpdatetime(chapterUpdatetime);
 				chapter.getSnNovel().setNovelAuthor(novelauthor);
 				chapter.getSnNovel().setNovelTitle(noveltitle);

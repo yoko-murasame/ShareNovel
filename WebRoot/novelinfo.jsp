@@ -135,13 +135,13 @@ if("".equals(id)||id==null){
 				<div class="col-lg-6">
 					<p class="bookname"><%=novel.getNovelTitle() %></p>
 					<p class="bookauthor">作者:<%=novel.getNovelAuthor() %></p>
-					<p class="bookcategory">分类:<%=novel.getSnCategory() %></p>
+					<p class="bookcategory">分类:<%=novel.getSnCategory().getCatName() %></p>
 					<p class="bkintroduct"><%=novel.getNovelSummary() %></p>
 				</div>
 				<div class="col-lg-3" id="ff">
 					<a href="" class="btn btn-default">在线阅读</a>
 					<a href="" class="btn btn-default">加入书架</a>
-					<a href="" class="btn btn-default">下载</a>
+					<a href="javascript:" class="btn btn-default">下载</a>
 			</div>
 			</div>
 			<div class="clearfix"></div>
