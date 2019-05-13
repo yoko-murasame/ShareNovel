@@ -79,7 +79,7 @@
 							</a>
 							<ul class="sub">
 								<li>
-									<a href="admin_userlist.jsp">用户列表</a>
+									<a href="admin_userlist.html">用户列表</a>
 								</li>
 								<li>
 									<a href="admin_userupdate.jsp">用户修改</a>
@@ -394,6 +394,10 @@
 		<script src="${pageContext.request.contextPath}/js/admin/assets/js/sparkline-chart.js"></script>
 
 		<script type="text/javascript">
+
+		
+
+		
 			$(document).ready(function() {
 				var unique_id = $.gritter.add({
 					// (string | mandatory) the heading of the notification

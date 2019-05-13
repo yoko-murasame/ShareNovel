@@ -131,4 +131,26 @@ public class SnUserDaoImpl implements SnUserDao {
 			dbUtil.closeAll();
 		}
 	}
+
+	/**
+	 * 根据用户总数量
+	 * @return
+	 */
+	@Override
+	public Integer count() {
+		int allCount = 0;
+
+		String sql = "select count(*) from sn_user";
+
+		ResultSet resultSet = dbUtil.query(sql);
+		try {
+			while (resultSet.next()) {
+				allCount = resultSet.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return allCount;
+	}
 }

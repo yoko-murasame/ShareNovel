@@ -20,6 +20,13 @@
 	    <servlet-name>AdminCategoryServlet</servlet-name>
 	    <servlet-class>cn.dmdream.controller.AdminCategoryServlet</servlet-class>
 	  </servlet>
+  <servlet>
+    <servlet-name>AdminUserlist</servlet-name>
+    <servlet-class>cn.dmdream.controller.userMana.AdminUserlist</servlet-class>
+  </servlet>
+
+  
+
 
 
 
@@ -45,6 +52,11 @@
     <servlet-name>AdminCategoryServlet</servlet-name>
     <url-pattern>/adminCategory.do</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminUserlist</servlet-name>
+    <url-pattern>/adminUserlist.do</url-pattern>
+  </servlet-mapping>
+  
 
 
 	<welcome-file-list>

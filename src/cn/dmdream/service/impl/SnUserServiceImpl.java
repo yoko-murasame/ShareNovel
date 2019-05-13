@@ -75,4 +75,9 @@ public class SnUserServiceImpl implements SnUserService{
 		return snUser;
 	}
 
+	@Override
+	public Integer count() {
+		return snUserDao.count();
+	}
+
 }

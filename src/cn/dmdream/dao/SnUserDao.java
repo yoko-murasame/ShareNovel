@@ -59,5 +59,10 @@ public interface SnUserDao {
 	 * @return
 	 */
 	public SnUser findByUsername(String username);
+	/**
+	 * 根据用户总数量
+	 * @return
+	 */
+	public Integer count();
 	
 }
