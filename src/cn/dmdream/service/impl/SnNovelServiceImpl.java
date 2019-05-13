@@ -159,20 +159,16 @@ public class SnNovelServiceImpl implements SnNovelService {
 		return snNovelDao.findByCheckByPage(check, pageSize, page);
 	}
 
-	/**
-	 * 获取每周排行榜 前10的小说信息
-	 * @param null
-	 * @return List<SnNovel> 数量10
-	 */
+	@Override
 	public List<SnNovel> getWeekRank() {
-		// 
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<SnNovel> queryByCategory(int cid) {
 		// TODO Auto-generated method stub
-		return snNovelDao.queryByCategory(cid);
+		return null;
 	};
 	
 	@Override

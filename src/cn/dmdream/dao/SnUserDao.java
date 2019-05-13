@@ -60,4 +60,6 @@ public interface SnUserDao {
 	 */
 	public SnUser findByUsername(String username);
 	
+	public int countByUsername(String username);
+	
 }

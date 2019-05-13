@@ -59,6 +59,6 @@ public interface SnUserService {
 	 * @return
 	 */
 	public SnUser findByUsername(String username);
-	public Boolean login(String name,String pwd);
-	public Boolean emailActive(SnUser u);
+	
+	public boolean countByUsername(String username);
 }

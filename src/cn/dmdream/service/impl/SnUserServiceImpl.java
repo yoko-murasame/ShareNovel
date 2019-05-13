@@ -76,21 +76,12 @@ public class SnUserServiceImpl implements SnUserService{
 	}
 
 	@Override
-	public Boolean login(String name, String pwd) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	/**
-	 *  修改邮箱已验证
-	 */
-	@Override
-	public Boolean emailActive(SnUser u) {
-		u.setUserEmailActive(1);
-		int ret = snUserDao.update(u);
-		if(ret==1) {
-			return true;
-		}else
-		return false;
+	public boolean countByUsername(String username) {
+
+		snUserDao=new SnUserDaoImpl();
+		int count=snUserDao.countByUsername(username);
+		//false代表用户名不可用
+		return count>0?false:true;
 	}
 
 }

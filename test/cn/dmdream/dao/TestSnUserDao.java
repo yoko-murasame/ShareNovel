@@ -60,4 +60,10 @@ public class TestSnUserDao {
 		SnUser snUser = snUserDao.findByUsername("pbb");
 		System.out.println(snUser);
 	}
+	
+	@Test
+	public void testCountByUsername(){
+		int i = snUserDao.countByUsername("pbb");
+		Assert.assertEquals(1, i);
+	}
 }

@@ -1,6 +1,7 @@
 package cn.dmdream.service.impl;
 
 import java.util.List;
+
 import cn.dmdream.dao.SnChapterDao;
 import cn.dmdream.dao.impl.SnChapterDaoImpl;
 import cn.dmdream.entity.SnChapter;
@@ -107,39 +108,23 @@ public class SnChapterServiceImpl implements SnChapterService {
 	public List<SnChapter> findByNovelByOrdersByPage(SnNovel snNovel, String idOrder,String titleOrder,String updatetimeOrder, int pageSize, int page){
 		return chapterDao.findByNovelByOrdersByPage(snNovel, idOrder, titleOrder, updatetimeOrder, pageSize, page);
 	}
-	/**
-	 * 获取最近更新小说章节
-	 * @param  day 前day天 到现在的时间间隔 必须大于0  默认为3.
-	 * @return 最近更新的小说章节
-	 */
-	public List<SnChapter> findRecentUpdate(Integer day,Integer limit) {
-		if(day==null) {
-			day=3;
-		}
-		if(day<0) {
-			day=0;
-		}
-		//查询
-		return chapterDao.findRecentUpdate((long) (day*24*60*60*1000), limit);
+
+	@Override
+	public List<SnChapter> findRecentUpdate(Integer day, Integer limit) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public List<SnChapter> findRecentUpdate(SnNovel novel,Integer day, Integer limit) {
-		if(day==null) {
-			day=3;
-		}
-		if(day<0) {
-			day=0;
-		}
-		return chapterDao.findRecentUpdate(novel, (long) (day*24*60*60*1000), limit);
+	public List<SnChapter> findRecentUpdate(SnNovel novel, Integer day, Integer limit) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public int findNovelChapterTotalCount(SnNovel novel) {
 		// TODO Auto-generated method stub
-		return chapterDao.findNovelChapterTotalCount(novel);
-	}
-	
-
+		return 0;
+	};
 
 }
