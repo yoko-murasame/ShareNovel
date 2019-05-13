@@ -171,9 +171,39 @@
 		          		
   			          	<form class="form-horizontal tasi-form">
   			          		<div class="col-xs-3"></div>
+  			          		<!-- 图片上传开始 -->
   			          		<div id="userPicUpload" class="col-xs-6" style="text-align: center;">
   			          		</div>
   			          		<input type="hidden" name="addNickpic" id="addNickpic"/>
+  			          		
+								<!-- 封面上传js -->
+								<script type="text/javascript">
+									var dragImgUpload = new DragImgUpload("#userPicUpload", {
+										callback : function(files) {
+											//回调函数，可以传递给后台等等
+											var file = files[0];
+											console.log(file.name);
+											var form = new FormData();
+											form.append("file", file);
+											if(/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(file.name)){
+												showStikyGritter('消息',"正在上传图片······");
+												var formPromiseObj = getPostAjaxPromiseForForm("../adminNovel.do?method=ajaxFileUpload",form);
+												formPromiseObj.then(function(res){
+													removeAllGritters();
+													setTimeout(function() {showGritter('消息',"图片上传成功！");}, 500);
+													console.log(res);
+													$("#addNickpic").val(res.data)
+												});
+											}else{
+												showGritter('错误',"不支持的图片格式!支持以下格式:gif、jpg、jpeg、png");
+												return false;
+											}
+										//格式判断完毕
+										}
+										//回调函数完毕
+									})
+								</script>
+  			          		
   			          		
   			          		<div class="col-xs-3"></div>
   			          		<div class="col-xs-12" style="height: 30px;"></div>
