@@ -461,6 +461,12 @@ function newestChapterload(data){
 		$("#newchaptertable").append(line);
 	}
 }
+
+function getWeekRank(){
+
+//页面格式 <tr><td>1</td><td>玄幻</td><td><a href="#">斗破苍穹</a></td></tr>
+
+}
 </script>
 
 
