@@ -159,13 +159,9 @@ public class SnNovelServiceImpl implements SnNovelService {
 		return snNovelDao.findByCheckByPage(check, pageSize, page);
 	}
 
-	/**
-	 * 获取每周排行榜 前10的小说信息
-	 * @param null
-	 * @return List<SnNovel> 数量10
-	 */
+	@Override
 	public List<SnNovel> getWeekRank() {
-		// 
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -192,6 +188,12 @@ public class SnNovelServiceImpl implements SnNovelService {
 	 */
 	public List<SnNovel> findByTitleStrict(String novelTitle) {
 		return snNovelDao.findByTitleStrict(novelTitle);
+	}
+
+	@Override
+	public List<SnNovel> findNewestNovel(Integer size) {
+		// TODO Auto-generated method stub
+		return snNovelDao.findNewestNovel(size);
 	}
 
 }

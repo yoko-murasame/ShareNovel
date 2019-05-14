@@ -9,6 +9,14 @@
 		<servlet-class>cn.dmdream.controller.TestServlet</servlet-class>
 	</servlet>
   <servlet>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>cn.dmdream.servlet.UserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/user.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>AdminServlet</servlet-name>
     <servlet-class>cn.dmdream.controller.AdminServlet</servlet-class>
   </servlet>
@@ -53,6 +61,14 @@
 		<servlet-name>ChapterServlet</servlet-name>
 		<url-pattern>/chapter.do</url-pattern>
 	</servlet-mapping>
+  <servlet>
+    <servlet-name>ReadOnlineServlet</servlet-name>
+    <servlet-class>cn.dmdream.servlet.ReadOnlineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReadOnlineServlet</servlet-name>
+    <url-pattern>/readonline.do</url-pattern>
+  </servlet-mapping>
 	<servlet>
 		<servlet-name>BaseServlet</servlet-name>
 		<servlet-class>cn.dmdream.controller.base.BaseServlet</servlet-class>
@@ -75,18 +91,33 @@
 		<servlet-name>UserCenterServlet</servlet-name>
 		<servlet-class>cn.dmdream.servlet.UserCenterServelt</servlet-class>
 	</servlet>
-  <servlet>
-    <servlet-name>UserSearchServlet</servlet-name>
-    <servlet-class>cn.dmdream.controller.UserSearchServlet</servlet-class>
-  </servlet>
-
 	<servlet-mapping>
 		<servlet-name>UserCenterServlet</servlet-name>
 		<url-pattern>/usercenter.do</url-pattern>
 	</servlet-mapping>
+  <servlet>
+    <servlet-name>UserSearchServlet</servlet-name>
+    <servlet-class>cn.dmdream.controller.UserSearchServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>UserSearchServlet</servlet-name>
     <url-pattern>/userSearch.do</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>MainPageServlet</servlet-name>
+    <servlet-class>cn.dmdream.servlet.MainPageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MainPageServlet</servlet-name>
+    <url-pattern>/mainpage.do</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>CommentServlet</servlet-name>
+    <servlet-class>cn.dmdream.servlet.CommentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommentServlet</servlet-name>
+    <url-pattern>/comment.do</url-pattern>
   </servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>mainpage.jsp</welcome-file>
@@ -109,4 +140,13 @@
         <url-pattern>/adminCategory.do</url-pattern>
         <url-pattern>/adminNovel.do</url-pattern>
     </filter-mapping>
+    <filter>
+    <filter-name>UserAuthFilter</filter-name>
+    <filter-class>cn.dmdream.controller.filter.UserAuthFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>UserAuthFilter</filter-name>
+    <url-pattern>/usercenterjsp/*</url-pattern>
+    <url-pattern>/usercenter.jsp</url-pattern>
+  </filter-mapping>
 </web-app>

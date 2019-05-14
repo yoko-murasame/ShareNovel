@@ -20,7 +20,7 @@
 		SnChapterService ss = new SnChapterServiceImpl();
 		list = ss.findByNovelByPage(novel, 60, pagenum);
 		if(pagenum<2){
-			newlist=ss.findRecentUpdate(novel, 2, 12);
+			newlist=ss.findRecentUpdate(novel, 7, 12);
 		}
 	} else {
 		request.getRequestDispatcher("mainpage.jsp").forward(request, response);
@@ -89,7 +89,7 @@ h3 {
 			<%
 				for (SnChapter chapter : newlist) {
 			%>
-			<li class="chapter"><a href="../chapter.do?method=readOnline&cid=<%=chapter.getChapterId() %>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
+			<li class="chapter"><a href="../readonline.do?method=readOnline&cid=<%=chapter.getChapterId() %>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
 			<%
 				}
 			%>
@@ -103,7 +103,7 @@ h3 {
 			<%
 				for (SnChapter chapter : list) {
 			%>
-			<li class="chapter"><a href="../chapter.do?method=readOnline&cid=<%=chapter.getChapterId()%>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
+			<li class="chapter"><a href="../readonline.do?method=readOnline&cid=<%=chapter.getChapterId()%>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
 			<%
 			}
 			%>

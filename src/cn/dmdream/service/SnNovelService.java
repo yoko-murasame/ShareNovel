@@ -120,4 +120,5 @@ public interface SnNovelService {
 	 * @return
 	 */
 	public List<SnNovel> findByTitleStrict(String novelTitle);
+	public List<SnNovel> findNewestNovel(Integer size);
 }

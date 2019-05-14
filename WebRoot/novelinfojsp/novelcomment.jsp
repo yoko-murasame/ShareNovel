@@ -9,132 +9,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<head>
 		<meta charset="utf-8">
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="../js/kindeditor/themes/default/default.css" />
-		<script src="../js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
-		<script charset="utf-8" src="../js/kindeditor/kindeditor-all-min.js"></script>
-		<script charset="utf-8" src="../js/kindeditor/lang/zh-CN.js"></script>
-		<style type="text/css">
-			.comment{
-				width:100%;
-				border: 1px solid #C0C0C0;
-			}
-			.comment-left{
-				width: 20%;
-				height: 150px;
-				float: left;
-			}
-			.comment-right{
-				width: 70%;
-				height: 150px;
-				float: left;
-			}
-			.comment-user-headpic{
-				margin-top: 10px;
-				margin-left: 20px;
-				width:100px;
-				height: 100px;
-				border-radius: 50px;
-				overflow: hidden;
-			}
-			.comment-user-name{
-				padding-top: 10px;
-				padding-left: 30px;
-			}
-			.comment-context{
-				padding: 10px;
-				min-height: 100px;
-				font-size: 20px;
-				line-height: 25px;
-			}
-			.comment-floor{
-				height: 25px;
-			}
-		</style>
-		<script type="text/javascript">
-			var editor;
-			KindEditor.ready(function(K) {
-				editor = K.create('textarea[name="content"]', {
-					resizeType : 1,
-					allowPreviewEmoticons : false,
-					allowImageUpload : false,
-					items : [
-						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-						'insertunorderedlist', '|', 'emoticons', 'image', 'link']
-				});
-			});
-		</script>
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="css/sinaFaceAndEffec.css"/>
+		<script src="js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/sinaFaceAndEffec.js" type="text/javascript" charset="utf-8"></script>
+	</head>
 	</head>
 	<body>
-		<div class="comment">
-			<div class="comment-left">
-				<div class="comment-user-headpic">
-					<img src="../img/nocover.jpg" >
+		<div id="content" style="width: 700px; height: auto;">
+			<div class="wrap">
+				<div class="comment">
+					<div class="head-face">
+						<img src="images/1.jpg">
+						<p>我是鸟</p>
+					</div>
+					<div class="content">
+						<div class="cont-box">
+							<textarea class="text" placeholder="请输入..."></textarea>
+						</div>
+						<div class="tools-box">
+							<div class="operator-box-btn"><span class="face-icon">☺</span><span class="img-icon">▧</span></div>
+							<div class="submit-btn"><input type="button" onClick="out()" value="提交评论" /></div>
+						</div>
+					</div>
 				</div>
-				<div class="comment-user-name">你还未发现</div>
-			</div>
-			<div class="comment-right">
-				<div class="comment-context">
-					666666666666666666666666666666666666666666666666666666
+				<div id="info-show">
+					<ul></ul>
 				</div>
-				<div class="comment-floor">
-					<a href="#">回复</a>
-					<a href="#">点赞</a>
-				</div>
-			</div>
-			<div style="clear: both;"></div>
-		</div>
-		<div class="comment">
-			<div class="comment-left">
-				<div class="comment-user-headpic">
-					<img src="../img/nocover.jpg" >
-				</div>
-				<div class="comment-user-name">你还未发现</div>
-			</div>
-			<div class="comment-right">
-				<div class="comment-context">
-					阿斯达收到了需持续吗我欧派我就去就撒了达拉斯
-				</div>
-				<div class="comment-floor">
-					<a href="#">回复</a>
-					<a href="#">点赞</a>
-				</div>
-			</div>
-			<div style="clear: both;"></div>
-		</div>
-		<div class="comment">
-			<div class="comment-left">
-				<div class="comment-user-headpic">
-					<img src="../img/nocover.jpg" >
-				</div>
-				<div class="comment-user-name">你还未发现</div>
-			</div>
-			<div class="comment-right">
-				<div class="comment-context">
-					萨德撒大撒奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥奥
-				</div>
-				<div class="comment-floor">
-					<a href="#">回复</a>
-					<a href="#">点赞</a>
-				</div>
-			</div>
-			<div style="clear: both;"></div>
-		</div>
-		<!--分页-->
-		<!--富文本-->
-		<div class="comment">
-			<div class="comment-left">
-				<div class="comment-user-headpic">
-					<img src="../img/nocover.jpg" >
-				</div>
-				<div class="comment-user-name">你还未发现</div>
-			</div>
-			<div class="comment-right" style="width:80%;">
-				<textarea name="content" style="width:100%;height:300px;visibility:hidden;"></textarea>
 			</div>
 		</div>
-		</textarea>
 	</body>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/sinaFaceAndEffec.js"></script>
 	<script type="text/javascript">
+		// 绑定表情
+		$('.face-icon').SinaEmotion($('.text'));
+		// 测试本地解析
+		function out() {
+			var inputText = $('.text').val();
+			$('#info-show ul').append(reply(AnalyticEmotion(inputText)));
+		}
+
+		var html;
+
+		function reply(content,x,obj) {
+			html = '<li>';
+			html += '<div class="head-face">';
+			html += '<img src="images/1.jpg" / >';
+			html += '</div>';
+			html += '<div class="reply-cont">';
+			html += '<p class="username">小小红色飞机</p>';
+			html += '<p class="comment-body">' + content + '</p>';
+			html += '<p class="comment-footer">2016年10月5日　回复　点赞54　转发12</p>';
+			html += '</div>';
+			html += '</li>';
+			return html;
+		}
 	</script>
 </html>

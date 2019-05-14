@@ -9,14 +9,6 @@
 <%
 	//确认用户是否登录
 	SnUser user=(SnUser)session.getAttribute("user");
-	//查询每周排行榜
-	SnNovelService novelservice=new SnNovelServiceImpl();
-	List<SnNovel> weekranklist=novelservice.getWeekRank();
-	//查询最近更新章节
-	SnChapterService chapterservice=new SnChapterServiceImpl();
-	List<SnChapter> updatelist=chapterservice.findRecentUpdate(3, 15);
-	//查询最新入库小说
-
 
  %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -56,25 +48,25 @@
 					<span>亲,请登录</span> <a href="javascript:openmodel()">登录</a>
 				</div>
 				<div class="col-lg-6">
-					<a href="#"> <font color="red">注册</font>
+					<a href="${pageContext.request.contextPath}/register.jsp"> <font color="red">注册</font>
 					</a>
 				</div>
 					<%}else{ %>
 					<div class="col-lg-6" id="logintip">
-						<span><%=user.getUserUsername() %></span>
+						<span><font color='red'><%=user.getUserUsername() %></font>,你好!</span>
 					</div>	
 					<% }%>
 
 			</div>
 			<div class="col-lg-4 col-lg-offset-4 ">
-				<a href="mainpage.jsp" class="pull-right">我的收藏</a> <a href="#"
-					class="pull-right">个人中心&nbsp;</a>
+				<a href="${pageContext.request.contextPath}/usercenter.jsp" class="pull-right">我的收藏</a>
+				 <a href="${pageContext.request.contextPath}/usercenter.jsp" class="pull-right">个人中心&nbsp;</a>
 			</div>
 		</div>
 	</div>
 	<div class="container" id="search-bar">
 		<div class="col-lg-4" id="logo">
-			<a href="#"><img src="img/logo.beebc.png"></a>
+			<a href="${pageContext.request.contextPath}/mainpage.jsp"><img src="img/logo.beebc.png"></a>
 		</div>
 		<!--搜索框-->
 		<div class="col-lg-8" id="navsearch">
@@ -99,7 +91,7 @@
 			<div>
 				<ul class="nav navbar-nav">
 					<!-- 这里是导航栏内容-->
-					<li><a href="classfiypage.jsp">全部作品</a></li>
+					<li><a href="${pageContext.request.contextPath}/classfiypage.jsp">全部作品</a></li>
 					<li><a href="#">排行榜</a></li>
 					<li><a href="#">最近更新</a></li>
 					<li><a href="#">全本小说</a></li>
@@ -332,75 +324,31 @@
 			<span style="font-size: 20px;">最近更新章节</span>
 			<hr>
 			<table border="1" cellspacing="0" cellpadding="0"
-				class="table table-hover">
+				class="table table-hover" id="newchaptertable">
 				<tr>
 					<th>小说名</th>
 					<th>更新章节</th>
 					<th>作者</th>
 					<th>更新日期</th>
 				</tr>
-				<%
-					for(SnChapter chapter:updatelist){
-					%>
+				<!--
 					<tr>
-						<td><a href="novelinfo.jsp?nid=<%=chapter.getSnNovel().getNovelId() %>"><%=chapter.getSnNovel().getNovelTitle()%></a></td>
-						<td><a href="#"><%=chapter.getChapterTitle() %> </a></td>
-						<td><a href="#"><%=chapter.getSnNovel().getNovelAuthor() %></a></td>
-						<td><a href="#"><%=chapter.getChapterUpdatetime() %></a></td>
-					</tr>
-					<%
-					}
-				 %>
+						<td><a href="novelinfo.jsp?nid=id">书名</a></td>
+						<td><a href="#">标题 </a></td>
+						<td><a href="#">作者</a></td>
+						<td><a href="#">更新时间</a></td>
+					</tr>				
+				  -->
 			</table>
 		</div>
 		<div class="col-lg-3" id="newbook">
 			<span style="font-size: 20px;">新书入库</span>
 			<hr>
 			<table border="o" cellspacing="0" cellpadding="0"
-				class="table table-hover">
+				class="table table-hover" id="newnoveltable">
 				<tr>
 					<th>书名</th>
 					<th>作者</th>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
 				</tr>
 			</table>
 		</div>
@@ -426,9 +374,9 @@
 					</div>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form id="loginform">
 						<div class="form-group">
-							<input type="text" class="form-control" id="username"  name="username" placeholder="手机/邮箱/用户名">
+							<input type="text" class="form-control" id="username"  name="name" placeholder="邮箱(必须已经验证)/用户名">
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" id="password" name="password" placeholder="密码">
@@ -441,15 +389,18 @@
 								<a href="#" class="text-right">忘记密码</a>
 							</div>
 						</div>
+						<div class="form-group">
+							<p id="tip"></p>
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<center>
-						<button type="button" class="btn btn-danger btn-block">登录</button>
+						<button type="button" class="btn btn-danger btn-block" id="loginbt">登录</button>
 					</center>
 					<center>
 						<div>
-							<a href="#">免费注册</a>
+							<a href="${pageContext.request.contextPath}/register.jsp">免费注册</a>
 						</div>
 					</center>
 				</div>
@@ -463,6 +414,68 @@ function openmodel(){
 	$('#myModal').modal({
 	  keyboard: false,
 	})
+}
+$("#loginbt").click(function(){
+	var data=$("#loginform").serialize();
+	$.ajax({
+		url:"${pageContext.request.contextPath}/user.do?method=userLogin",
+		method:"post",
+		data:data,
+		success:function(json){
+			if(json.status==200){
+				window.location.href=window.location.href;
+			}else{
+				$("#tip").text(json.msg);
+			}
+		}
+	});
+});
+$(function(){
+	//获取最新小说
+	$.ajax({
+		url:"${pageContext.request.contextPath}/mainpage.do?method=getNewNovel",
+		type:"post",
+		dataType:"json",
+		success:function(data){
+			if(data.status==200)
+				newestNovelload(data.data);
+		}
+	});
+	//获取最新章节
+	$.ajax({
+		url:"${pageContext.request.contextPath}/mainpage.do?method=getNewChapter",
+		type:"post",
+		dataType:"json",
+		success:function(data){
+			if(data.status==200)
+				newestChapterload(data.data);
+		},
+	});
+});
+
+
+function newestNovelload(data){
+	for(var i=0;i<data.length;i++){
+		var line="<tr><td><a href='${pageContext.request.contextPath}/novelinfo.jsp?nid="+data[i].novelId+"'>"+data[i].novelTitle+"</td><td>"+data[i].novelAuthor+"</td></tr>";
+		console.log(line);
+		$("#newnoveltable").append(line);
+	}
+}
+function newestChapterload(data){
+	for(var i=0;i<data.length;i++){
+		var line=	"<tr><td><a href='${pageContext.request.contextPath}/novelinfo.jsp?nid="+data[i].snNovel.novelId+"'>"+data[i].snNovel.novelTitle+"</a></td>"
+					+	"<td><a href='${pageContext.request.contextPath}/chapter.do?method=readOnline&cid="+data[i].chapterId+"'>"+data[i].chapterTitle+" </a></td>"
+					+	"<td><a href='#'>"+data[i].snNovel.novelAuthor+"</a></td>"
+					+	"<td><a href='#'>"+data[i].chapterUpdatetime+"</a></td></tr>	";
+		console.log(line);
+		$("#newchaptertable").append(line);
+	}
+}
+
+function getWeekRank(){
+
+//页面格式 <tr><td>1</td><td>玄幻</td><td><a href="#">斗破苍穹</a></td></tr>
+
 }
 </script>
 

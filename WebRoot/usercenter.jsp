@@ -11,6 +11,8 @@
 		<link rel="stylesheet" type="text/css" href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
 		<script src="js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="js/yezi/css/lrtk.css"/>
+		<script src="js/yezi/js/yezi.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
 			#body{
 				border: 1px solid gainsboro;
@@ -26,6 +28,7 @@
 	</head>
 	<body>
 	<div class="container-fluid warp">
+		<div id="yezibg"></div>
 		<div class="container" id="body">
 			<div class="header">
 				<h2>个人中心</h2>
@@ -34,14 +37,14 @@
 				<ul class="list-group" id="fc">
 					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/userinfo.jsp' class="list-group-item active">个人信息</a>
 					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/changepwd.jsp' class="list-group-item">修改密码</a>
-					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/uploadnovel.jsp' class="list-group-item active">上传小说</a>
+					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/uploadnovel.jsp' class="list-group-item">上传小说</a>
 					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/myupload.jsp' class="list-group-item">我的上传</a>
 					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/mybookshelf.jsp' class="list-group-item">我的书架</a>
-					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/mycomment.jsp' class="list-group-item">我的评价</a>
+					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenter.do?method=queryComments&page=1' class="list-group-item">我的评价</a>
 				</u>
 			</div>
 			<div class="col-lg-10">
-				<iframe src="usercenter/userinfo.html" class="col-lg-12" frameborder="0" scrolling="no" id="myiframe" onload="setIframeHeight(this)"></iframe>
+				<iframe src="usercenterjsp/userinfo.jsp" class="col-lg-12" frameborder="0" scrolling="no" id="myiframe" onload="setIframeHeight(this)"></iframe>
 			</div>
 		</div>
 		<div class="container footer text-center" style="height: 200px;">
@@ -68,5 +71,22 @@
 				}
 			}
 		};
+		//初始化叶子
+		$.AutomLeafStart({
+			leafsfolder: "js/yezi/img/",
+			howmanyimgsare: 8,
+			initialleafs: 10,
+			maxYposition: -10,
+			multiplyclick: true,
+			multiplynumber: 2,
+			infinite: true,
+			fallingsequence: 6000
+		});
+		$("#yezibg").on("click", function() {
+			$.AutomLeafAdd({
+				leafsfolder: "js/yezi/img",
+				add: 8,
+			})
+		});
 	</script>
 </html>
