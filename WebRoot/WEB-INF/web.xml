@@ -75,10 +75,19 @@
 		<servlet-name>UserCenterServlet</servlet-name>
 		<servlet-class>cn.dmdream.servlet.UserCenterServelt</servlet-class>
 	</servlet>
+  <servlet>
+    <servlet-name>UserSearchServlet</servlet-name>
+    <servlet-class>cn.dmdream.controller.UserSearchServlet</servlet-class>
+  </servlet>
+
 	<servlet-mapping>
 		<servlet-name>UserCenterServlet</servlet-name>
 		<url-pattern>/usercenter.do</url-pattern>
 	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserSearchServlet</servlet-name>
+    <url-pattern>/userSearch.do</url-pattern>
+  </servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>mainpage.jsp</welcome-file>
 	</welcome-file-list>

@@ -34,6 +34,16 @@
 <link rel="stylesheet" type="text/css" href="css/mainpage.css">
 <script src="js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function(){
+		//首页点击搜索按钮 访问搜索servlet请求转发
+		$("#btnSearch").click(function(){
+			var str = $("#searchStr").val();
+			$("#searchStr").val("");
+			window.location.href="${pageContext.request.contextPath}/userSearch.do?method=toSearchPage&keyword="+str;
+		})
+	})
+</script>
 </head>
 <body>
 	<div class="container-fluid" id="head">
@@ -71,9 +81,9 @@
 			<form class="bs-example bs-example-form" role="form">
 				<div class="col-lg-6">
 					<div class="input-group">
-						<input type="text" class="form-control"> <span
+						<input type="text" id="searchStr" class="form-control"> <span
 							class="input-group-btn">
-							<button class="btn btn-default" type="button">搜索</button>
+							<button class="btn btn-default" id="btnSearch" type="button">搜索</button>
 						</span>
 					</div>
 				</div>
