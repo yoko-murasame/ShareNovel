@@ -93,5 +93,5 @@ public interface SnCommentService {
 	 * @param novel
 	 * @return
 	 */
-	public List<CommentJSON> getCommentJsonByNovel(SnNovel novel);
+	public List<SnComment> queryByUser(SnUser user);
 }

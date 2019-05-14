@@ -168,7 +168,7 @@ public class SnNovelServiceImpl implements SnNovelService {
 	@Override
 	public List<SnNovel> queryByCategory(int cid) {
 		// TODO Auto-generated method stub
-		return null;
+		return snNovelDao.queryByCategory(cid);
 	};
 	
 	@Override

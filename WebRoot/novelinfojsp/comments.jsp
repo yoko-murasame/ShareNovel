@@ -1,46 +1,56 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String nid=request.getParameter("nid");
+	String nid = request.getParameter("nid");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-		<link rel="stylesheet" type="text/css" href="../js/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
-		<link rel="stylesheet" type="text/css" href="../js/comment/css/main.css"/>
-		<link rel="stylesheet" type="text/css" href="../js/comment/css/sinaFaceAndEffec.css"/>
-		<script src="../js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/comment/js/main.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/comment/js/sinaFaceAndEffec.js" type="text/javascript" charset="utf-8"></script>
-	</head>
-	</head>
-	<body>
-		<div id="content" style="width: 700px; height: auto;">
-			<div class="wrap">
-				<div class="comment">
-					<div class="head-face" id="myheadinfo">
-						<img src="../img/1.jpg">
-						<p>我是鸟</p>
-					</div>
-					<div class="content">
-						<div class="cont-box">
-							<textarea class="text" placeholder="请输入..."></textarea>
-						</div>
-						<div class="tools-box">
-							<div class="operator-box-btn"><span class="face-icon">☺</span><span class="img-icon">▧</span></div>
-							<div class="submit-btn"><input type="button" onClick="out()" value="提交评论" /></div>
-						</div>
-					</div>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" type="text/css"
+	href="../js/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" type="text/css" href="../js/comment/css/main.css" />
+<link rel="stylesheet" type="text/css"
+	href="../js/comment/css/sinaFaceAndEffec.css" />
+<script src="../js/jquery-3.4.0.min.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="../js/bootstrap-3.3.7-dist/js/bootstrap.min.js"
+	type="text/javascript" charset="utf-8"></script>
+<script src="../js/comment/js/main.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="../js/comment/js/sinaFaceAndEffec.js"
+	type="text/javascript" charset="utf-8"></script>
+</head>
+</head>
+<body>
+	<div id="content" style="width: 700px; height: auto;">
+		<div class="wrap">
+			<div class="comment">
+				<div class="head-face">
+					<img src="images/1.jpg">
+					<p>我是鸟</p>
 				</div>
-				<div id="info-show">
-					<ul></ul>
+				<div class="content">
+					<div class="cont-box">
+						<textarea class="text" placeholder="请输入..."></textarea>
+					</div>
+					<div class="tools-box">
+						<div class="operator-box-btn">
+							<span class="face-icon">☺</span><span class="img-icon">▧</span>
+						</div>
+						<div class="submit-btn">
+							<input type="button" onClick="out()" value="提交评论" />
+						</div>
+					</div>
 				</div>
 			</div>
+			<div id="info-show">
+				<ul></ul>
+			</div>
 		</div>
-	</body>
-	<script type="text/javascript">
+	</div>
+</body>
+<script type="text/javascript">
 		// 绑定表情
 		$('.face-icon').SinaEmotion($('.text'));
 		// 测试本地解析

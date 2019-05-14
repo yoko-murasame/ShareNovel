@@ -20,7 +20,7 @@
 		SnChapterService ss = new SnChapterServiceImpl();
 		list = ss.findByNovelByPage(novel, 60, pagenum);
 		if(pagenum<2){
-			newlist=ss.findRecentUpdate(novel, 2, 12);
+			newlist=ss.findRecentUpdate(novel, 7, 12);
 		}
 	} else {
 		request.getRequestDispatcher("mainpage.jsp").forward(request, response);

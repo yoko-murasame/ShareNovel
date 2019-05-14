@@ -122,13 +122,9 @@ public class SnCommentServiceImpl implements SnCommentService {
 		return commentDao.findAllChildCommentByPage(comment, pageSize, page);
 	}
 
-	public List<CommentJSON> getCommentJsonByNovel(SnNovel novel) {
-		List<SnComment> list=commentDao.findByNovel(novel);
-		List<CommentJSON> jsonlist=new ArrayList<CommentJSON>();
-		Collections.sort(list, (o1,o2)->{
-			return o1.getCommId()-o2.getCommId();
-		});
-		
-		return null;
+
+	@Override
+	public List<SnComment> queryByUser(SnUser user) {
+		return commentDao.queryByUser(user);
 	};
 }

@@ -61,5 +61,12 @@ public interface SnUserDao {
 	public SnUser findByUsername(String username);
 	
 	public int countByUsername(String username);
+	/**
+	 * 
+	 * @param name  用户名 或者邮箱 手机号暂时不考虑
+	 * @param pwd  密码
+	 * @return
+	 */
+	public List<SnUser> login(String name,String pwd);
 	
 }

@@ -99,7 +99,7 @@ public class SnChapterDaoImpl implements SnChapterDao {
 	 * @param snNovel
 	 * @return 只返回 小说章节标题 和id
 	 */
-	public List<SnChapter> findByNovelByPage(SnNovel snNovel, int pageSize, int page) {
+	public List<SnChapter> queryByNovelByPage(SnNovel snNovel, int pageSize, int page) {
 		if (page <= 0)
 			page = 1;
 		String sql = "select chapter_id,chapter_title from sn_chapter where chapter_novelid = ? order by chapter_id limit ?,?";
@@ -227,14 +227,7 @@ public class SnChapterDaoImpl implements SnChapterDao {
 	public List<SnChapter> findRecentUpdate(Long time,Integer limit) {
 		Date since=new java.util.Date(new java.util.Date().getTime()-time);
 		CachedRowSet rs;
-		List<SnChapter> list = new ArrayList<SnChapter>();
-		//handleData(rs, list);
-		/*list.forEach((snchapter)->{
-			Integer novelId = snchapter.getSnNovel().getNovelId();
-			System.out.println(novelId);
-			SnNovelDao snoveldao=new SnNovelDaoImpl();
-			snchapter.setSnNovel(snoveldao.findById(novelId));
-		});*/
+
 		//多表查询
 		String sql1="select sn_chapter.chapter_id,sn_chapter.chapter_novelid,sn_chapter.chapter_title,sn_chapter.chapter_updatetime,sn_novel.novel_title,sn_novel.novel_author from sn_chapter join sn_novel where sn_chapter.chapter_novelid=sn_novel.novel_id and chapter_updatetime>=? order by chapter_updatetime DESC";
 		if(limit==null) {
@@ -243,6 +236,7 @@ public class SnChapterDaoImpl implements SnChapterDao {
 			sql1+=" limit 0,?";
 			rs = dbUtil.query(sql1, since,limit);	
 		}
+		List<SnChapter> list = new ArrayList<SnChapter>();
 		try {
 			while (rs.next()) {
 				SnChapter chapter = new SnChapter();

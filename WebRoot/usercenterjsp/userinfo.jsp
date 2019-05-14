@@ -16,16 +16,16 @@
     <div class="container-fluid">
     	<div class="col-sm-7 col-sm-offset-1" style="margin-top:100px;">
     		<table class="table .table-hover">
-    			<tr><td>用户名:</td><td>111</td></tr>
-    			<tr><td>昵称:</td><td>1232134</td></tr>
-    			<tr><td>邮箱:</td><td>1237819231@qq.com</td><td>
+    			<tr><td>用户名:</td><td><%=user.getUserUsername() %></td></tr>
+    			<tr><td>昵称:</td><td><%=user.getUserNickname() %></td></tr>
+    			<tr><td>邮箱:</td><td><%=user.getUserEmail() %></td><td>
     			<%if(user.getUserEmailActive()==0){ %>
     				<button type="button" class="btn btn-danger"  id="ebt">验证邮箱</button>
     			<%}else{ %>
     				<button type="button" class="btn btn-danger"  disabled="true" id="ebt">邮箱已验证</button>
     			<%} %>
     			</td></tr>
-    			<tr><td></td><td></td></tr>
+    			<tr><td>手机号:</td><td><%=user.getUserPhone() %></td></tr>
     			<tr><td></td><td></td></tr>
     			<tr><td></td><td></td></tr>
     		</table>

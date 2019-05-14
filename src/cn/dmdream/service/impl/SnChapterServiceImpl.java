@@ -72,7 +72,7 @@ public class SnChapterServiceImpl implements SnChapterService {
 	 * @return
 	 */
 	public List<SnChapter> findByNovelByPage(SnNovel snNovel, int pageSize, int page){
-		return chapterDao.findByNovelByPage(snNovel, pageSize, page);
+		return chapterDao.queryByNovelByPage(snNovel, pageSize, page);
 	};
 
 	/**
@@ -112,19 +112,19 @@ public class SnChapterServiceImpl implements SnChapterService {
 	@Override
 	public List<SnChapter> findRecentUpdate(Integer day, Integer limit) {
 		// TODO Auto-generated method stub
-		return null;
+		return chapterDao.findRecentUpdate((long)day*24*60*60*1000,limit);
 	}
 
 	@Override
 	public List<SnChapter> findRecentUpdate(SnNovel novel, Integer day, Integer limit) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return chapterDao.findRecentUpdate(novel,(long)day*24*60*60*1000 ,limit);
 	}
 
 	@Override
 	public int findNovelChapterTotalCount(SnNovel novel) {
 		// TODO Auto-generated method stub
-		return 0;
+		return chapterDao.findNovelChapterTotalCount(novel);
 	};
 
 }

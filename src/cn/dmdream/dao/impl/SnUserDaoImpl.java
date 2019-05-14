@@ -158,4 +158,12 @@ public class SnUserDaoImpl implements SnUserDao {
 		}
 		return count;
 	}
+
+	public List<SnUser> login(String name, String pwd) {
+		String sql="SELECT * from sn_user where	( user_username = ? or (user_email =? and user_email_active =1) ) and user_password =?";
+		ResultSet rs = dbUtil.query(sql,name,name,pwd);
+		List<SnUser> list = new ArrayList<SnUser>();
+		handleData(rs, list);
+		return list.size()>0?list:null;
+	}
 }

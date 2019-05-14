@@ -43,20 +43,20 @@
 				</div>
 					<%}else{ %>
 					<div class="col-lg-6" id="logintip">
-						<span><%=user.getUserUsername() %></span>
+						<span><font color='red'><%=user.getUserUsername() %></font>,你好!</span>
 					</div>	
 					<% }%>
 
 			</div>
 			<div class="col-lg-4 col-lg-offset-4 ">
-				<a href="mainpage.jsp" class="pull-right">我的收藏</a> <a href="#"
-					class="pull-right">个人中心&nbsp;</a>
+				<a href="${pageContext.request.contextPath}/usercenter.jsp" class="pull-right">我的收藏</a>
+				 <a href="${pageContext.request.contextPath}/usercenter.jsp" class="pull-right">个人中心&nbsp;</a>
 			</div>
 		</div>
 	</div>
 	<div class="container" id="search-bar">
 		<div class="col-lg-4" id="logo">
-			<a href="#"><img src="img/logo.beebc.png"></a>
+			<a href="${pageContext.request.contextPath}/mainpage.jsp"><img src="img/logo.beebc.png"></a>
 		</div>
 		<!--搜索框-->
 		<div class="col-lg-8" id="navsearch">
@@ -81,7 +81,7 @@
 			<div>
 				<ul class="nav navbar-nav">
 					<!-- 这里是导航栏内容-->
-					<li><a href="classfiypage.jsp">全部作品</a></li>
+					<li><a href="${pageContext.request.contextPath}/classfiypage.jsp">全部作品</a></li>
 					<li><a href="#">排行榜</a></li>
 					<li><a href="#">最近更新</a></li>
 					<li><a href="#">全本小说</a></li>
@@ -366,7 +366,7 @@
 				<div class="modal-body">
 					<form id="loginform">
 						<div class="form-group">
-							<input type="text" class="form-control" id="username"  name="username" placeholder="手机/邮箱/用户名">
+							<input type="text" class="form-control" id="username"  name="name" placeholder="邮箱(必须已经验证)/用户名">
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" id="password" name="password" placeholder="密码">
@@ -379,6 +379,9 @@
 								<a href="#" class="text-right">忘记密码</a>
 							</div>
 						</div>
+						<div class="form-group">
+							<p id="tip"></p>
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
@@ -387,7 +390,7 @@
 					</center>
 					<center>
 						<div>
-							<a href="#">免费注册</a>
+							<a href="${pageContext.request.contextPath}/register.jsp">免费注册</a>
 						</div>
 					</center>
 				</div>
@@ -405,9 +408,16 @@ function openmodel(){
 $("#loginbt").click(function(){
 	var data=$("#loginform").serialize();
 	$.ajax({
-		url:"user.do",
+		url:"${pageContext.request.contextPath}/user.do?method=userLogin",
 		method:"post",
 		data:data,
+		success:function(json){
+			if(json.status==200){
+				window.location.href=window.location.href;
+			}else{
+				$("#tip").text(json.msg);
+			}
+		}
 	});
 });
 $(function(){

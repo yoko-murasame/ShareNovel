@@ -56,7 +56,7 @@ public interface SnChapterDao {
 	 * @param snNovel
 	 * @return
 	 */
-	public List<SnChapter> findByNovelByPage(SnNovel snNovel, int pageSize, int page);
+	public List<SnChapter> queryByNovelByPage(SnNovel snNovel, int pageSize, int page);
 
 	/**
 	 * 给定小说时,根据章节标题模糊查询

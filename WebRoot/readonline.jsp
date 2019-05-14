@@ -18,13 +18,20 @@
 		<link rel="stylesheet" type="text/css" href="css/read_online.css"/>
 		<script src="js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			#myiframe{
+				display:none;
+			}
+		
+		</style>
 		
 	</head>
 	<body>
 		<div class="container-fluid" id="header">
-			
+		<iframe src="novelinfojsp/novelchapter.jsp?totalnum=${totalnum}&nid=${novel.novelId}" frameborder="0" scrolling="" id="myiframe"
+			onload="setIframeHeight(this)" class="col-lg-12" ></iframe>
 		</div>
-		
+
 		<div class="container" >
 				<div class="col-xs-1 "></div>
 				<div class="float-wrap ">
@@ -33,7 +40,7 @@
 					</div>
 					<div class="float-opt">
 						<div><span class="glyphicon glyphicon-menu-hamburger"></span></div>
-						<p>目录</p>
+						<p id="Catalog">目录</p>
 					</div>
 					<div class="float-opt">
 						<div><span class="glyphicon glyphicon-cog"></span></div>
@@ -50,13 +57,13 @@
 				<div class="text-wrap col-xs-10">
 					<!--小说栏-->
 					<div class="text-head">
-						<h2><%=chapter.getSnNovel().getNovelTitle() %></h3>
+						<h2>${novel.novelTitle}</h3>
 						<span class="glyphicon glyphicon-book"></span>
-						<a href="#"><%=chapter.getSnNovel().getSnCategory() %></a>
+						<a href="#">${novel.snCategory.catName}</a>
 						<span class="glyphicon glyphicon-user"></span>
-						<a href="#"><%=chapter.getSnNovel().getNovelAuthor() %></a>
+						<a href="#">${novel.novelAuthor}</a>
 						<span class="glyphicon glyphicon-time"></span>
-						<span style="color: grey;">2019-05-07</span>
+						<span style="color: grey;">${chapter.chapterUpdatetime}</span>
 					</div>
 					<div class="read-content ">
 						<p><%=chapter.getChapterContent() %></p>
@@ -67,6 +74,17 @@
 					<p>TOP</p>
 				</div>
 		</div>
-		
+		<iframe src="novelinfojsp/novelchapter.jsp?totalnum=${totalnum}&nid=${novel.novelId}" frameborder="0" scrolling="" id="myiframe"
+			onload="setIframeHeight(this)" class="col-lg-12"></iframe>
 	</body>
+	<script type="text/javascript">
+		$("#Catalog").click(function(){
+			if($("#myiframe").css("display")=="none"){
+				$("#myiframe").css("display","block");
+			}else{
+				$("#myiframe").css("display","none");
+			}
+		
+		});
+</script>
 </html>

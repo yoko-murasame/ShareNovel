@@ -39,7 +39,7 @@ public class SnUserServiceImpl implements SnUserService{
 	public boolean update(SnUser snUser) {
 
 		int i = snUserDao.update(snUser);
-		if (i==0) {
+		if (i==1) {
 			return true;
 		}else {
 			return false;
@@ -82,6 +82,15 @@ public class SnUserServiceImpl implements SnUserService{
 		int count=snUserDao.countByUsername(username);
 		//false代表用户名不可用
 		return count>0?false:true;
+	}
+
+	@Override
+	public SnUser login(String name, String pwd) {
+		List<SnUser> login = snUserDao.login(name, pwd);
+		if(login!=null) {
+			return login.get(0);
+		}
+		return null;
 	}
 
 }

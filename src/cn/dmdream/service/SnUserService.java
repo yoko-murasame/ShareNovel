@@ -61,4 +61,5 @@ public interface SnUserService {
 	public SnUser findByUsername(String username);
 	
 	public boolean countByUsername(String username);
+	public SnUser login(String name,String pwd);
 }

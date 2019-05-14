@@ -136,7 +136,7 @@ style type ="text /css"> < !-- 标签选中css-->.select {
 					} else {
 				%>
 				<div class="col-lg-6" id="logintip">
-					<span><%=user.getUserUsername()%></span>
+					<span><font color='red'><%=user.getUserUsername() %></font>,你好!</span>
 				</div>
 				<%
 					}
@@ -144,7 +144,7 @@ style type ="text /css"> < !-- 标签选中css-->.select {
 
 			</div>
 			<div class="col-lg-4 col-lg-offset-4 ">
-				<a href="mainpage.jsp" class="pull-right">我的收藏</a> <a href="#"
+				<a href="mainpage.jsp" class="pull-right">我的收藏</a> <a href="${pageContext.request.contextPath}/usercenter.jsp"
 					class="pull-right">个人中心&nbsp;</a>
 			</div>
 		</div>
@@ -176,7 +176,7 @@ style type ="text /css"> < !-- 标签选中css-->.select {
 			<div>
 				<ul class="nav navbar-nav">
 					<!-- 这里是导航栏内容-->
-					<li><a href="#">全部作品</a></li>
+					<li><a href="${pageContext.request.contextPath}/classfiypage.jsp">全部作品</a></li>
 					<li><a href="#">排行榜</a></li>
 					<li><a href="#">最近更新</a></li>
 					<li><a href="#">全本小说</a></li>
@@ -200,86 +200,12 @@ style type ="text /css"> < !-- 标签选中css-->.select {
 						<ul id="femalelike">
 
 						</ul>
-						
 					</li>
-					<li><a href="javascript:void(0)">Item without subitems</a></li>
-					<li><a href="javascript:void(0)">Item without subitems</a></li>
 				</ul>
 			</div>
 		</div>
 		<div class="col-lg-9" id="searchresultbox" style="margin-left: -40px;">
-			<div class="result-context">
-				<div class="result-context-left col-lg-5">
-					<img src="img/180.jpg">
-				</div>
-				<div class="result-context-middle col-lg-7">
-					<p class="book-title">斗破苍穹</p>
-					<p class="book-author">天蚕土豆</p>
-					<p class="book-catagorys">
-						<span class="book-catagory">玄幻</span><span class="book-catagory">
-							热血</span>
-					</p>
-					<p class='book-updatetime'>2019-1-1-17:00:00</p>
-					<p class="book-summry">到奥斯卡大撒旦啦萨达是你打莱克斯诺可惜了撒好大声点卡螺丝刀卡拉斯科你先看兰千万我哦亲活动撒好is怕被你萨卡下你砸sad
-						圣诞节卡了坚实的抛弃我就怕是啊大胜靠德看的刷卡了的奥斯卡了看了撒好可怜对话框萨拉赫克痢痧弹劳拉西安开两三年</p>
-					<a href="#" class="btn btn-warning">加入书架</a> <a href="#"
-						class="btn btn-default">在线阅读</a>
-				</div>
-			</div>
-			<div class="result-context">
-				<div class="result-context-left col-lg-5">
-					<img src="img/180.jpg">
-				</div>
-				<div class="result-context-middle col-lg-7">
-					<p class="book-title">斗破苍穹</p>
-					<p class="book-author">天蚕土豆</p>
-					<p class="book-catagorys">
-						<span class="book-catagory">玄幻</span><span class="book-catagory">
-							热血</span>
-					</p>
-					<p class='book-updatetime'>2019-1-1-17:00:00</p>
-					<p class="book-summry">到奥斯卡大撒旦啦萨达是你打莱克斯诺可惜了撒好大声点卡螺丝刀卡拉斯科你先看兰千万我哦亲活动撒好is怕被你萨卡下你砸sad
-						圣诞节卡了坚实的抛弃我就怕是啊大胜靠德看的刷卡了的奥斯卡了看了撒好可怜对话框萨拉赫克痢痧弹劳拉西安开两三年</p>
-					<a href="#" class="btn btn-warning">加入书架</a> <a href="#"
-						class="btn btn-default">在线阅读</a>
-				</div>
-			</div>
-			<div class="result-context">
-				<div class="result-context-left col-lg-5">
-					<img src="img/180.jpg">
-				</div>
-				<div class="result-context-middle col-lg-7">
-					<p class="book-title">斗破苍穹</p>
-					<p class="book-author">天蚕土豆</p>
-					<p class="book-catagorys">
-						<span class="book-catagory">玄幻</span><span class="book-catagory">
-							热血</span>
-					</p>
-					<p class='book-updatetime'>2019-1-1-17:00:00</p>
-					<p class="book-summry">到奥斯卡大撒旦啦萨达是你打莱克斯诺可惜了撒好大声点卡螺丝刀卡拉斯科你先看兰千万我哦亲活动撒好is怕被你萨卡下你砸sad
-						圣诞节卡了坚实的抛弃我就怕是啊大胜靠德看的刷卡了的奥斯卡了看了撒好可怜对话框萨拉赫克痢痧弹劳拉西安开两三年</p>
-					<a href="#" class="btn btn-warning">加入书架</a> <a href="#"
-						class="btn btn-default">在线阅读</a>
-				</div>
-			</div>
-			<div class="result-context">
-				<div class="result-context-left col-lg-5">
-					<img src="img/180.jpg">
-				</div>
-				<div class="result-context-middle col-lg-7">
-					<p class="book-title">斗破苍穹</p>
-					<p class="book-author">天蚕土豆</p>
-					<p class="book-catagorys">
-						<span class="book-catagory">玄幻</span><span class="book-catagory">
-							热血</span>
-					</p>
-					<p class='book-updatetime'>2019-1-1-17:00:00</p>
-					<p class="book-summry">到奥斯卡大撒旦啦萨达是你打莱克斯诺可惜了撒好大声点卡螺丝刀卡拉斯科你先看兰千万我哦亲活动撒好is怕被你萨卡下你砸sad
-						圣诞节卡了坚实的抛弃我就怕是啊大胜靠德看的刷卡了的奥斯卡了看了撒好可怜对话框萨拉赫克痢痧弹劳拉西安开两三年</p>
-					<a href="#" class="btn btn-warning">加入书架</a> <a href="#"
-						class="btn btn-default">在线阅读</a>
-				</div>
-			</div>
+
 			<div class="clearfix"></div>
 		</div>
 	</div>
@@ -301,44 +227,41 @@ style type ="text /css"> < !-- 标签选中css-->.select {
 		</p>
 	</div>
 	<!--登入模态框  -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<div>
-						<center>
-							<h3>用户登录</h3>
-						</center>
+					    <center><h3>用户登录</h3></center>
 					</div>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form id="loginform">
 						<div class="form-group">
-							<input type="text" class="form-control" id="username"
-								name="username" placeholder="手机/邮箱/用户名">
+							<input type="text" class="form-control" id="username"  name="name" placeholder="邮箱(必须已经验证)/用户名">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="password"
-								name="password" placeholder="密码">
+							<input type="text" class="form-control" id="password" name="password" placeholder="密码">
 						</div>
 						<div class="form-group">
 							<div style="float: left">
-								<input type="checkbox" value="auto">记住密码
+								<input type="checkbox"  value="auto">记住密码
 							</div>
 							<div style="float: right">
 								<a href="#" class="text-right">忘记密码</a>
 							</div>
 						</div>
+						<div class="form-group">
+							<p id="tip"></p>
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<center>
-						<button type="button" class="btn btn-danger btn-block">登录</button>
+						<button type="button" class="btn btn-danger btn-block" id="loginbt">登录</button>
 					</center>
 					<center>
 						<div>
@@ -357,6 +280,21 @@ function openmodel(){
 	  keyboard: false,
 	})
 }
+$("#loginbt").click(function(){
+	var data=$("#loginform").serialize();
+	$.ajax({
+		url:"${pageContext.request.contextPath}/user.do?method=userLogin",
+		method:"post",
+		data:data,
+		success:function(json){
+			if(json.status==200){
+				window.location.reload();
+			}else{
+				$("#tip").text(json.msg);
+			}
+		}
+	});
+});
 $(function(){
 		$.ajax({
 			url:"${pageContext.request.contextPath}/category.do?method=getCategorys",
@@ -386,6 +324,7 @@ function classifiedQuery(a){
 		async:true,
 		dataType:"json",
 		success:function(json){
+		console.log(json);
 			if(json.status==200){
 				novelload(json.data,cate);
 			}else{
@@ -410,8 +349,8 @@ function classifiedQuery(a){
 				+list[i].novelTitle+"</p><p class='book-author'>"
 				+list[i].novelAuthor+"<p class='book-categorys'><span class='book-category'>"
 				+txt+"</span></p><p class='book-updatetime'>"
-				+list[i].novelUpdatetime+"</p><div class='book-summry'>"+list[i].novelSummary+"</div><a href='"
-				+"#"+"' class='btn btn-warning'>加入书架</a> <a href='"
+				+list[i].novelUpdatetime+"</p><div class='book-summry'>"+list[i].novelSummary+"</div><a href='javascrpit:void(0)' onclick='collect("
+				+list[i].novelId+")' class='btn btn-warning'>加入书架</a> <a href='"
 				+"novelinfo.jsp?nid="+list[i].novelId+"' class='btn btn-default'>在线阅读</a></div></div>";
 				$("#searchresultbox").prepend(line);
 				
@@ -439,12 +378,27 @@ function cateload(data){
     	
     	}
     	line+="	</ul></li>";
-    	console.log(line);
     	if(data[i].catGender==0)
     		$("#malelike").append(line);
     	else
     		$("#femalelike").append(line);
     }
+}
+function collect(nid){
+	$.ajax({
+		url:"${pageContext.request.contextPath}/usercenter.do?method=collectNovel&nid="+nid,
+		type:"post",
+		dataType: "json",
+		async: true,
+		success:function(data){
+			if(data.status==100){
+				alert(data.msg);
+				openmodel();
+			}else{
+				alert(data.msg);
+			}
+		},
+	});
 }
 </script>
 <script src="js/menu_min.js" type="text/javascript" charset="utf-8"></script>

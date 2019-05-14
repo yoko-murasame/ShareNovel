@@ -20,7 +20,7 @@
   </head>
   
   <body>
-  		<%if(request.getParameter("authemailok")!=null&&Boolean.valueOf(request.getParameter("authemailok"))){ %>
+  		<%if(request.getAttribute("authemailok")!=null&&(Boolean)request.getAttribute("authemailok")){ %>
   			<h1><a href="usercenter.jsp">验证成功,点击跳到个人中心</a></h1>
   		<%
   		}else{ %>

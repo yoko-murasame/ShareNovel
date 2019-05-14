@@ -59,5 +59,8 @@ public class MainPageServlet extends BaseServlet{
 	public String getWheelInfo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		return null;
 	}
+	public String search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		return null;
+	}
 	
 }
