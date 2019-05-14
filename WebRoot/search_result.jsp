@@ -68,7 +68,7 @@
 	//刷新页面请求数据
 	function flushSearchData(){
 		
-		var promiseObj = getPostAjaxPromise("http://localhost/findByKeywordByPage", pageModel);
+		var promiseObj = getPostAjaxPromise("http://cloud.dmdream.cn:8880/findByKeywordByPage", pageModel);
 		promiseObj.then(function(res){
 			console.log(res);
 			if(res.status == 200){
