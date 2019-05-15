@@ -9,9 +9,11 @@
 <html>
 <head>
 <title>登录页面</title>
-<link rel="stylesheet" href="css/bootstrap.css" />
-<script src="js/jquery-3.4.0.js"></script>
-<script src="js/bootstrap.js"></script>
+<link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.css"
+rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/js/bootstrap.js">
+</script>
 </head>
 
 <body>
@@ -28,7 +30,7 @@
 					</div>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form action="user.do?method=userlogin">
 						<div class="form-group">
 							<input type="text" class="form-control" id="username" placeholder="手机/邮箱/用户名">
 						</div>

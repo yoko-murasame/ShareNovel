@@ -271,5 +271,13 @@ public class SnCommentDaoImpl implements SnCommentDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	};
+	}
+
+	@Override
+	public List<SnComment> queryByUser(SnUser user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

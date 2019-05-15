@@ -85,8 +85,7 @@
 							<li><a
 								href="${pageContext.request.contextPath}/adminNovel.do?method=toNovelList">小说列表</a>
 							</li>
-							<li><a href="admin_novecheck.jsp">小说审核</a></li>
-							<li><a href="admin_noveadd.jsp">小说添加</a></li>
+							<li><a href="admin_noveadd.jsp">章节管理</a></li>
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-tasks"></i> <span>分类管理</span>

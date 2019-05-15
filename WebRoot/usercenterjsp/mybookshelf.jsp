@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			#main_container {
 				width: 800px;
 				height: 600px;
-				border: solid #66512C 1px;
+				background-color: white;
 			}
 			
 			#container {
@@ -41,7 +41,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				margin-right: 28px;
 				margin-top: 15px;
 				margin-bottom: 15px;
-				/* border: solid #66512C 1px; */
 			}
 			
 			.book_image {

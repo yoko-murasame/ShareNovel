@@ -5,6 +5,7 @@ import java.util.List;
 import cn.dmdream.entity.SnComment;
 import cn.dmdream.entity.SnNovel;
 import cn.dmdream.entity.SnUser;
+import cn.dmdream.entity.JsonEntity.CommentJSON;
 
 public interface SnCommentService {
 
@@ -87,4 +88,10 @@ public interface SnCommentService {
 	 * @return
 	 */
 	public List<SnComment> findAllChildCommentByPage(SnComment comment , int pageSize , int page);
+	/**
+	 * 返回json格式的树形结果的评论.
+	 * @param novel
+	 * @return
+	 */
+	public List<SnComment> queryByUser(SnUser user);
 }

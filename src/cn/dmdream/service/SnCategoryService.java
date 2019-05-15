@@ -80,4 +80,5 @@ public interface SnCategoryService {
 	public List<SnCategory> findByParentIdByPage(int id , int pageSize ,int page);
 
 	public Integer findCount(Integer id);
+	public List<SnCategory> queryAll();
 }

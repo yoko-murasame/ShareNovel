@@ -40,6 +40,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/kindeditor/kindeditor-all.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/kindeditor/lang/zh-CN.js"></script>
 <script>
+	var requestUrl = "${requestUrl}";
 	$(function() {
 		//分页
 		new Page({
@@ -61,7 +62,7 @@
 			showSkipInputFlag: true, //是否支持跳转,不填默认不显示
 			getPage: function() {
 				//获取当前页数跳转
-				window.location.href = "${pageContext.request.contextPath}/adminNovel.do?method=toNovelList&curPage="+this.curPage + "&pageSize="+this.pageAmount;
+				window.location.href = requestUrl + "&curPage="+this.curPage + "&pageSize="+this.pageAmount;
 			}
 		});
 
@@ -85,9 +86,27 @@
 				}
 			})
 		});
-		//确认删除点击事件
+		//确认删除/索引库清空点击事件
 		$("#catDelBtn").click(function() {
-			delNovels(ck_val, "#modalDel");
+			if($("#catDelBtn").val() == "确认清空"){
+				showStikyGritter("消息", "正在清空索引库······");
+				//发送清空索引库的请求
+				var promiseObj = getPostAjaxPromise("http://cloud.dmdream.cn:8880/deleteSolrAll");
+				promiseObj.then(function(res){
+					console.log(res);
+					removeAllGritters();
+					if(res.status == 200) {
+						setTimeout(function(){showGritter('成功', res.msg);},500)
+						$("#modalDel").modal("hide");
+					} else {
+						setTimeout(function(){showGritter('失败', res.msg);},500)
+						$("#modalDel").modal("hide");
+					}
+				});
+			}else{
+				delNovels(ck_val, "#modalDel");
+			}
+			
 		});
 		//新增保存点击事件
 		$("#novelSaveBtn").click(function() {
@@ -122,6 +141,76 @@
 				showGritter("消息", "简介已更新!");
 			});
 		});
+		
+		//索引库清空按钮监听
+		$("#removeIndexAlltoDelModal").click(function(){
+			$("#modalDelBody").html("你确认要清空索引库吗?")
+			$("#catDelBtn").val("确认清空");
+			$("#modalDel").modal("toggle");
+		})
+		
+		//完全更新索引库
+		$("#updateIndexLib").click(function(){
+			showStikyGritter("消息", "正在更新索引库······");
+			//发送清空索引库的请求
+			var promiseObj = getPostAjaxPromise("http://cloud.dmdream.cn:8880/insertSolrAll");
+			promiseObj.then(function(res){
+				console.log(res);
+				removeAllGritters();
+				if(res.status == 200) {
+					setTimeout(function(){showGritter('成功', res.msg);},500)
+					$("#modalDel").modal("hide");
+				} else {
+					setTimeout(function(){showGritter('失败', res.msg);},500)
+					$("#modalDel").modal("hide");
+				}
+			});
+		})
+		
+		//更新已审核小说到索引库
+		$("#updateCheckedIndexLib").click(function(){
+			showStikyGritter("消息", "正在更新已审核小说到索引库······");
+			//发送清空索引库的请求
+			var promiseObj = getPostAjaxPromise("http://cloud.dmdream.cn:8880/insertSolrAllByCheck/1");
+			promiseObj.then(function(res){
+				console.log(res);
+				removeAllGritters();
+				if(res.status == 200) {
+					setTimeout(function(){showGritter('成功', res.msg);},500)
+					$("#modalDel").modal("hide");
+				} else {
+					setTimeout(function(){showGritter('失败', res.msg);},500)
+					$("#modalDel").modal("hide");
+				}
+			});
+		
+		})
+		
+		//按小说名模糊查询按钮
+		$("#btnNovelSearch").click(function(){
+			//获取关键词
+			var keyword = $("#novelSearchId").val();
+			if(keyword == "" || keyword == null){
+				showGritter("消息","条件为空，若要查询所有列表，请重新点击右侧<br/><font color='red'>小说列表</font>");
+				return;
+			} 
+			window.location.href = "${pageContext.request.contextPath}/adminNovel.do?method=toNovelList&keyword=" + keyword;
+			
+		})
+		
+		//按审核类型过滤
+		$("#btnNovelFilter").click(function(){
+			var valStr = $(this).val();
+			if(valStr == "切换未审核列表"){
+				window.location.href = "${pageContext.request.contextPath}/adminNovel.do?method=toNovelList&checkType=0";
+			}else if(valStr == "切换已审核列表"){
+				window.location.href = "${pageContext.request.contextPath}/adminNovel.do?method=toNovelList&checkType=1";
+			}else if(valStr == "切换未通过列表"){
+				window.location.href = "${pageContext.request.contextPath}/adminNovel.do?method=toNovelList&checkType=2";
+			}else{
+				window.location.href = "${pageContext.request.contextPath}/adminNovel.do?method=toNovelList";
+			}
+		})
 	})
 	//保存方法(save和update通用)
 	function novelSave(novelObj, modalId) {
@@ -138,6 +227,7 @@
 				showGritter('失败', res.msg);
 			}
 		});
+		
 	}
 	
 	//删除函数
@@ -169,6 +259,7 @@
 			cklength++;
 		}
 		$("#modalDelBody").html("你确认要删除这 <strong><font color='red'>" + cklength + "</font></strong>项吗?")
+		$("#catDelBtn").val("确认");
 		$("#modalDel").modal("toggle");
 		$.each($('input:checkbox:checked'), function() {
 			ck_val.push($(this).val())
@@ -330,8 +421,7 @@
 							<li class="active"><a
 								href="${pageContext.request.contextPath}/adminNovel.do?method=toNovelList">小说列表</a>
 							</li>
-							<li><a href="admin_novecheck.jsp">小说审核</a></li>
-							<li><a href="admin_noveadd.jsp">小说添加</a></li>
+							<li><a href="admin_noveadd.jsp">章节管理</a></li>
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-tasks"></i> <span>分类管理</span>
@@ -361,17 +451,48 @@
 				</h3>
 				<div class="row mt">
 					<div class="col-lg-12">
-						<p>在这里新增、修改、删除已审核的小说.</p>
+						<p>在这里新增、修改、删除
+							<span style="color:red;">
+							<c:if test="${empty checkType }">所有的</c:if>
+							<c:if test="${checkType == 0 }">未审核的</c:if>
+							<c:if test="${checkType == 1 }">已审核的</c:if>
+							<c:if test="${checkType == 2 }">未通过的</c:if>
+							</span>
+						小说.</p>
 					</div>
 				</div>
 				<div id="nav"
-					style="width:100px;display:flex;margin:5px;justify-content:space-between;">
-					<!--新增Modal button -->
-					<button class="btn btn-theme03 btn-sm" onclick="prepareTopCategory()" data-toggle="modal"
-						data-backdrop="true" data-target="#modalNew">新增</button>
-					<!-- 删除Modal button -->
-					<button onclick="showDeleteConfirmModal(this)"
-						class="btn btn-theme04 btn-sm">删除</button>
+					style="display:flex;margin:5px;justify-content:space-between;">
+					<!-- 小说新增/批量删除按钮 -->
+					<div id="nav-1" style="width:100px;display:flex;justify-content:space-between;">
+						<!--新增Modal button -->
+						<button class="btn btn-theme03 btn-sm" onclick="prepareTopCategory()" data-toggle="modal"
+							data-backdrop="true" data-target="#modalNew">新增</button>
+						<!-- 删除Modal button -->
+						<button onclick="showDeleteConfirmModal(this)"
+							class="btn btn-theme04 btn-sm">删除</button>
+					</div>
+					<!-- 查询/过滤 -->
+					<div id="nav-2" style="width:370px;display:flex;justify-content:space-between;">
+						<input <c:if test="${not empty keyword}">value='${keyword}'</c:if> style="width:52%;" placeholder="请输入小说名" type="text" name="novelSearch" class="form-control" id="novelSearchId">
+						<button style="width:17%;" class="btn btn-theme02 btn-sm" id="btnNovelSearch">查询</button>
+						<input style="width:28%;" type="button" class="btn btn-theme02 btn-sm" id="btnNovelFilter" 
+						<c:if test="${empty checkType }">value='切换未审核列表'</c:if>
+						<c:if test="${checkType == 0 }">value='切换已审核列表'</c:if>
+						<c:if test="${checkType == 1 }">value='切换未通过列表'</c:if>
+						<c:if test="${checkType == 2 }">value='切换所有列表'</c:if>/>
+					</div>
+					<!-- 索引库更新按钮 -->
+					<div id="nav-3" style="width:320px;display:flex;justify-content:space-between;">
+						<!--更新所有索引库 button -->
+						<button class="btn btn-theme btn-sm" id="updateIndexLib">完全更新索引库</button>
+						<!--更新已审核小说索引库 button -->
+						<button class="btn btn-theme btn-sm" id="updateCheckedIndexLib">更新已审核索引库</button>
+						<!-- 清空索引库 button -->
+						<button id="removeIndexAlltoDelModal" class="btn btn-theme04 btn-sm">清空索引库</button>
+					</div>
+
+
 				</div>
 				<!--表格开始-->
 				<div class="row">

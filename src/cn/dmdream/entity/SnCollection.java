@@ -8,7 +8,6 @@ public class SnCollection {
 	private SnChapter collectChapterHistory;//	False	外键,指向小说章节信息,总是指向最新的章节
 	public SnCollection() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public SnCollection(Integer collectId, SnUser collectUser, SnNovel collectNovel, SnChapter collectChapterHistory) {
 		super();

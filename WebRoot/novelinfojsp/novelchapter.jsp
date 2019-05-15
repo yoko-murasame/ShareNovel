@@ -20,7 +20,7 @@
 		SnChapterService ss = new SnChapterServiceImpl();
 		list = ss.findByNovelByPage(novel, 60, pagenum);
 		if(pagenum<2){
-			newlist=ss.findRecentUpdate(novel, 2, 12);
+			newlist=ss.findRecentUpdate(novel, 7, 12);
 		}
 	} else {
 		request.getRequestDispatcher("mainpage.jsp").forward(request, response);
@@ -40,6 +40,13 @@
 <link rel="stylesheet" type="text/css" href="../css/myPagination.css">
 <script type="text/javascript" src="../js/myPagination.js"></script>
 <style type="text/css">
+ html {
+	 -ms-overflow-style:none;
+	 overflow:-moz-scrollbars-none;
+ }
+ html::-webkit-scrollbar{
+ 	width:0px;
+ }
 * {
 	margin: 0;
 	padding: 0;
@@ -89,7 +96,7 @@ h3 {
 			<%
 				for (SnChapter chapter : newlist) {
 			%>
-			<li class="chapter"><a href="../chapter.do?method=readOnline&cid=<%=chapter.getChapterId() %>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
+			<li class="chapter"><a href="../readonline.do?method=readOnline&cid=<%=chapter.getChapterId() %>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
 			<%
 				}
 			%>
@@ -103,7 +110,7 @@ h3 {
 			<%
 				for (SnChapter chapter : list) {
 			%>
-			<li class="chapter"><a href="../chapter.do?method=readOnline&cid=<%=chapter.getChapterId()%>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
+			<li class="chapter"><a href="../readonline.do?method=readOnline&cid=<%=chapter.getChapterId()%>" target="_parent"><%=chapter.getChapterTitle()%></a></li>
 			<%
 			}
 			%>
@@ -115,7 +122,7 @@ h3 {
 		new Page({
 		    id: 'pager',
 		    curPage:<%=pagenum%>, //初始页码
-		    pageTotal:<%=(Integer.parseInt(totalnum)/60+1)%>, //总页数
+		    pageTotal:<%=(Integer.parseInt(totalnum)/60+1) %>, //总页数
 		    pageAmount: 60, //每页多少条
 		    dataTotal: <%=totalnum%>, //总共多少条数据
 		    pageSize: 5, //可选,分页个数

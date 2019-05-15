@@ -15,7 +15,9 @@ public class BaseServlet extends HttpServlet {
 	public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		// localhost:8080/store/productServlet?method=addProduct
+
 		String method = req.getParameter("method");
+
 		if (null == method || "".equals(method) || method.trim().equals("")) {
 			method = "execute";
 		}
@@ -35,9 +37,9 @@ public class BaseServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			String message = e.getMessage();
+			String message = e.getMessage().toLowerCase();
 			System.out.println(message);
-			if(message.indexOf("Admin") > 0){
+			if(message.indexOf("admin") > 0){
 				//访问不到方法时跳转
 				req.getRequestDispatcher("/admin/login.jsp").forward(req, resp);
 			}else{

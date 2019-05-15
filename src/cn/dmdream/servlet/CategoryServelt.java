@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.dmdream.controller.base.BaseServlet;
+import cn.dmdream.entity.SnCategory;
 import cn.dmdream.entity.SnNovel;
+import cn.dmdream.service.SnCategoryService;
 import cn.dmdream.service.SnNovelService;
+import cn.dmdream.service.impl.SnCategoryServiceImpl;
 import cn.dmdream.service.impl.SnNovelServiceImpl;
 import cn.dmdream.vo.JsonMsg;
 
@@ -35,12 +38,21 @@ public class CategoryServelt extends BaseServlet{
 				List<SnNovel> list = novelservice.queryByCategory(categoryid);
 				msg = JsonMsg.makeSuccess("1",list);			
 			}catch (NumberFormatException e) {
-				msg = JsonMsg.makeFail("",null);
+				msg = JsonMsg.makeFail("查询错误",null);
 			}
 			String jsonstr=mapper.writeValueAsString(msg);
 			resp.getWriter().print(jsonstr);
 		}
 		return null;
 	}
-
+	public String getCategorys(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		System.out.println(111111);
+		SnCategoryService cateservice=new SnCategoryServiceImpl();
+		List<SnCategory> list = cateservice.queryAll();
+		ObjectMapper mapper=new ObjectMapper();
+		JsonMsg msg=JsonMsg.makeSuccess("1", list);
+		String jsonstr=mapper.writeValueAsString(msg);
+		resp.getWriter().print(jsonstr);
+		return null;
+	}
 }

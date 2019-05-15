@@ -131,4 +131,39 @@ public class SnUserDaoImpl implements SnUserDao {
 			dbUtil.closeAll();
 		}
 	}
+
+	@Override
+	public int countByUsername(String username) {
+
+        String sql="select count(*) from sn_user where user_username=?"	;
+        dbUtil=new DbUtil();
+        CachedRowSet rs = dbUtil.query(sql, username);
+        int count=1;
+        try {
+			while(rs.next()){
+				count=rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if (rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return count;
+	}
+
+	public List<SnUser> login(String name, String pwd) {
+		String sql="SELECT * from sn_user where	( user_username = ? or (user_email =? and user_email_active =1) ) and user_password =?";
+		ResultSet rs = dbUtil.query(sql,name,name,pwd);
+		List<SnUser> list = new ArrayList<SnUser>();
+		handleData(rs, list);
+		return list.size()>0?list:null;
+	}
 }

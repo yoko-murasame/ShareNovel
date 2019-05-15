@@ -50,6 +50,8 @@ public class AdminNovelServlet extends BaseServlet {
 			// 获取当前页和每页数量
 			String currPageStr = req.getParameter("curPage");
 			String pageSizeStr = req.getParameter("pageSize");
+			String keyword = req.getParameter("keyword");
+			String checkType = req.getParameter("checkType");
 			int defaultCurrPage = 0;
 			int defaultPageSize = 0;
 			if (currPageStr != null && pageSizeStr != null) {
@@ -64,14 +66,44 @@ public class AdminNovelServlet extends BaseServlet {
 				defaultCurrPage = 1;
 			if (defaultPageSize < 1)
 				defaultPageSize = 10;
-			// 2.查询所有已通过审核的小说
-			List<SnNovel> novelList = novelService.findAllByPage(defaultPageSize, defaultCurrPage);
-			Integer count = novelService.findCount();// 总记录数
+
 			PageModel<SnCategory> pageModel = new PageModel<SnCategory>();
-			PageModel.wrapPageModel(defaultCurrPage, defaultPageSize, count, novelList, pageModel);
-			// 3.放入req
-			req.setAttribute("pageModel", pageModel);
-			System.out.println(pageModel.toString());
+			// 判断是否是根据关键词查询
+			if (checkType != null && !checkType.equals("")) {
+				Integer checkNum = Integer.parseInt(checkType);
+				List<SnNovel> novelChechList = novelService.findByCheckByPage(checkNum, defaultPageSize, defaultCurrPage);
+				Integer count = novelService.findCountByStatus(checkNum);// 总记录数
+				PageModel.wrapPageModel(defaultCurrPage, defaultPageSize, count, novelChechList, pageModel);
+				//放入req 需要1.pageModel2.状态值
+				req.setAttribute("pageModel", pageModel);
+				req.setAttribute("checkType", checkType);
+				req.setAttribute("requestUrl", "adminNovel.do?method=toNovelList&checkType="+checkType);// 设置请求链接
+				
+			} else if (keyword == null || keyword.equals("")) {
+				// 2.查询所有类别
+				List<SnNovel> novelList = novelService.findAllByPage(defaultPageSize, defaultCurrPage);
+				Integer count = novelService.findCount();// 总记录数
+
+				PageModel.wrapPageModel(defaultCurrPage, defaultPageSize, count, novelList, pageModel);
+				// 3.放入req
+				req.setAttribute("pageModel", pageModel);
+				req.setAttribute("requestUrl", "adminNovel.do?method=toNovelList");// 设置请求链接
+			} else {
+				// 关键字过滤
+				List<SnNovel> novelList = novelService.findByTitleByPage(keyword, defaultPageSize, defaultCurrPage);
+				List<SnNovel> countList = novelService.findByTitle(keyword);
+				Integer count;// 总记录数
+				if (countList == null) {
+					count = 0;
+				} else {
+					count = countList.size();
+				}
+				PageModel.wrapPageModel(defaultCurrPage, defaultPageSize, count, novelList, pageModel);
+				// 3.放入req
+				req.setAttribute("pageModel", pageModel);
+				req.setAttribute("keyword", keyword);
+				req.setAttribute("requestUrl", "adminNovel.do?method=toNovelList&keyword=" + keyword);// 设置请求链接
+			}
 			return "/admin/admin_novellist.jsp";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,7 +115,7 @@ public class AdminNovelServlet extends BaseServlet {
 	public String addNovel(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			String novelIdStr = req.getParameter("novelId");//先获取id判断是修改还是新增
+			String novelIdStr = req.getParameter("novelId");// 先获取id判断是修改还是新增
 			String novelTitle = req.getParameter("novelTitle");
 			String novelAuthor = req.getParameter("novelAuthor");
 			String novelSummary = req.getParameter("novelSummary");
@@ -98,18 +130,18 @@ public class AdminNovelServlet extends BaseServlet {
 				novelFindById.setNovelTitle(novelTitle);
 				novelFindById.setNovelAuthor(novelAuthor);
 				novelFindById.setNovelSummary(novelSummary);
-				//category
+				// category
 				SnCategory category = new SnCategory();
 				category.setCatId(Integer.parseInt(novelCategory));
 				novelFindById.setSnCategory(category);
 				novelFindById.setNovelIsEnd(Integer.parseInt(novelIsEnd));
 				novelFindById.setNovelCheck(Integer.parseInt(novelCheck));
-				//download
+				// download
 				Map<String, String> urlMap = new HashMap<String, String>();
 				urlMap.put("url", novelDownloadurl);
 				novelFindById.setNovelDownloadurl(urlMap);
 				novelFindById.setNovelCover(novelCover);
-				
+
 				boolean isok = novelService.update(novelFindById);
 				if (isok) {
 					jsonMsg = JsonMsg.makeSuccess("修改成功!", null);
@@ -126,26 +158,26 @@ public class AdminNovelServlet extends BaseServlet {
 					novel.setNovelTitle(novelTitle);
 					novel.setNovelAuthor(novelAuthor);
 					novel.setNovelSummary(novelSummary);
-					//category
+					// category
 					SnCategory category = new SnCategory();
 					category.setCatId(Integer.parseInt(novelCategory));
 					novel.setSnCategory(category);
 					novel.setNovelIsEnd(Integer.parseInt(novelIsEnd));
 					novel.setNovelCheck(Integer.parseInt(novelCheck));
-					//download
+					// download
 					Map<String, String> urlMap = new HashMap<String, String>();
-					urlMap.put("url", ""+novelDownloadurl);
+					urlMap.put("url", "" + novelDownloadurl);
 					novel.setNovelDownloadurl(urlMap);
 					novel.setNovelCover(novelCover);
 					SnUser user = (SnUser) req.getSession().getAttribute("user");
-					//判断用户
-					if(user == null){
+					// 判断用户
+					if (user == null) {
 						user = new SnUser();
 						user.setUserId(1);
 					}
-					//设置用户
+					// 设置用户
 					novel.setNovelShareUser(user);
-					//保存
+					// 保存
 					boolean isok = novelService.save(novel);
 					if (isok) {
 						jsonMsg = JsonMsg.makeSuccess("保存成功!", null);
@@ -153,7 +185,7 @@ public class AdminNovelServlet extends BaseServlet {
 						throw new Exception("数据库插入失败!");
 					}
 				} else {
-					throw new Exception("小说《"+list.get(0).getNovelTitle()+"》已存在!");
+					throw new Exception("小说《" + list.get(0).getNovelTitle() + "》已存在!");
 				}
 			}
 
@@ -201,7 +233,8 @@ public class AdminNovelServlet extends BaseServlet {
 					String head = resourceBundle.getString("IMAGE_SERVER_URL");
 					// 最终图片路径
 					path = head + path;
-					//path = "http://193.112.41.124/group1/M00/00/00/rBAABVzVPXuAb0s0AAAouX6YDHQ53.jpeg";测试用地址
+					// path =
+					// "http://193.112.41.124/group1/M00/00/00/rBAABVzVPXuAb0s0AAAouX6YDHQ53.jpeg";测试用地址
 					// System.out.println(path);
 					jsonMsg = JsonMsg.makeSuccess("上传成功", path);
 				}
@@ -215,16 +248,16 @@ public class AdminNovelServlet extends BaseServlet {
 		resp.getWriter().write(jsonStr);
 		return null;
 	}
-	
-	//查询单个Novel
+
+	// 查询单个Novel
 	public String findById(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		String novelId = req.getParameter("novelId");
 		try {
 			SnNovel novelFind = novelService.findById(Integer.parseInt(novelId));
-			if(novelFind != null){
+			if (novelFind != null) {
 				jsonMsg = JsonMsg.makeSuccess("查询成功", novelFind);
-			}else{
+			} else {
 				throw new Exception("查询失败!");
 			}
 		} catch (Exception e) {
@@ -235,27 +268,26 @@ public class AdminNovelServlet extends BaseServlet {
 		return null;
 	}
 
-	//删除
+	// 删除
 	public String delNovel(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		
-		//ids在前端判断一次,后端一次
+		// ids在前端判断一次,后端一次
 		String[] ids = req.getParameterValues("novelIds");
-		if(ids == null){
+		if (ids == null) {
 			jsonMsg = JsonMsg.makeFail("删除失败,没有选择id", null);
-		}else{
+		} else {
 			try {
 				for (String id : ids) {
 					SnNovel novel = new SnNovel();
 					novel.setNovelId(Integer.parseInt(id));
 					novelService.delete(novel);
 				}
-				jsonMsg = JsonMsg.makeSuccess("成功删除"+ ids.length +"条数据!", null);
+				jsonMsg = JsonMsg.makeSuccess("成功删除" + ids.length + "条数据!", null);
 			} catch (Exception e) {
-				jsonMsg = JsonMsg.makeFail("删除失败!错误信息: "+e.getMessage(), null);
+				jsonMsg = JsonMsg.makeFail("删除失败!错误信息: " + e.getMessage(), null);
 			}
 		}
-		
+
 		String jsonStr = objectMapper.writeValueAsString(jsonMsg);
 		resp.getWriter().write(jsonStr);
 		return null;
