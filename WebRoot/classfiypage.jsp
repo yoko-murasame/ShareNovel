@@ -192,8 +192,8 @@ margin-bottom: 5px;
 								<ul>
 									<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">都市言情</a></li>
 									<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">古装言情</a></li>
-									<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 3</a></li>
-									<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 4</a></li>
+									<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">校园言情</a></li>
+									<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">玄幻言情</a></li>
 								</ul></li>
 							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 3</a></li>
 							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 4</a>
@@ -205,13 +205,13 @@ margin-bottom: 5px;
 						</ul></li>
 					<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">女生</a>
 						<ul>
-							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 1</a></li>
-							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 2</a></li>
-							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 3</a></li>
-							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">Subitem 4</a></li>
+							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">都市言情</a></li>
+							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">古装言情</a></li>
+							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">校园言情</a></li>
+							<li><a href="javascript:void(0)" onclick="classifiedQuery(this)">玄幻言情</a></li>
 						</ul></li>
-					<li><a href="javascript:void(0)" >Item without subitems</a></li>
-					<li><a href="javascript:void(0)" >Item without subitems</a></li>
+					<li><a href="javascript:void(0)" >异能</a></li>
+					<li><a href="javascript:void(0)" >耽美</a></li>
 				</ul>
 			</div>
 		</div>
