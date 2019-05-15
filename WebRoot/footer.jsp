@@ -7,11 +7,6 @@
 		<meta http-equiv="keywords" content="免费小说,免费小说下载,小说在线阅读">
 		<meta http-equiv="description" content="这个小说网站是我们的实训项目">
 		<title>星象小说</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mainpage.css">
-		<script src="${pageContext.request.contextPath}/js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="${pageContext.request.contextPath}/js/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/style.css" type="text/css"/>
 	</head>
 	<body>
 	

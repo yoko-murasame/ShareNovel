@@ -15,7 +15,6 @@
 		<script src="${pageContext.request.contextPath}/js/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/style.css" type="text/css"/>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/admin/assets/js/gritter/css/jquery.gritter.css" />
-		<script src="${pageContext.request.contextPath}/js/admin/assets/js/jquery.js"></script>
 		<!-- 公共js -->
 		<script src="${pageContext.request.contextPath}/js/admin/admin-common.js"></script>
 		<!--script for this page-->

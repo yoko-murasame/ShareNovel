@@ -47,7 +47,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/myPagination.css">
 <script src="${pageContext.request.contextPath}/js/myPagination.js"></script>
-
+		
 <script type="text/javascript">
 	var pageModel = {};
 	pageModel.page = 1;

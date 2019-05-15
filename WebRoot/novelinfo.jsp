@@ -5,13 +5,6 @@
 <head>
 <meta charset="utf-8">
 <title>小说详情</title>
-<link rel="stylesheet" type="text/css"
-	href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="css/mainpage.css" />
-<script src="js/jquery-3.4.0.min.js" type="text/javascript"
-	charset="utf-8"></script>
-<script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js"
-	type="text/javascript" charset="utf-8"></script>
 <style type="text/css">
 #bookpageimg {
 	margin-left: 20px;
@@ -138,7 +131,7 @@
 				alert(data.msg);
 				openmodel();
 			}else{
-				alert(data.msg);
+				showGritter("消息",data.msg);
 			}
 		},
 	});
