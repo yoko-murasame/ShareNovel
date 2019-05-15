@@ -73,7 +73,7 @@
 			</div>
 			<div class="col-lg-3" id="ff">
 				<a href="" class="btn btn-default">在线阅读</a> <a href="javascript:void(0)" onclick="collect(${novel.novelId })"
-					class="btn btn-default">加入书架</a> <a href="${novel.novelDownloadurl[url] } %>"
+					class="btn btn-default">加入书架</a> <a target="_blank" href="${novel.novelDownloadurl['url'] }"
 					class="btn btn-default" >下载</a>
 			</div>
 		</div>
