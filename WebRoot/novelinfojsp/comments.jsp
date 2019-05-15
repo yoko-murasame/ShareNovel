@@ -2,8 +2,8 @@
 <%
 	String nid = request.getParameter("nid");
 %>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML>
 <head>
 <meta charset="utf-8">
 <title></title>
@@ -27,8 +27,14 @@
 		<div class="wrap">
 			<div class="comment">
 				<div class="head-face">
-					<img src="images/1.jpg">
-					<p>我是鸟</p>
+					<c:if test="${empty user }">
+						<img src="${pageContext.request.contextPath}/img/defaultNickpic.jpg">
+						<p>您还未登录</p>
+					</c:if>
+					<c:if test="${not empty user }">
+						<img src="${user.userNickpic }">
+						<p>${user.userNickname }</p>
+					</c:if>
 				</div>
 				<div class="content">
 					<div class="cont-box">

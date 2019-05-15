@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>DASHGUM - Bootstrap Admin Template</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="assets/css/bootstrap.css" rel="stylesheet">
+		<!--external css-->
+		<link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
+
+		<!-- Custom styles for this template -->
+		<link href="assets/css/style.css" rel="stylesheet">
+		<link href="assets/css/style-responsive.css" rel="stylesheet">
+		<link rel="stylesheet" href="assets/css/to-do.css">
+
+		<!--分页插件-->
+		<link rel="stylesheet" href="css/myPagination.css">
+		<script src="js/myPagination.js"></script>
+		<script>
+			window.onload = function() {
+				new Page({
+					id: 'pagination',
+					pageTotal: 50, //必填,总页数
+					pageAmount: 10, //每页多少条
+					dataTotal: 500, //总共多少条数据
+					curPage: 1, //初始页码,不填默认为1
+					pageSize: 5, //分页个数,不填默认为5
+					showPageTotalFlag: true, //是否显示数据统计,不填默认不显示
+					showSkipInputFlag: true, //是否支持跳转,不填默认不显示
+					getPage: function(page) {
+						//获取当前页数
+						console.log(page);
+					}
+				})
+
+				//如有问题可联系VX(base64): REo5ODc4OQ==
+			}
+		</script>
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<style type="text/css">
+			.black-bg {
+				background-color: #424A5D;
+				border-color: #666;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<section id="container">
+			<!-- **********************************************************************************************************************************************************
+      TOP BAR CONTENT & NOTIFICATIONS
+      *********************************************************************************************************************************************************** -->
+			<!--header start-->
+			<header class="header black-bg">
+				<div class="sidebar-toggle-box">
+					<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+				</div>
+				<!--logo start-->
+				<a href="index.html" class="logo"><b>星象小说后台管理系统</b></a>
+				<!--logo end-->
+
+				<div class="top-menu">
+					<ul class="nav pull-right top-menu">
+						<li>
+							<a class="logout" href="login.html">Logout</a>
+						</li>
+					</ul>
+				</div>
+			</header>
+			<!--header end-->
+
+			<!-- **********************************************************************************************************************************************************
+      MAIN SIDEBAR MENU
+      *********************************************************************************************************************************************************** -->
+			<!--sidebar start-->
+			<aside>
+				<div id="sidebar" class="nav-collapse ">
+					<!-- sidebar menu start-->
+					<ul class="sidebar-menu" id="nav-accordion">
+
+						<p class="centered">
+							<a href="#"><img src="http://193.112.41.124/group1/M00/00/00/rBAABVzNhFKAXNXiAAEviRJSH0M870.jpg" class="img-circle" width="60"></a>
+						</p>
+						<h5 class="centered">Yoko</h5>
+
+						<li class="mt">
+							<a href="index.html">
+								<i class="fa fa-dashboard"></i>
+								<span>首页</span>
+							</a>
+						</li>
+
+						<li class="sub-menu">
+							<a href="javascript:;">
+								<i class="fa fa-cogs"></i>
+								<span>用户管理</span>
+							</a>
+							<ul class="sub">
+								<li>
+									<a href="admin_userlist.html">用户列表</a>
+								</li>
+								<li>
+									<a href="admin_userupdate.html">用户修改</a>
+								</li>
+								<li>
+									<a href="admin_userfind.html">用户查询</a>
+								</li>
+							</ul>
+						</li>
+						<li class="sub-menu">
+							<a class="active" href="javascript:;">
+								<i class="fa fa-book"></i>
+								<span>小说管理</span>
+							</a>
+							<ul class="sub">
+								<li>
+									<a href="admin_novellist.html">小说列表</a>
+								</li>
+								<li>
+									<a href="admin_novecheck.html">小说审核</a>
+								</li>
+								<li class="active" >
+									<a href="admin_noveadd.html">小说添加</a>
+								</li>
+							</ul>
+						</li>
+						<li class="sub-menu">
+							<a href="javascript:;">
+								<i class="fa fa-tasks"></i>
+								<span>分类管理</span>
+							</a>
+							<ul class="sub">
+								<li>
+									<a href="admin_topcategory.html">顶级分类管理</a>
+								</li>
+								<li>
+									<a href="admin_subcategory.html">子分类分类管理</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<!-- sidebar menu end-->
+				</div>
+			</aside>
+			<!--sidebar end-->
+
+			<!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+			<!--main content start-->
+			<section id="main-content">
+				<section class="wrapper site-min-height">
+					<h3><i class="fa fa-angle-right"></i> Blank Page</h3>
+					<div class="row mt">
+						<div class="col-lg-12">
+							<p>Place your content here.</p>
+						</div>
+					</div>
+
+					<!--表格开始-->
+					<div class="row mt">
+						<div class="col-md-12">
+							<div class="content-panel">
+								<table class="table table-striped table-advance table-hover">
+									<h4><i class="fa fa-angle-right"></i> Advanced Table</h4>
+									<hr>
+									<thead>
+										<tr>
+											<th><i class="fa fa-bullhorn"></i> Company</th>
+											<th class="hidden-phone"><i class="fa fa-question-circle"></i> Descrition</th>
+											<th><i class="fa fa-bookmark"></i> Profit</th>
+											<th><i class=" fa fa-edit"></i> Status</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<a href="basic_table.html#">Company Ltd</a>
+											</td>
+											<td class="hidden-phone">Lorem Ipsum dolor</td>
+											<td>12000.00$ </td>
+											<td><span class="label label-info label-mini">Due</span></td>
+											<td>
+												<button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+												<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+												<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="basic_table.html#">
+													Dashgum co
+												</a>
+											</td>
+											<td class="hidden-phone">Lorem Ipsum dolor</td>
+											<td>17900.00$ </td>
+											<td><span class="label label-warning label-mini">Due</span></td>
+											<td>
+												<button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+												<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+												<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="basic_table.html#">
+													Another Co
+												</a>
+											</td>
+											<td class="hidden-phone">Lorem Ipsum dolor</td>
+											<td>14400.00$ </td>
+											<td><span class="label label-success label-mini">Paid</span></td>
+											<td>
+												<button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+												<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+												<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="basic_table.html#">
+													Dashgum ext
+												</a>
+											</td>
+											<td class="hidden-phone">Lorem Ipsum dolor</td>
+											<td>22000.50$ </td>
+											<td><span class="label label-success label-mini">Paid</span></td>
+											<td>
+												<button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+												<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+												<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<a href="basic_table.html#">Total Ltd</a>
+											</td>
+											<td class="hidden-phone">Lorem Ipsum dolor</td>
+											<td>12120.00$ </td>
+											<td><span class="label label-warning label-mini">Due</span></td>
+											<td>
+												<button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+												<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+												<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div id="pagination" class="pagination"></div>
+							</div>
+							<!-- /content-panel -->
+						</div>
+						<!-- /col-md-12 -->
+					</div>
+					<!-- 表格结束/row -->
+
+					<!--列表开始-->
+					<!-- COMPLEX TO DO LIST -->
+					<div class="row mt">
+						<div class="col-md-12">
+							<section class="task-panel tasks-widget">
+								<div class="panel-heading">
+									<div class="pull-left">
+										<h5><i class="fa fa-tasks"></i> Todo List - Complex Style</h5></div>
+									<br>
+								</div>
+								<div class="panel-body">
+									<div class="task-content">
+
+										<ul class="task-list">
+											<li>
+												<div class="task-checkbox">
+													<input type="checkbox" class="list-child" value="" />
+												</div>
+												<div class="task-title">
+													<span class="task-title-sp">Dashgum - Admin Panel Theme</span>
+													<span class="badge bg-theme">Done</span>
+													<div class="pull-right hidden-phone">
+														<button class="btn btn-success btn-xs"><i class=" fa fa-check"></i></button>
+														<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+														<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="task-checkbox">
+													<input type="checkbox" class="list-child" value="" />
+												</div>
+												<div class="task-title">
+													<span class="task-title-sp">Extensive collection of plugins</span>
+													<span class="badge bg-warning">Cool</span>
+													<div class="pull-right hidden-phone">
+														<button class="btn btn-success btn-xs"><i class=" fa fa-check"></i></button>
+														<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+														<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="task-checkbox">
+													<input type="checkbox" class="list-child" value="" />
+												</div>
+												<div class="task-title">
+													<span class="task-title-sp">Free updates always, no extra fees.</span>
+													<span class="badge bg-success">2 Days</span>
+													<div class="pull-right hidden-phone">
+														<button class="btn btn-success btn-xs"><i class=" fa fa-check"></i></button>
+														<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+														<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="task-checkbox">
+													<input type="checkbox" class="list-child" value="" />
+												</div>
+												<div class="task-title">
+													<span class="task-title-sp">More features coming soon</span>
+													<span class="badge bg-info">Tomorrow</span>
+													<div class="pull-right hidden-phone">
+														<button class="btn btn-success btn-xs"><i class=" fa fa-check"></i></button>
+														<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+														<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="task-checkbox">
+													<input type="checkbox" class="list-child" value="" />
+												</div>
+												<div class="task-title">
+													<span class="task-title-sp">Hey, seriously, you should buy this Dashboard</span>
+													<span class="badge bg-important">Now</span>
+													<div class="pull-right">
+														<button class="btn btn-success btn-xs"><i class=" fa fa-check"></i></button>
+														<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+														<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+
+									<div class=" add-task-row">
+										<a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Add New Tasks</a>
+										<a class="btn btn-default btn-sm pull-right" href="todo_list.html#">See All Tasks</a>
+									</div>
+								</div>
+							</section>
+						</div>
+						<!-- /col-md-12-->
+					</div>
+					<!-- 列表结束/row -->
+
+					<!--提示框开始-->
+					<div class="row mt">
+						<div class="col-lg-6 col-md-6 col-sm-12">
+							<! -- BASIC PROGRESS BARS -->
+							<div class="showback">
+								<h4><i class="fa fa-angle-right"></i> Basic Progress Bars</h4>
+								<div class="progress">
+									<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+										<span class="sr-only">40% Complete (success)</span>
+									</div>
+								</div>
+								<div class="progress">
+									<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+										<span class="sr-only">20% Complete</span>
+									</div>
+								</div>
+								<div class="progress">
+									<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+										<span class="sr-only">60% Complete (warning)</span>
+									</div>
+								</div>
+								<div class="progress">
+									<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+										<span class="sr-only">80% Complete</span>
+									</div>
+								</div>
+							</div>
+							<!--/showback -->
+
+							<! -- STRIPPED PROGRESS BARS -->
+							<div class="showback">
+								<h4><i class="fa fa-angle-right"></i> Stripped Progress Bars</h4>
+								<div class="progress progress-striped">
+									<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+										<span class="sr-only">40% Complete (success)</span>
+									</div>
+								</div>
+								<div class="progress progress-striped">
+									<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+										<span class="sr-only">20% Complete</span>
+									</div>
+								</div>
+								<div class="progress progress-striped">
+									<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+										<span class="sr-only">60% Complete (warning)</span>
+									</div>
+								</div>
+								<div class="progress progress-striped">
+									<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+										<span class="sr-only">80% Complete (danger)</span>
+									</div>
+								</div>
+							</div>
+							<!-- /showback -->
+
+							<! -- ANIMATED PROGRESS BARS -->
+							<div class="showback">
+								<h4><i class="fa fa-angle-right"></i> Animated Progress Bars</h4>
+								<div class="progress progress-striped active">
+									<div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+										<span class="sr-only">45% Complete</span>
+									</div>
+								</div>
+							</div>
+							<!-- /showback -->
+
+							<! -- MODALS -->
+							<div class="showback">
+								<h4><i class="fa fa-angle-right"></i> Modal Example</h4>
+								<!-- Button trigger modal -->
+								<button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+						  Launch Modal
+						</button>
+
+								<!-- Modal -->
+								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+												<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+											</div>
+											<div class="modal-body">
+												Hi there, I am a Modal Example for Dashgum Admin Panel.
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-primary">Save changes</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /showback -->
+
+							<! -- GRITTER NOTICES -->
+							<div class="showback">
+								<h4><i class="fa fa-angle-right"></i> Gritter Examples</h4>
+								<p>Click on below buttons to check it out.</p>
+								<a id="add-regular" class="btn btn-default btn-sm" href="javascript:;">Regular</a>
+								<a id="add-sticky" class="btn btn-success  btn-sm" href="javascript:;">Sticky</a>
+								<a id="add-without-image" class="btn btn-info  btn-sm" href="javascript:;">Imageless</a>
+								<a id="add-gritter-light" class="btn btn-warning  btn-sm" href="javascript:;">Light</a>
+								<a id="remove-all" class="btn btn-danger  btn-sm" href="general.html#">Remove all</a>
+							</div>
+							<!-- /showback -->
+
+						</div>
+						<! --/col-lg-6 -->
+
+					</div>
+					<!--提示框结束/row-->
+
+					<!--按钮开始-->
+					<div class="row mt">
+						<div class="col-lg-6 col-md-6 col-sm-12">
+							<! -- BASIC BUTTONS -->
+							<div class="showback">
+								<h4><i class="fa fa-angle-right"></i> Basic Buttons</h4>
+								<button type="button" class="btn btn-default">Default</button>
+								<button type="button" class="btn btn-primary">Primary</button>
+								<button type="button" class="btn btn-success">Success</button>
+								<button type="button" class="btn btn-info">Info</button>
+								<button type="button" class="btn btn-warning">Warning</button>
+								<button type="button" class="btn btn-danger">Danger</button>
+							</div>
+							<!-- /showback -->
+
+							<! -- BUTTONS ROUND -->
+							<div class="showback">
+								<h4><i class="fa fa-angle-right"></i> Buttons Round</h4>
+								<button type="button" class="btn btn-round btn-default">Default</button>
+								<button type="button" class="btn btn-round btn-primary">Primary</button>
+								<button type="button" class="btn btn-round btn-success">Success</button>
+								<button type="button" class="btn btn-round btn-info">Info</button>
+								<button type="button" class="btn btn-round btn-warning">Warning</button>
+								<button type="button" class="btn btn-round btn-danger">Danger</button>
+							</div>
+							<!-- /showback -->
+
+							<! -- THEME BUTTONS -->
+							<div class="showback">
+								<h4><i class="fa fa-angle-right"></i> Theme Buttons</h4>
+								<!-- Standard button -->
+								<button type="button" class="btn btn-theme">Theme</button>
+								<button type="button" class="btn btn-theme02">Theme 02</button>
+								<button type="button" class="btn btn-theme03">Theme 03</button>
+								<button type="button" class="btn btn-theme04">Theme 04</button>
+							</div>
+							<!-- /showback -->
+
+							<! -- BUTTONS GROUP -->
+							<div class="showback">
+								<h4><i class="fa fa-angle-right"></i> Buttons Group</h4>
+								<div class="btn-group">
+									<button type="button" class="btn btn-default">Left</button>
+									<button type="button" class="btn btn-default">Middle</button>
+									<button type="button" class="btn btn-default">Right</button>
+								</div>
+							</div>
+							<!-- /showback -->
+
+							<! -- BUTTONS NESTING -->
+							<div class="showback">
+								<h4><i class="fa fa-angle-right"></i> Button Nesting</h4>
+								<div class="btn-group">
+									<button type="button" class="btn btn-default">1</button>
+									<button type="button" class="btn btn-default">2</button>
+
+									<div class="btn-group">
+										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						      Dropdown
+						      <span class="caret"></span>
+						    </button>
+										<ul class="dropdown-menu">
+											<li>
+												<a href="#">Dropdown link</a>
+											</li>
+											<li>
+												<a href="#">Dropdown link</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- /showback -->
+
+							<! -- SPLIT BUTTONS -->
+							<div class="showback">
+								<h4><i class="fa fa-angle-right"></i> Split Buttons</h4>
+								<!-- Split button -->
+								<div class="btn-group">
+									<button type="button" class="btn btn-theme03">Action</button>
+									<button type="button" class="btn btn-theme03 dropdown-toggle" data-toggle="dropdown">
+						    <span class="caret"></span>
+						    <span class="sr-only">Toggle Dropdown</span>
+						  </button>
+									<ul class="dropdown-menu" role="menu">
+										<li>
+											<a href="#">Action</a>
+										</li>
+										<li>
+											<a href="#">Another action</a>
+										</li>
+										<li>
+											<a href="#">Something else here</a>
+										</li>
+										<li class="divider"></li>
+										<li>
+											<a href="#">Separated link</a>
+										</li>
+									</ul>
+								</div>
+
+							</div>
+							<!-- /showback -->
+
+						</div>
+						<! --/col-lg-6 -->
+
+					</div>
+					<!--按钮结束-->
+				</section>
+				<! --/wrapper -->
+			</section>
+			<!-- /MAIN CONTENT -->
+
+			<!--main content end-->
+			<!--footer start-->
+			<footer class="site-footer">
+				<div class="text-center">
+					2019 - 中软-码之形小组
+					<a href="index.html#" class="go-top">
+						<i class="fa fa-angle-up"></i>
+					</a>
+				</div>
+			</footer>
+			<!--footer end-->
+		</section>
+
+		<!-- js placed at the end of the document so the pages load faster -->
+		<script src="assets/js/jquery.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+		<script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+		<script src="assets/js/jquery.scrollTo.min.js"></script>
+		<script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+		<!--common script for all pages-->
+		<script src="assets/js/common-scripts.js"></script>
+
+		<!--script for this page-->
+		<script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
+		<script type="text/javascript" src="assets/js/gritter-conf.js"></script>
+
+	</body>
+
+</html>

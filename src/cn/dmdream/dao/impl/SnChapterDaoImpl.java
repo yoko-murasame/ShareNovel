@@ -285,8 +285,8 @@ public class SnChapterDaoImpl implements SnChapterDao {
 
 	@Override
 	public int findNovelChapterTotalCount(SnNovel novel) {
-		String sql="select count(chapter_novelid) from sn_chapter";
-		CachedRowSet query = dbUtil.query(sql);
+		String sql="select count(chapter_novelid) from sn_chapter where chapter_novelid = ?";
+		CachedRowSet query = dbUtil.query(sql,novel.getNovelId());
 		int ret=0;
 		try {
 			if(query.next()) 

@@ -4,7 +4,7 @@
 	SnUser user = (SnUser) session.getAttribute("user");
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
 <title>小说分类</title>
@@ -18,8 +18,7 @@
 <script src="js/bootstrap-3.3.7-dist/js/bootstrap.min.js"
 	type="text/javascript" charset="utf-8"></script>
 <style type="text/css">
-<
-style type ="text /css"> < !-- 标签选中css-->.select {
+.select {
 	list-style: none;
 }
 
@@ -117,76 +116,11 @@ style type ="text /css"> < !-- 标签选中css-->.select {
 }
 </style>
 </head>
-<body>
-	<div class="container-fluid" id="head">
-		<div class="container">
-			<div class="col-lg-4">
-				<%
-					if (user == null) {
-				%>
-				<div class="col-lg-6" id="logintip">
-					<span>亲,请登录</span> <a href="javascript:openmodel()">登录</a>
-				</div>
-				<div class="col-lg-6">
-					<a href="${pageContext.request.contextPath}/register.jsp"> <font
-						color="red">注册</font>
-					</a>
-				</div>
-				<%
-					} else {
-				%>
-				<div class="col-lg-6" id="logintip">
-					<span><font color='red'><%=user.getUserUsername() %></font>,你好!</span>
-				</div>
-				<%
-					}
-				%>
-
-			</div>
-			<div class="col-lg-4 col-lg-offset-4 ">
-				<a href="mainpage.jsp" class="pull-right">我的收藏</a> <a href="${pageContext.request.contextPath}/usercenter.jsp"
-					class="pull-right">个人中心&nbsp;</a>
-			</div>
-		</div>
-	</div>
-	<div class="container" id="search-bar">
-		<div class="col-lg-4" id="logo">
-			<a href="#"><img src="img/logo.beebc.png"></a>
-		</div>
-		<!--搜索框-->
-		<div class="col-lg-8" id="navsearch">
-			<form class="bs-example bs-example-form" role="form">
-				<div class="col-lg-6">
-					<div class="input-group">
-						<input type="text" class="form-control"> <span
-							class="input-group-btn">
-							<button class="btn btn-default" type="button">搜索</button>
-						</span>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-	<nav class="navbar" role="navigation" style="margin-bottom: 0;">
-	<div class="container-fluid" style="background: #3e3d43;">
-		<div class="container">
-			<div class="navbar-header col-lg-2">
-				<a class="navbar-brand" href="#">小说分类</a>
-			</div>
-			<div>
-				<ul class="nav navbar-nav">
-					<!-- 这里是导航栏内容-->
-					<li><a href="${pageContext.request.contextPath}/classfiypage.jsp">全部作品</a></li>
-					<li><a href="#">排行榜</a></li>
-					<li><a href="#">最近更新</a></li>
-					<li><a href="#">全本小说</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	</nav>
-	<!-- 主体部分 -->
-	<div class="container">
+<body class="col-md-12 col-lg-12">
+	<!-- 内层容器1 -->
+	<div class="container-fluid col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+		<!-- 页首 -->
+		<jsp:include page="header.jsp" flush="true"/>
 		<div class="col-lg-3">
 			<div class="menu">
 				<ul>
@@ -208,24 +142,12 @@ style type ="text /css"> < !-- 标签选中css-->.select {
 
 			<div class="clearfix"></div>
 		</div>
+		<!-- 页脚 -->
+		<%@ include file="/footer.jsp"%>
 	</div>
+	<!-- 内层容器2 /-->
 
 
-
-
-
-
-
-
-	<!--  -->
-	<div class="container footer text-center" style="height: 200px;">
-		<hr>
-		<p>请所有作者发布作品时务必遵守国家互联网信息管理办法规定，我们拒绝任何色情小说，一经发现，即作删除！举报电话：110</p>
-		<p>本站所收录的作品、社区话题、用户评论、用户上传内容或图片等均属用户个人行为。如前述内容侵害您的权益，欢迎举报投诉，一经核实，立即删除，本站不承担任何责任</p>
-		<p>
-			<span>Copyright © 中软小组-码之行</span>
-		</p>
-	</div>
 	<!--登入模态框  -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog modal-sm" role="document">
@@ -272,6 +194,7 @@ style type ="text /css"> < !-- 标签选中css-->.select {
 			</div>
 		</div>
 	</div>
+
 </body>
 <script type="text/javascript">
 //设置模态框

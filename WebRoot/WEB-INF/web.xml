@@ -115,12 +115,21 @@
     <servlet-name>CommentServlet</servlet-name>
     <servlet-class>cn.dmdream.servlet.CommentServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>UserNovelServlet</servlet-name>
+    <servlet-class>cn.dmdream.servlet.UserNovelServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>CommentServlet</servlet-name>
     <url-pattern>/comment.do</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserNovelServlet</servlet-name>
+    <url-pattern>/userNovel.do</url-pattern>
+  </servlet-mapping>
 	<welcome-file-list>
-		<welcome-file>mainpage.jsp</welcome-file>
+		<welcome-file>/index.jsp</welcome-file>
 	</welcome-file-list>
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>

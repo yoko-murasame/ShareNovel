@@ -6,6 +6,8 @@ import cn.dmdream.dao.SnNovelDao;
 import cn.dmdream.dao.impl.SnNovelDaoImpl;
 import cn.dmdream.entity.SnNovel;
 import cn.dmdream.service.SnNovelService;
+import cn.dmdream.utils.JedisUtils;
+import redis.clients.jedis.Jedis;
 
 /**
  * 小说Service层实现类
@@ -22,6 +24,14 @@ public class SnNovelServiceImpl implements SnNovelService {
 	 * @return
 	 */
 	public boolean save(SnNovel snNovel){
+		try {
+			Jedis jedis = JedisUtils.getJedis();
+			jedis.del("indexNovelCache");
+			jedis.close();
+			System.out.println("Redis小说相关缓存已清空");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		int i = snNovelDao.save(snNovel);
 		return i==1 ? true:false;
 	};
@@ -32,6 +42,14 @@ public class SnNovelServiceImpl implements SnNovelService {
 	 * @return
 	 */
 	public boolean delete(SnNovel snNovel){
+		try {
+			Jedis jedis = JedisUtils.getJedis();
+			jedis.del("indexNovelCache");
+			jedis.close();
+			System.out.println("Redis小说相关缓存已清空");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		int i = snNovelDao.delete(snNovel);
 		return i==1 ? true:false;
 	};
@@ -59,6 +77,14 @@ public class SnNovelServiceImpl implements SnNovelService {
 	 * @return
 	 */
 	public boolean update(SnNovel snNovel){
+		try {
+			Jedis jedis = JedisUtils.getJedis();
+			jedis.del("indexNovelCache");
+			jedis.close();
+			System.out.println("Redis小说相关缓存已清空");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		int i = snNovelDao.update(snNovel);
 		return i==1 ? true:false;
 	};

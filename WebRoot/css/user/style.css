@@ -1,0 +1,142 @@
+/* 主页自定义css */
+body {
+	margin-top: 20px;
+	margin: 0 auto;
+	width: 100%;
+}
+.carousel-inner .item img {
+	width: 100%;
+	height: 300px;
+}
+
+.clear{
+	clear:both;
+}
+
+.top{
+	width:1210px;
+	margin:20px auto;
+	overflow:hidden;
+}
+
+.top div{
+	
+}
+
+.search{
+	background-color: #FCFDEF;
+	padding:10px 200px 10px 0px;
+}
+
+.content{
+	width:1210px;
+	margin:0 auto;
+}
+
+.news{
+	border:1px solid #E7E7E7;
+	height:auto;
+	height:300px;
+}
+
+.mynav{
+	width:1210px;
+	margin:0 auto;
+}
+
+.myrow .col-md-10 div{
+	border-bottom:1px solid #E7E7E7;
+	border-left:1px solid #E7E7E7;
+	padding:0px;
+}
+
+.row p{margin:0;}
+
+.myrow .yes-right-border{
+	border-right:1px solid #E7E7E7;
+}
+.myrow .no-left-border{
+	border-left:0px;
+}
+
+.txtCenter{
+	text-align:center;
+}
+
+.divider_1{
+	width:2%;
+}
+
+.showHot {
+	display: flex;
+	width: 100%;
+	height: 400px;
+}
+
+.rightShow {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: space-between;
+}
+
+.rightShow p {
+	margin: 0 0 0 0;
+}
+
+.flex-column-sa-fs{
+	display:flex;
+	flex-direction:column;
+	justify-content:space-around;
+	align-items:flex-start;
+}
+
+.flex-column-fs-fs{
+	display:flex;
+	flex-direction:column;
+	justify-content:flex-start;
+	align-items:flex-start;
+}
+
+/*先设置文字标签宽度*/
+.shop-title{
+    font-size: 16px;
+    color:#333;
+    width: 380px;
+}
+/* 功能封装8：单行超出宽度变省略号 */
+.ell{
+    overflow: hidden;
+    white-space: nowrap;/*规定段落中的文本不进行换行*/
+    text-overflow: ellipsis;/*显示省略符号来代表被修剪的文本*/
+}
+/* 功能封装: 多行超出宽度变省略号 */
+.ell-multi{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+	overflow: hidden;
+}
+/*多行省略号2*/
+.ell-2 {
+    width: 140px;
+    position: relative;
+    line-height: 1.4em;
+    height: 2.8em;
+    overflow: hidden;
+}
+.ell-2::after {
+    content: "...";
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0 20px 1px 45px;
+    background: url(http://css88.b0.upaiyun.com/css88/2014/09/ellipsis_bg.png) repeat-y;
+}
+
+.no-margin{
+	margin:0;
+}
+.overflow-hidden{
+	overflow:hidden;
+}

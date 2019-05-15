@@ -16,7 +16,7 @@ public class UserSearchServlet extends BaseServlet {
 
 		String keyword = req.getParameter("keyword");
 		if(keyword == null || keyword.equals("")){
-			resp.sendRedirect("/ShareNovel/mainpage.jsp");
+			resp.sendRedirect("/ShareNovel");
 		}else{
 			req.setAttribute("keyword", keyword);
 			return "/search_result.jsp";
