@@ -94,10 +94,19 @@
 		<servlet-name>UserCenterServlet</servlet-name>
 		<servlet-class>cn.dmdream.servlet.UserCenterServelt</servlet-class>
 	</servlet>
+  <servlet>
+    <servlet-name>FindPassword</servlet-name>
+    <servlet-class>cn.dmdream.controller.FindPassword</servlet-class>
+  </servlet>
+
 	<servlet-mapping>
 		<servlet-name>UserCenterServlet</servlet-name>
 		<url-pattern>/usercenter.do</url-pattern>
 	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FindPassword</servlet-name>
+    <url-pattern>/findPassword.do</url-pattern>
+  </servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>mainpage.jsp</welcome-file>
@@ -115,9 +124,12 @@
         <filter-class>cn.dmdream.controller.filter.AdminAuthFilter</filter-class>
     </filter>
     <filter-mapping>
+        <filter-name>AdminAuthFilter</filter-name>
         <url-pattern>/admin/*</url-pattern>
         <url-pattern>/adminCategory.do</url-pattern>
-    </filter-mapping>
+
         <url-pattern>/adminNovel.do</url-pattern>
     </filter-mapping>
+    
+    
 </web-app>

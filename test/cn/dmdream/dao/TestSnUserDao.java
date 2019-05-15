@@ -22,7 +22,7 @@ public class TestSnUserDao {
 	@Test
 	public void testSave(){
 
-		SnUser snUser=new SnUser(1,"pbb","666","dsg","","","",111,111,"2019-1-1 13:23:55");
+		SnUser snUser=new SnUser(null,"pbb","666","dsg","","","",111,111,"2019-1-1 23:23:50");
 		int i = snUserDao.save(snUser);
 		Assert.assertEquals(1, i);
 	}

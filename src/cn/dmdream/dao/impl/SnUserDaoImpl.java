@@ -22,7 +22,7 @@ public class SnUserDaoImpl implements SnUserDao {
 	@Override
 	public int save(SnUser snUser) {
 
-		String sql = "insert into sn_user values(null,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into sn_user values(null,?,?,?,?,?,?,?,?,?,null)";
 		int i = dbUtil.update(sql, snUser.getUserUsername(), snUser.getUserPassword(), snUser.getUserNickname(),
 				snUser.getUserNickpic(), snUser.getUserEmail(), snUser.getUserPhone(), snUser.getUserEmailActive(),
 				snUser.getUserPhoneActive(), snUser.getUserRegisttime());

@@ -39,7 +39,7 @@ public class SnUserServiceImpl implements SnUserService{
 	public boolean update(SnUser snUser) {
 
 		int i = snUserDao.update(snUser);
-		if (i==0) {
+		if (i==1) {
 			return true;
 		}else {
 			return false;

@@ -18,6 +18,8 @@
 		<!--分页插件-->
 		<link rel="stylesheet" href="../css/myPagination.css">
 		<script src="../js/myPagination.js"></script>
+		<!-- 图片上传插件 -->
+		<script src="../js/admin/upload2.js"></script>
 		<!-- 分离当前页面对应的js -->
 		 <!--<script src="../js/admin/admin_subcategory.js"></script> -->
 
@@ -62,11 +64,31 @@
 				<ul class="sidebar-menu" id="nav-accordion">
 
 					<p class="centered">
-						<a href="#"><img src="#"
-							class="img-rounded" width="100"></a>
+						<a href="#"><img src=""
+							class="img-rounded" width="100" id="adminNickPic"></a>
 					</p>
-					<h5 class="centered">#</h5>
-
+					<h5 class="centered" id="adminName"></h5>
+					<script type="text/javascript">
+						$.ajax({
+							type:"post",
+							url:"../adminUserlist.do",
+							data:{method:"getSession"},
+							async:true,
+							dataType:"json",
+							success:function(data){
+								console.log(data);
+								$("#adminNickPic").attr("src",data.data.adminNickpic);
+								$("#adminName").html(data.data.adminUsername);
+							},error: function(XMLHttpRequest, textStatus, errorThrown) {
+							alert("初始化失败");
+							console.log(XMLHttpRequest.readyState);
+							console.log("");
+							console.log(XMLHttpRequest.status);
+							console.log("");
+							console.log(XMLHttpRequest.responseText);
+							}
+						});
+					</script>
 					<li class="mt"><a
 						href="admin_index.jsp">
 							<i class="fa fa-dashboard"></i> <span>首页</span>
@@ -114,7 +136,8 @@
 				</h3>
 				<div class="row mt">
 					<div class="col-lg-12">
-						<p>在这里查询未审核、已通过、未通过的小说.</p>
+						<p>在这里管理用户.</p>
+						<p style="font-size: 0.8em;">*注：邮箱和电话中，黄色图标代表未激活，绿色代表已激活</p>
 					</div>
 				</div>
 				<div id="nav"
@@ -122,9 +145,11 @@
 					<!--新增Modal button -->
 					<button class="btn btn-theme03 btn-sm" data-toggle="modal"
 						data-backdrop="true" data-target="#add">新增</button>
-					<!-- 删除Modal button -->
-					<button onclick="showDeleteConfirmModal(this)"
-						class="btn btn-theme04 btn-sm">删除</button>
+					<!-- 根据用户名模糊查询 -->
+					
+						<input type="text" name="usname" id="usname" value="" class="form-control"
+							style="margin-left: 20px; margin-right: 5px;"/>
+					<button class="btn btn-theme02 btn-sm" id="ussear">查询</button>
 				</div>
 				<!--表格开始-->
 				<div class="row">
@@ -134,9 +159,9 @@
 								<thead>
 	                              <tr>
 	                                  <th><i class="fa fa-book"></i> 用户名</th>
-	                                  <th class="hidden-phone"><i class="fa fa-user"></i> 昵称</th>
-	                                  <th><i class="fa fa-tags"></i> e-mail</th>
-	                                  <th><i class="fa fa-check"></i> 电话号码</th>
+	                                  <th><i class="fa fa-user"></i> 昵称</th>
+	                                  <th><i class="fa fa-envelope"></i> e-mail</th>
+	                                  <th><i class="fa fa-signal"></i> 电话号码</th>
 	                                  <th><i class="fa fa-edit"></i></th>
 	                              </tr>
 	                            </thead>
@@ -220,7 +245,7 @@
   	  			          	</div>
   	  			          	
   	  			          	<div class="col-xs-6" style="height: 90px;">
-  	  			          		<label for="addPassword">确认密码</label>
+  	  			          		<label for="addConPassword">确认密码</label>
   	  				          	<input type="text" name="password" id="addConPassword" class="form-control" value="" />
   	  				          	<p id="addCkps" style="color: red;"></p>
   	  			          	</div>
@@ -249,13 +274,15 @@
 		        <div class="modal-footer">
 		          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 		          <fieldset id="addSave" style="display: inline;">
-		          	<a href="" class="btn btn-primary">保存</a>
+		          	<a  class="btn btn-primary" id="addSaveBtn">保存</a>
 		          </fieldset>
 		        </div>
 		      </div>
 		    </div>
 		 </div>
-		 <!--Model用户信息-->
+		 
+		 
+		 <!--Model修改-->
 		 
 		 <div class="modal fade" id="userInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		    <div class="modal-dialog" role="document">
@@ -265,25 +292,45 @@
 		          <h4 class="modal-title" id="myModalLabel">用户详情</h4>
 		        </div>
 		        <div class="modal-body" >
-		          <div class="container" id="add-one">
-		          	<img src=""/>
-		          	<label for=""></label>
-		          	<input type="text" name="username" value="" />
-		          	<label for=""></label>
-		          	<input type="text" name="password"  value="" />
-		          	<label for=""></label>
-		          	<input type="text" name="nick-name"  value="" />
-		          	<label for=""></label>
-		          	<input type="text" name="email"  value="" />
-		          	<label for=""></label>
-		          	<input type="text" name="phone" value="" />
-		          	<label for=""></label>
-		          	<input type="text" name="regist-time" value="" />
+		        	
+		        	<input type="hidden" name="iden" id="iden" value="" />
+		          	<div  id="add-one" style="height: 500px;">
+		          	<div class="col-xs-12" style="text-align: center;height: 160px;"><img src="" id="updImg" style="height: 100%;"/></div>
+		          	<form class="form-group">
+		          		<div class="col-xs-6" style="height: 90px;">
+  			          		<label for="updUsername">用户名</label>
+  	  			          	<input type="text" id="updUsername" value="" class="form-control"/>
+  	  			          	<p id="updCkun"></p>
+  			          	</div>
+  			          	<div class="col-xs-6" style="height: 90px;">
+  			          		<label for="updPassword">密码</label>
+  	  			          	<input type="text" id="updPassword"  value="" class="form-control"/>
+  			          	</div>
+  			          	<div class="col-xs-6" style="height: 90px;">
+  			          		<label for="updNickname">昵称</label>
+  	  			          	<input type="text" id="updNickname"  value="" class="form-control"/>
+  			          	</div>
+  			          	<div class="col-xs-6" style="height: 90px;">
+  			          		<label for="updEmail">邮箱</label>
+  	  			          	<input type="text" id="updEmail"  value="" class="form-control"/>
+  			          	</div>
+  			          	<div class="col-xs-6" style="height: 90px;">
+  			          		<label for="updPhone">电话号码</label>
+  	  			          	<input type="text" id="updPhone" value="" class="form-control"/>
+  			          	</div>
+  			          	<div class="col-xs-6" style="height: 90px;">
+  			          		<label for="updRegistTime">注册时间</label>
+  	  			          	<input type="text" id="updRegistTime" value="" class="form-control"/>
+  			          	</div>
+		          	</form>
 		          </div>
+		          
 		        </div>
 		        <div class="modal-footer">
 		          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		          <a href="#" class="btn btn-primary">前往详情...</a>
+		          <fieldset id="updSave" style="display: inline;">
+		          	<a  class="btn btn-primary" id="updSaveBtn">保存</a>
+		          </fieldset>
 		        </div>
 		      </div>
 		    </div>
@@ -329,6 +376,7 @@
 		src="../js/admin/assets/js/gritter/js/jquery.gritter.js"></script>
 	<script type="text/javascript"
 		src="../js/admin/assets/js/gritter-conf.js"></script>
+	<script type="text/javascript" src="../js/admin/admin-common.js"></script>
 
 </body>
 
@@ -342,6 +390,7 @@
 	//model
 	var snUser;
 	var user;
+	var ckColor = new Array("label-warning", "label-success");
 
 	function setPageData(page, pageSize) {
 		$.ajax({
@@ -359,20 +408,18 @@
 				snUser = data;
 				console.log(snUser);
 				//	            alert(data.data.list[0].novelAuthor);
-				alert("准备初始化");
+//				alert("准备初始化");
 				user = snUser.data.list;
-				var tbpart = "<td><a href='' data-toggle='modal' data-target='#userInfo' > </a></td>" +
-					"<td class='hidden-phone'> </td>" +
-					"<td><a class='label'> </a></td>" +
-					"<td><a class='label'> </a></td>" +
+				var tbpart = "<td><a href='' data-toggle='modal' data-target='#userInfo' class='username'> </a></td>" +
+					"<td > </td>" +
+					"<td><a class='label email'> </a></td>" +
+					"<td><a class='label phone'> </a></td>" +
 					"<td>" +
-					"<button class='btn btn-success btn-xs'><i class='fa fa-check'></i></button>" +
-					"<button class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i></button>" +
 					"<button class='btn btn-danger btn-xs'><i class='fa fa-trash-o '></i></button>" +
 					"</td>";
 
-				var ckColor = new Array("label-warning", "label-success");
-				alert("完成初始化");
+				
+//				alert("完成初始化");
 				var insert = $("#tb-insert");
 					insert.html(null);
 
@@ -397,7 +444,7 @@
 
 				}
 
-				alert("完成页面初始化");
+//				alert("完成页面初始化");
 				
 				//分页
 				new Page({
@@ -414,6 +461,10 @@
 						setPageData(this.curPage, this.pageAmount);
 					}
 				});
+				
+				userUpdate();
+				active();
+				userDel();
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				alert("初始化失败");
@@ -427,9 +478,7 @@
 	}
 	
 	
-	function newInsert(){
-			
-		}
+	
 
 
 	$(function() {
@@ -447,8 +496,6 @@
 				},
 				async:true,
 				success:function(data){
-					console.log(data);
-					console.log(data.msg);
 					var ckrs=JSON.parse(data);
 					if(ckrs.data!=null){
 						if(ckrs.data==0){
@@ -510,7 +557,10 @@
 //				setPageData(this.curPage, this.pageAmount);
 //			}
 //		});
+		
+		
 
+		
 		
 
 		
@@ -518,6 +568,308 @@
 	
 	
 	
+	$("#addSaveBtn").click(function(){
+		$.ajax({
+			type:"get",
+			url:"../adminUserlist.do",
+			async:true,
+			data:{
+				method:"newAdd",
+				nickPic:$("#addNickpic").val(),
+				username:$("#addUsername").val(),
+				password:$("#addPassword").val(),
+				nickName:$("#addNickname").val(),
+				email:$("#addEmail").val(),
+				phone:$("#addPhone").val(),
+				emailActive:0,
+				phoneActive:0
+			},
+			success:function(data){
+				data=JSON.parse(data);
+//				console.log(data.msg);
+				setTimeout(function() {showGritter('消息',data.msg);}, 500);
+			},error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("新增失败");
+				console.log(XMLHttpRequest.readyState);
+				console.log("");
+				console.log(XMLHttpRequest.status);
+				console.log("");
+				console.log(XMLHttpRequest.responseText);
+				}
+		});
+	});
+	
+	
+	$("#ussear").click(function(){
+		$.ajax({
+			type:"post",
+			url:"../adminUserlist.do",
+			async:true,
+			data:{
+				method:"ussear",
+				username:$("#usname").val()
+			},
+			dataType:"json",
+			success:function(data){
+				snUser = data;
+				console.log(snUser);
+				//	            alert(data.data.list[0].novelAuthor);
+//				alert("准备初始化");
+				user = snUser.data.list;
+				var tbpart = "<td><a href='' data-toggle='modal' data-target='#userInfo' class='username'> </a></td>" +
+					"<td > </td>" +
+					"<td><a class='label email'> </a></td>" +
+					"<td><a class='label phone'> </a></td>" +
+					"<td>" +
+					"<button class='btn btn-danger btn-xs'><i class='fa fa-trash-o '></i></button>" +
+					"</td>";
+
+				
+//				alert("完成初始化");
+				var insert = $("#tb-insert");
+					insert.html(null);
+
+				for(var i = 0; i < user.length; i++) {
+
+					
+					var tr = $("<tr></tr>")
+					insert.append(tr);
+					//					console.log("tbody子节点:");
+					//					console.log(insert.children().last())
+					insert.children().last().html(tbpart);
+					var sons = insert.children().last().children();
+					//alert("出现了吗？");
+					//					console.log(sons);
+					//					console.log(sons[0]);
+					$(sons[0]).children().last().html(user[i].userUsername);
+					$(sons[1]).html(user[i].userNickname);
+					$(sons[2]).children().last().html(user[i].userEmail);
+					$(sons[2]).children().last().addClass(ckColor[user[i].userEmailActive]);
+					$(sons[3]).children().last().html(user[i].userPhone);
+					$(sons[3]).children().last().addClass(ckColor[user[i].userPhoneActive]);
+
+				}
+
+//				alert("完成页面初始化");
+				
+				//分页
+				new Page({
+					id: 'pagination',
+					pageTotal: snUser.data.totalPage, //必填,总页数
+					pageAmount: snUser.data.pageSize, //每页多少条
+					dataTotal: snUser.data.totalCount, //总共多少条数据
+					curPage: snUser.data.currPage, //初始页码,不填默认为1
+					pageSize: 5, //分页个数,不填默认为5
+					showPageTotalFlag: true, //是否显示数据统计,不填默认不显示
+					showSkipInputFlag: true, //是否支持跳转,不填默认不显示
+					getPage: function() {
+						//获取当前页数跳转
+						setPageData(this.curPage, this.pageAmount);
+					}
+				});
+				
+				userUpdate();
+				active();
+				userDel();
+			},error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("新增失败");
+				console.log(XMLHttpRequest.readyState);
+				console.log("");
+				console.log(XMLHttpRequest.status);
+				console.log("");
+				console.log(XMLHttpRequest.responseText);
+			}
+		});
+	});
+	
+	
+	$("#updSaveBtn").click(function(){
+		$.ajax({
+			type:"post",
+			url:"../adminUserlist.do",
+			async:true,
+			data:{
+				method:"newUpdate",
+				id:$("#iden").val(),
+				nickPic:$("#updImg").attr("src"),
+				username:$("#updUsername").val(),
+				password:$("#updPassword").val(),
+				nickName:$("#updNickname").val(),
+				email:$("#updEmail").val(),
+				phone:$("#updPhone").val(),
+				registTime:$("#updRegistTime").val()
+			},
+			success:function(data){
+				data=JSON.parse(data);
+	//				console.log(data.msg);
+				showGritter('消息',data.msg);
+			},error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("新增失败");
+				console.log(XMLHttpRequest.readyState);
+				console.log("");
+				console.log(XMLHttpRequest.status);
+				console.log("");
+				console.log(XMLHttpRequest.responseText);
+				}
+		});
+	});
+	
+	function userUpdate(){
+		$("#tb-insert a.username").click(function(){
+			$.ajax({
+				type:"get",
+				url:"../adminUserlist.do",
+				async:true,
+				data:{
+					method:"update",
+					username:$(this).html()
+				},
+				success:function(data){
+					data=JSON.parse(data);
+					console.log(data);
+					if(data.status==200){
+						$("#updImg").attr("src",data.data.userNickpic);
+						$("#iden").val(data.data.userId);
+						$("#updUsername").val(data.data.userUsername);
+						$("#updPassword").val(data.data.userPassword);
+						$("#updEmail").val(data.data.userEmail);
+						$("#updPhone").val(data.data.userPhone);
+						$("#updNickname").val(data.data.userNickname);
+						$("#updRegistTime").val(data.data.userRegisttime);
+					}else{
+						showGritter('消息',"用户信息获取失败");
+					}
+					
+				},error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("初始化失败");
+				console.log(XMLHttpRequest.readyState);
+				console.log("");
+				console.log(XMLHttpRequest.status);
+				console.log("");
+				console.log(XMLHttpRequest.responseText);
+				}
+			});
+		});
+	}
+	
+	function active(){
+		//邮箱激活状态修改
+		$("tbody a.email").click(function(){
+			console.log($("tbody a.email"));
+			var actSta=-1;
+			var target=$(this);
+			if($(this).attr("class").indexOf("label-warning")>-1){
+				actSta=0;
+			}else if($(this).attr("class").indexOf("label-success")>-1){
+				actSta=1;
+			}
+			console.log($(this).parent().parent().children()[0].children[0].innerHTML);
+			
+			if(actSta!=-1){
+				$.ajax({
+					type:"post",
+					url:"../adminUserlist.do",
+					dataType:"json",
+					async:true,
+					data:{
+						method:"active",
+						username:$(this).parent().parent().children()[0].children[0].innerHTML,
+						active:actSta,
+						obj:"email"
+					},
+					success:function(data){
+						
+						showGritter('消息',data.msg);
+						
+						target.removeClass(ckColor[actSta]);
+						target.addClass(ckColor[data.data]);
+					},error: function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("初始化失败");
+					console.log(XMLHttpRequest.readyState);
+					console.log("");
+					console.log(XMLHttpRequest.status);
+					console.log("");
+					console.log(XMLHttpRequest.responseText);
+					}
+				});
+			}
+			
+		});
+		//电话激活状态修改
+		$("tbody a.phone").click(function(){
+			console.log($("tbody a.phone"));
+			var actSta=-1;
+			var target=$(this);
+			if($(this).attr("class").indexOf("label-warning")>-1){
+				actSta=0;
+			}else if($(this).attr("class").indexOf("label-success")>-1){
+				actSta=1;
+			}
+			console.log($(this).parent().parent().children()[0].children[0].innerHTML);
+			
+			if(actSta!=-1){
+				$.ajax({
+					type:"post",
+					url:"../adminUserlist.do",
+					dataType:"json",
+					async:true,
+					data:{
+						method:"active",
+						username:$(this).parent().parent().children()[0].children[0].innerHTML,
+						active:actSta,
+						obj:"phone"
+					},
+					success:function(data){
+						
+						showGritter('消息',data.msg);
+						
+						target.removeClass(ckColor[actSta]);
+						target.addClass(ckColor[data.data]);
+					},error: function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("初始化失败");
+					console.log(XMLHttpRequest.readyState);
+					console.log("");
+					console.log(XMLHttpRequest.status);
+					console.log("");
+					console.log(XMLHttpRequest.responseText);
+					}
+				});
+			}
+			
+		});
+	}
+	
+	function userDel(){
+		$("tbody button.btn").click(function(){
+			$.ajax({
+				type:"post",
+				url:"../adminUserlist.do",
+				dataType:"json",
+				async:true,
+				data:{
+					method:"delete",
+					username:$(this).parent().parent().children()[0].children[0].innerHTML
+				},
+				success:function(data){
+					if(data.status==200){
+						showGritter('消息',data.msg);
+						setTimeout(setPageData(1,10), 500);
+					}else if(data.status==400){
+						showGritter('消息',data.msg);
+					}else{
+						showGritter('消息',data.msg);
+					}
+				},error: function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("初始化失败");
+					console.log(XMLHttpRequest.readyState);
+					console.log("");
+					console.log(XMLHttpRequest.status);
+					console.log("");
+					console.log(XMLHttpRequest.responseText);
+				}
+			});
+		});
+	}
 	
 </script>
   
