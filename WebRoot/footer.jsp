@@ -37,7 +37,7 @@
 								<input type="checkbox" value="auto">记住密码
 							</div>
 							<div style="float: right">
-								<a href="#" class="text-right">忘记密码</a>
+								<a href="${pageContext.request.contextPath}/findPassword/verify.html" class="text-right">忘记密码</a>
 							</div>
 						</div>
 						<div class="form-group">

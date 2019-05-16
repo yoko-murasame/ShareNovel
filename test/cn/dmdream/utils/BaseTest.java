@@ -1,6 +1,7 @@
 package cn.dmdream.utils;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class BaseTest {
 
@@ -13,5 +14,10 @@ public class BaseTest {
 		
 		//测试随机数
 		System.out.println(new Random().nextInt(16) + 1);
+		
+		//测试随机校验码
+		UUID uuid = UUID.randomUUID();
+		String avticeCode = uuid.toString().replaceAll("-", "");
+		System.out.println(avticeCode);
 	}
 }

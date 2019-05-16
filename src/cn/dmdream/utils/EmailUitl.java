@@ -77,7 +77,7 @@ public class EmailUitl {
 	        //设置收件人
 	        message.setRecipient(Message.RecipientType.TO,new InternetAddress(to));//收件人
 	        //设置主题
-	        message.setSubject("欢迎使用xxx小说网,请继续以下步骤");
+	        message.setSubject("感谢您注册星象小说,请继续以下步骤");
 	        //设置邮件正文  第二个参数是邮件发送的类型
 	        String txt="<p>点击下面链接,激活邮箱.</p><a href='"+url+"'>"+url+"</a>";
 	        message.setContent(txt,"text/html;charset=UTF-8");
@@ -89,6 +89,42 @@ public class EmailUitl {
 	    }catch (MessagingException e) {
 	    	e.printStackTrace();
 	    	return -1;
+		}
+		return 1;	
+	}
+	/**
+	 * 发送找回密码邮件
+	 * @param to
+	 * @param url
+	 * @return
+	 */
+	public static int sendFindPasswordEmail(String username,String to,String url) {
+		Session session = Session.getInstance(prop, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(senderEmail,senderAuthCode);
+			}
+		});
+		Message message = new MimeMessage(session);
+		//设置发件人
+		try {
+			message.setFrom(new InternetAddress(senderEmail));
+			
+			//设置收件人
+			message.setRecipient(Message.RecipientType.TO,new InternetAddress(to));//收件人
+			//设置主题
+			message.setSubject("您好,"+username+" 你正在找回密码,请点击以下链接继续···");
+			//设置邮件正文  第二个参数是邮件发送的类型
+			String txt="<p>点击下面链接,重置密码.</p><a href='"+url+"'>"+url+"</a>";
+			message.setContent(txt,"text/html;charset=UTF-8");
+			//发送一封邮件
+			Transport transport = session.getTransport();
+			transport.connect(senderEmail,senderAuthCode);
+			Transport.send(message);
+			transport.close();
+		}catch (MessagingException e) {
+			e.printStackTrace();
+			return -1;
 		}
 		return 1;	
 	}

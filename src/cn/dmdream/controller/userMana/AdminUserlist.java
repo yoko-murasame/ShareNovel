@@ -163,7 +163,7 @@ public class AdminUserlist extends BaseServlet {
 			return null;
 		}
 		
-		SnUser snUser=new SnUser(null, username, password, nickName, nickPic, email, phone, emailActive, phoneActive, null);
+		SnUser snUser=new SnUser(null, username, password, nickName, nickPic, email, phone, emailActive, phoneActive,null, null);
 		System.out.println(snUser);
 		
 		boolean isok=snUserService.save(snUser);

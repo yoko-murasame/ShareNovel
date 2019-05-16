@@ -22,7 +22,7 @@ public class TestSnUserService {
 	@Test
 	public void testSave(){
 
-		SnUser snUser=new SnUser(1,"pbbpp","666","dsg","","","",111,111,"2019-1-1 13:23:55");
+		SnUser snUser=new SnUser(1,"pbbpp","666","dsg","","","",111,111,null,"2019-1-1 13:23:55");
 		boolean isok = snUserService.save(snUser);
 		Assert.assertEquals(true, isok);
 	}

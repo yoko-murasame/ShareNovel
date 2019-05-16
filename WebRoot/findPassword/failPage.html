@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
+		<script src="http://localhost:8080/ShareNovel/js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		
+		
+		<div class="container">
+			
+			<!--MainContent-->
+			<div id="main-content">
+				<div style="font-size: 1.4em;color: grey;text-align: center;margin-top: 15vh;">
+					<span>1.确认账号</span>
+					<span>&nbsp;&nbsp;——>&nbsp;&nbsp;</span>
+					<span style="color: #3498DB;">2.邮件校验失败,请重试或联系管理员! <span id="clockLeft">5</span>秒后将返回首页···</span>
+					<span>&nbsp;&nbsp;——>&nbsp;&nbsp;</span>
+					<span>3.重置成功</span>
+				</div>
+			</div>
+			
+		</div>
+		
+	</body>
+	<script type="text/javascript" charset="utf-8">
+		$(function(){
+			var i = 5;
+			var itv = setInterval(function() {
+				$("#clockLeft").html(i);
+				i--;
+			}, 1000);
+			setTimeout(function() {
+				clearInterval(itv);
+				window.location.href="localhost:8080/ShareNovel/index.jsp";
+			}, 5000);
+		})
+	</script>
+	
+</html>

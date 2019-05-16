@@ -22,10 +22,10 @@ public class SnUserDaoImpl implements SnUserDao {
 	@Override
 	public int save(SnUser snUser) {
 
-		String sql = "insert into sn_user values(null,?,?,?,?,?,?,?,?,?,null)";
+		String sql = "insert into sn_user values(null,?,?,?,?,?,?,?,?,?,?)";
 		int i = dbUtil.update(sql, snUser.getUserUsername(), snUser.getUserPassword(), snUser.getUserNickname(),
 				snUser.getUserNickpic(), snUser.getUserEmail(), snUser.getUserPhone(), snUser.getUserEmailActive(),
-				snUser.getUserPhoneActive(), snUser.getUserRegisttime());
+				snUser.getUserPhoneActive(), snUser.getUserRegisttime(),snUser.getUserCode());
 		return i;
 	}
 
@@ -41,10 +41,10 @@ public class SnUserDaoImpl implements SnUserDao {
 	public int update(SnUser snUser) {
 
 		String sql = "update sn_user set user_username=?,user_password=?,user_nickname=?,user_nickpic=?,user_email=?,user_phone=?,user_email_active=?,"
-				+ "user_phone_active=?,user_registtime=? where user_id=?";
+				+ "user_phone_active=?,user_registtime=?,user_code=? where user_id=?";
 		int i = dbUtil.update(sql, snUser.getUserUsername(), snUser.getUserPassword(), snUser.getUserNickname(),
 				snUser.getUserNickpic(), snUser.getUserEmail(), snUser.getUserPhone(), snUser.getUserEmailActive(),
-				snUser.getUserPhoneActive(), snUser.getUserRegisttime(), snUser.getUserId());
+				snUser.getUserPhoneActive(), snUser.getUserRegisttime(),snUser.getUserCode(), snUser.getUserId());
 		return i;
 	}
 
@@ -108,6 +108,7 @@ public class SnUserDaoImpl implements SnUserDao {
 				String user_phone = rs.getString("user_phone");
 				Integer user_email_active = rs.getInt("user_email_active");
 				Integer user_phone_active = rs.getInt("user_phone_active");
+				String user_code = rs.getString("user_code");
 				String user_registtime = rs.getString("user_registtime");
 
 				snUser.setUserId(user_id);
@@ -119,6 +120,7 @@ public class SnUserDaoImpl implements SnUserDao {
 				snUser.setUserPhone(user_phone);
 				snUser.setUserEmailActive(user_email_active);
 				snUser.setUserPhoneActive(user_phone_active);
+				snUser.setUserCode(user_code);
 				snUser.setUserRegisttime(user_registtime);
 				
 				list.add(snUser);

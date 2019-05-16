@@ -6,6 +6,7 @@ import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -20,6 +21,7 @@ import cn.dmdream.controller.base.BaseServlet;
 import cn.dmdream.entity.SnUser;
 import cn.dmdream.service.SnUserService;
 import cn.dmdream.service.impl.SnUserServiceImpl;
+import cn.dmdream.utils.EmailUitl;
 import cn.dmdream.utils.MailUtils;
 import cn.dmdream.vo.JsonMsg;
 
@@ -49,9 +51,22 @@ public class FindPassword extends BaseServlet {
 			}
 			
 			if(user!=null){
-				jsonMsg=JsonMsg.makeSuccess("用户信息已找到", user);
-				HttpSession session = request.getSession();
-				session.setAttribute("userInfo", user);
+				//发送激活邮件
+				UUID uuid = UUID.randomUUID();
+				String avticeCode = uuid.toString().replaceAll("-", "");
+				//保存激活码到数据库
+				user.setUserCode(avticeCode);
+				//更新用户信息
+				snUserService.update(user);
+				String url = "http://localhost:8080/ShareNovel/findPassword.do?method=verifyCode";
+				url = url + "&userId=" + user.getUserId() + "&userCode="+avticeCode;
+				//发送邮件
+				int isok = EmailUitl.sendFindPasswordEmail(user.getUserUsername(), user.getUserEmail(), url);
+				if(isok == 1){//发送成功
+					jsonMsg = JsonMsg.makeSuccess("用户信息已找到,密码重置邮件已发送!", null);
+				}else{
+					jsonMsg=JsonMsg.makeSuccess("用户信息已找到,邮件发送失败!", null);
+				}
 			}else{
 				jsonMsg=JsonMsg.makeFail("用户不存在", null);
 			}
@@ -103,91 +118,33 @@ public class FindPassword extends BaseServlet {
 		return null;
 	}
 	
-	public String sendEmail(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException{
-		String username=request.getParameter("username");
-		String password=request.getParameter("password");
-		String email=request.getParameter("email");
-		System.out.println("sendEmail->username:"+username);
-		
-		String emailMsg=getFixLenthString(10);
-		System.out.println(emailMsg);
-		
-		try {
-			MailUtils.sendConfirmMail(email, emailMsg);
-			HttpSession session=request.getSession();
-			session.setAttribute("password", password);
-			session.setAttribute("username", username);
-			session.setAttribute("code", emailMsg);
-		} catch (AddressException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (GeneralSecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		return null;
-	}
-
-	
-    /* 
-     * 返回长度为【strLength】的随机数，在前面补0 
-     */  
-    private static String getFixLenthString(int strLength) {  
-          
-        Random rm = new Random();  
-          
-        // 获得随机数  
-        double pross = (1 + rm.nextDouble()) * Math.pow(10, strLength);  
-      
-        // 将获得的获得随机数转化为字符串  
-        String fixLenthString = String.valueOf(pross);
-        // 返回固定的长度的随机数  
-        return fixLenthString.substring(2, strLength + 2);  
-    }  
-    
     
     public String confirm(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException{
-    	HttpSession session=request.getSession();
+    	
     	try {
-			String username=(String) session.getAttribute("username");
-			String password=(String) session.getAttribute("password");
-			String codeOri=(String) session.getAttribute("code");
+    		String username=request.getParameter("username");
+    		String password=request.getParameter("password");
+    		System.out.println("新的用户名是:"+username);
+    		System.out.println("新的密码是:"+password);
 			
-			System.out.println("username:"+username+", password:"+password+", codeOri"+codeOri);
-			
-			String codeRec=request.getParameter("code");
-			System.out.println("codeRec:"+codeRec);
-			
-			if(codeOri.equals(codeRec)){
-				SnUser snUser=snUserService.findByUsername(username);
-				System.out.println(snUser);
-				snUser.setUserPassword(password);
-				boolean isok=snUserService.update(snUser);
-				if(isok){
-					jsonMsg=JsonMsg.makeSuccess("密码修改成功", null);
-					session.invalidate();
-				}else{
-					jsonMsg=JsonMsg.makeFail("密码修改失败", null);
-				}
+    		SnUser snUser=snUserService.findByUsername(username);
+			System.out.println(snUser);
+			snUser.setUserPassword(password);
+			boolean isok=snUserService.update(snUser);
+			if(isok){
+				jsonMsg=JsonMsg.makeSuccess("密码修改成功", null);
+			}else{
+				jsonMsg=JsonMsg.makeFail("密码修改失败", null);
 			}
+    		
 		} catch (Exception e) {
 			jsonMsg=JsonMsg.makeError("密码修改异常", null);
 			e.printStackTrace();
 		}
-    	
-    	//序列化json
+		//序列化json
 		String writeValueAsString = objectMapper.writeValueAsString(jsonMsg);
-		//保存讯息到新的session
-		HttpSession session2=request.getSession();
-		session2.setAttribute("result", writeValueAsString);
-		
-    	
-    	return "findPassword/confirm.html";
+    	response.getWriter().write(writeValueAsString);
+    	return null;
     }
     
     public String conInit(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException{
@@ -211,5 +168,35 @@ public class FindPassword extends BaseServlet {
     	
     	return null;
     }
+
+    /**
+     * 找回密码邮件的校验
+     */
+	public String verifyCode(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			
+		String userId = req.getParameter("userId");
+		String userCode = req.getParameter("userCode");
+		
+		try {
+			SnUser userToRePass = snUserService.findById(Integer.parseInt(userId));
+			String code = userToRePass.getUserCode();
+			System.out.println("来自数据库的code："+code);
+			System.out.println("来自邮件的code："+ userCode);
+			if(code.equals(userCode)){
+				//校验成功
+				//放到session中
+				userToRePass.setUserPassword(null);
+				req.getSession().setAttribute("userInfo", userToRePass);
+
+				return "/findPassword/reset.html";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "/findPassword/failPage.html";
+	
+	}
+    
 	
 }

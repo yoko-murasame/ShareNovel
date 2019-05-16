@@ -12,13 +12,14 @@ public class SnUser {
 	private Integer userEmailActive;//默认0:未激活 1:已激活
 	private Integer userPhoneActive;//默认0:未激活 1:已激活
 	private String userRegisttime;//注册时间 数据库会自动生成 可以设置为null
+	private String userCode;//存放激活码
 	public SnUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public SnUser(Integer userId, String userUsername, String userPassword, String userNickname, String userNickpic,
-			String userEmail, String userPhone, Integer userEmailActive, Integer userPhoneActive,
-			String userRegisttime) {
+			String userEmail, String userPhone, Integer userEmailActive, Integer userPhoneActive, String userRegisttime,
+			String userCode) {
 		super();
 		this.userId = userId;
 		this.userUsername = userUsername;
@@ -30,6 +31,7 @@ public class SnUser {
 		this.userEmailActive = userEmailActive;
 		this.userPhoneActive = userPhoneActive;
 		this.userRegisttime = userRegisttime;
+		this.userCode = userCode;
 	}
 	public Integer getUserId() {
 		return userId;
@@ -91,12 +93,18 @@ public class SnUser {
 	public void setUserRegisttime(String userRegisttime) {
 		this.userRegisttime = userRegisttime;
 	}
+	public String getUserCode() {
+		return userCode;
+	}
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
 	@Override
 	public String toString() {
 		return "SnUser [userId=" + userId + ", userUsername=" + userUsername + ", userPassword=" + userPassword
 				+ ", userNickname=" + userNickname + ", userNickpic=" + userNickpic + ", userEmail=" + userEmail
 				+ ", userPhone=" + userPhone + ", userEmailActive=" + userEmailActive + ", userPhoneActive="
-				+ userPhoneActive + ", userRegisttime=" + userRegisttime + "]";
+				+ userPhoneActive + ", userRegisttime=" + userRegisttime + ", userCode=" + userCode + "]";
 	}
 	
 }
