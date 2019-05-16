@@ -22,7 +22,7 @@ public class SnUserDaoImpl implements SnUserDao {
 	@Override
 	public int save(SnUser snUser) {
 
-		String sql = "insert into sn_user values(null,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into sn_user values(null,?,?,?,?,?,?,?,?,?,null)";
 		int i = dbUtil.update(sql, snUser.getUserUsername(), snUser.getUserPassword(), snUser.getUserNickname(),
 				snUser.getUserNickpic(), snUser.getUserEmail(), snUser.getUserPhone(), snUser.getUserEmailActive(),
 				snUser.getUserPhoneActive(), snUser.getUserRegisttime());
@@ -165,5 +165,26 @@ public class SnUserDaoImpl implements SnUserDao {
 		List<SnUser> list = new ArrayList<SnUser>();
 		handleData(rs, list);
 		return list.size()>0?list:null;
+	}
+	/**
+	 * 根据用户总数量
+	 * @return
+	 */
+	@Override
+	public Integer count() {
+		int allCount = 0;
+
+		String sql = "select count(*) from sn_user";
+
+		ResultSet resultSet = dbUtil.query(sql);
+		try {
+			while (resultSet.next()) {
+				allCount = resultSet.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return allCount;
 	}
 }

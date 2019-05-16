@@ -92,5 +92,8 @@ public class SnUserServiceImpl implements SnUserService{
 		}
 		return null;
 	}
+	public Integer count() {
+		return snUserDao.count();
+	}
 
 }

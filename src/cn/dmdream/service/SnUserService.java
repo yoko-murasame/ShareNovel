@@ -1,5 +1,7 @@
 package cn.dmdream.service;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import cn.dmdream.entity.SnUser;
@@ -62,4 +64,9 @@ public interface SnUserService {
 	
 	public boolean countByUsername(String username);
 	public SnUser login(String name,String pwd);
+	/**
+	 * 根据用户总数量
+	 * @return
+	 */
+	public Integer count() ;
 }

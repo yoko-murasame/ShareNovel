@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+		<script src="../js/jquery-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body>
+		<div class="container">
+			
+			<!--MainContent-->
+			<div id="main-content">
+				<div style="font-size: 1.4em;color: grey;text-align: center;margin-top: 15vh;">
+					<span style="color: #3498DB;">1.确认账号</span>
+					<span>&nbsp;&nbsp;——>&nbsp;&nbsp;</span>
+					<span>2.重置密码</span>
+					<span>&nbsp;&nbsp;——>&nbsp;&nbsp;</span>
+					<span>3.重置成功</span>
+				</div>
+				<div class="form-group" style="margin-top: 15vh;">
+					<div class="col-xs-4"></div>
+					<form action="FindPassword.do?method=verify" method="post" class="col-xs-4">
+						<input type="text" class="form-control" name="inputInner" id="inputInner" value="" placeholder="请输入用户名或绑定的邮箱、手机号"/>
+						<p id="mes" style="color: red;"></p>
+						<fieldset id="save">
+							<input type="submit" value="确认" class="form-control btn-primary" style="margin-top: 0.8em;"/>
+						</fieldset>
+					</form>
+					<div class="col-xs-4"></div>
+				</div>
+			</div>
+			
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		$("#inputInner").on("input",function(){
+			console.log($("#inputInner").val().trim());
+			console.log($("#inputInner").val().trim()=="");
+			console.log($("#inputInner").val().trim().length);
+			if($("#inputInner").val().trim()==""){
+				$("#mes").html("内容不能为空");
+				$("#inputInner").parent().addClass("has-error");
+				$("#save").attr("disabled",'disabled');
+			}else{
+				$("#mes").html(null);
+				$("#inputInner").parent().removeClass("has-error");
+				$("#save").removeAttr("disabled");
+			}
+		});
+	</script>
+	
+</html>

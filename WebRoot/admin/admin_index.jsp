@@ -66,15 +66,16 @@
 					</p>
 					<h5 class="centered"> ${admin.adminUsername}</h5>
 					<li class="mt"><a  class="active"
-						href="${pageContext.request.contextPath }/admin/admin_index.jsp">
+						href="admin_index.jsp">
 							<i class="fa fa-dashboard"></i> <span>首页</span>
 					</a></li>
+
 
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-cogs"></i> <span>用户管理</span>
 					</a>
 						<ul class="sub">
-							<li><a href="admin_userlist.jsp">用户列表</a></li>
+							<li><a href="admin_userlist.html">用户列表</a></li>
 							<li><a href="admin_userupdate.jsp">用户修改</a></li>
 							<li><a href="admin_userfind.jsp">用户查询</a></li>
 						</ul></li>
@@ -372,6 +373,10 @@
 		<script src="${pageContext.request.contextPath}/js/admin/assets/js/sparkline-chart.js"></script>
 
 		<script type="text/javascript">
+
+		
+
+		
 			$(document).ready(function() {
 				var unique_id = $.gritter.add({
 					// (string | mandatory) the heading of the notification
