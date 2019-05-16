@@ -25,7 +25,7 @@
 						<input type="text" class="form-control" name="inputInner" id="inputInner" value="" placeholder="请输入用户名或绑定的邮箱、手机号"/>
 						<p id="mes" style="color: red;"></p>
 						<fieldset id="save">
-							<input type="submit" value="确认" class="form-control btn-primary" style="margin-top: 0.8em;"/>
+							<input type="button" value="确认" class="form-control btn-primary" style="margin-top: 0.8em;"/>
 						</fieldset>
 					</form>
 					<div class="col-xs-4"></div>
@@ -37,9 +37,6 @@
 	</body>
 	<script type="text/javascript">
 		$("#inputInner").on("input",function(){
-			console.log($("#inputInner").val().trim());
-			console.log($("#inputInner").val().trim()=="");
-			console.log($("#inputInner").val().trim().length);
 			if($("#inputInner").val().trim()==""){
 				$("#mes").html("内容不能为空");
 				$("#inputInner").parent().addClass("has-error");
@@ -48,6 +45,41 @@
 				$("#mes").html(null);
 				$("#inputInner").parent().removeClass("has-error");
 				$("#save").removeAttr("disabled");
+			}
+		});
+		
+		console.log($("#save input"));
+		$("#save input").click(function(){
+			if($("#inputInner").val().trim()==""){
+				$("#mes").html("内容不能为空");
+				$("#inputInner").parent().addClass("has-error");
+				$("#save").attr("disabled",'disabled');
+			}else{
+				$.ajax({
+					type:"post",
+					url:"../findPassword.do",
+					data:{
+						method:"ckEx",
+						inputInner:$("#inputInner").val()
+					},
+					dataType:"json",
+					async:true,
+					success:function(data){
+						if(data.status==200){
+							window.location.href="reset.html";
+						}else{
+							$("#mes").html("该用户不存在");
+						}
+						
+					},error: function(XMLHttpRequest, textStatus, errorThrown) {
+						alert("数据回传失败");
+						console.log(XMLHttpRequest.readyState);
+						console.log("");
+						console.log(XMLHttpRequest.status);
+						console.log("");
+						console.log(XMLHttpRequest.responseText);
+					}
+				});	
 			}
 		});
 	</script>

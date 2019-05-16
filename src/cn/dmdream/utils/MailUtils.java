@@ -96,6 +96,44 @@ public class MailUtils {
         transport.close();
 
 	}
+	
+	public static void sendConfirmMail(String email, String emailMsg)
+			throws AddressException, MessagingException, GeneralSecurityException {
+		/*
+		 * 使用QQ邮箱的设置
+		 */
+		Properties props = new Properties();
+		// 开启debug调试
+		props.setProperty("mail.debug", "true");
+		// 发送服务器需要身份验证
+		props.setProperty("mail.smtp.auth", "true");
+		// 设置邮件服务器主机名
+		props.setProperty("mail.host", "smtp.qq.com");
+		// 发送邮件协议名称
+		props.setProperty("mail.transport.protocol", "smtp");
+
+		MailSSLSocketFactory sf = new MailSSLSocketFactory();
+		sf.setTrustAllHosts(true);
+		props.put("mail.smtp.ssl.enable", "true");
+		props.put("mail.smtp.ssl.socketFactory", sf);
+		
+		Session session = Session.getInstance(props);
+        
+        Message msg = new MimeMessage(session);
+        msg.setSubject("星象小说的找回密码邮件");
+		String url = "http://localhost:8080/ShareNovel/findPassword.do?method=confirm&code=" + emailMsg;
+		String content = "<h1>来自星象小说的找回密码邮件!确认请点击以下链接!</h1><h3><a href='" + url + "'>" + url + "</a></h3>";
+		// 设置邮件内容
+		msg.setContent(content, "text/html;charset=utf-8");
+        
+        msg.setFrom(new InternetAddress("1289127381@qq.com"));
+     
+        Transport transport = session.getTransport();
+        transport.connect("smtp.qq.com", "1289127381@qq.com", "ucrjifvwurpwgeic");
+     
+        transport.sendMessage(msg, new Address[] { new InternetAddress(email) });
+        transport.close();
+	}
 
 	public static void main(String[] args) throws AddressException, MessagingException, GeneralSecurityException {
 		MailUtils.sendMail("kuluseky@icloud.com", "123456789");
