@@ -83,8 +83,8 @@ public class SnUserDaoImpl implements SnUserDao {
 	@Override
 	public SnUser findByUsername(String username) {
 
-		String sql = "select *from sn_user where user_username=?";
-		ResultSet rs = dbUtil.query(sql, username);
+		String sql = "select * from sn_user where user_username like ?";
+		ResultSet rs = dbUtil.query(sql, "%"+username+"%");
 		List<SnUser> list = new ArrayList<SnUser>();
 		handleData(rs, list);
 		return list.size()>0?list.get(0):null;

@@ -147,6 +147,22 @@ public class AdminUserlist extends BaseServlet {
 		Integer emailActive=Integer.parseInt(request.getParameter("emailActive"));
 		Integer phoneActive=Integer.parseInt(request.getParameter("phoneActive"));
 		
+		//检查用户名是否重复
+		SnUser snUser2=snUserService.findByUsername(username);
+		System.out.println("开始检查");
+		if(snUser2!=null){
+			jsonMsg=JsonMsg.makeFail("该用户名已经存在", 0);
+			String writeValueAsString = objectMapper.writeValueAsString(jsonMsg);
+			//返回
+			response.setContentType("text/html;charset=utf-8");  
+			response.setHeader("cache-control", "no-cache");
+			PrintWriter out = response.getWriter();
+			out.print(writeValueAsString);
+			out.flush();
+			out.close();
+			return null;
+		}
+		
 		SnUser snUser=new SnUser(null, username, password, nickName, nickPic, email, phone, emailActive, phoneActive, null);
 		System.out.println(snUser);
 		

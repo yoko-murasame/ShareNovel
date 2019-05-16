@@ -286,7 +286,7 @@
 					</p>
 					<h5 class="centered"> ${admin.adminUsername}</h5>
 					<li class="mt"><a 
-						href="${pageContext.request.contextPath }/admin/admin_index.jsp">
+						href="${pageContext.request.contextPath }/admin/admin_index.html">
 							<i class="fa fa-dashboard"></i> <span>首页</span>
 					</a></li>
 
@@ -294,18 +294,16 @@
 							class="fa fa-cogs"></i> <span>用户管理</span>
 					</a>
 						<ul class="sub">
-							<li><a href="admin_userlist.jsp">用户列表</a></li>
-							<li><a href="admin_userupdate.jsp">用户修改</a></li>
-							<li><a href="admin_userfind.jsp">用户查询</a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/admin_userlist.html">用户列表</a></li>
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;">
 							<i class="fa fa-book"></i> <span>小说管理</span>
 					</a>
 						<ul class="sub">
-							<li><a
+							<li ><a
 								href="${pageContext.request.contextPath}/adminNovel.do?method=toNovelList">小说列表</a>
 							</li>
-							<li><a href="admin_noveadd.jsp">章节管理</a></li>
+							<!-- <li><a href="admin_noveadd.jsp">章节管理</a></li> -->
 						</ul></li>
 					<li class="sub-menu"><a class="active" href="javascript:;"> <i
 							class="fa fa-tasks"></i> <span>分类管理</span>
