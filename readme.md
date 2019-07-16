@@ -2,6 +2,7 @@
 
 # 星象小说
 搜索服务见 https://github.com/yoko-murasame/ShareNovel_Search
+在线演示视频：http://img.dmdream.cn/starnovel.mp4
 ## 前言
 
 请不要用于商业用途
