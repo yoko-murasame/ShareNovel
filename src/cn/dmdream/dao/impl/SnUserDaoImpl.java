@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.rowset.CachedRowSet;
@@ -21,11 +22,13 @@ public class SnUserDaoImpl implements SnUserDao {
 
 	@Override
 	public int save(SnUser snUser) {
+		
+		Date date = new Date();
 
 		String sql = "insert into sn_user values(null,?,?,?,?,?,?,?,?,?,?)";
 		int i = dbUtil.update(sql, snUser.getUserUsername(), snUser.getUserPassword(), snUser.getUserNickname(),
 				snUser.getUserNickpic(), snUser.getUserEmail(), snUser.getUserPhone(), snUser.getUserEmailActive(),
-				snUser.getUserPhoneActive(), snUser.getUserRegisttime(),snUser.getUserCode());
+				snUser.getUserPhoneActive(), date,snUser.getUserCode());
 		return i;
 	}
 
@@ -140,7 +143,7 @@ public class SnUserDaoImpl implements SnUserDao {
         String sql="select count(*) from sn_user where user_username=?"	;
         dbUtil=new DbUtil();
         CachedRowSet rs = dbUtil.query(sql, username);
-        int count=1;
+        int count=0;
         try {
 			while(rs.next()){
 				count=rs.getInt(1);

@@ -69,6 +69,13 @@ public interface SnCollectionDao {
 	public List<SnCollection> findByNovelByPage(SnNovel novel , int pageSize , int page);
 	
 	/**
+	 * wxw专用查询书籍的所有收藏用户
+	 * @param user
+	 * @return
+	 */
+	public List<SnCollection> wxwfindByUserByPage(SnUser user ,int pageSize ,int page);
+	
+	/**
 	 * 统计书籍的收藏人数量
 	 * @param novel
 	 * @return

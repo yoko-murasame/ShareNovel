@@ -12,6 +12,7 @@
 	href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
 <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
 <script src="js/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/js/admin/admin-common.js"></script>
 <script type="text/javascript">
 	var chkusername = false;
 	var chkpassword = false;
@@ -20,7 +21,7 @@
 
 
 	$(function() {
-		$("#username").blur(function() {
+		$("#username").change(function() {
 			var username = $("#username").val();
 			//校验用户名长度
 			if (username.length < 6 || username.length > 18) {
@@ -28,8 +29,7 @@
 				chkusername = false;
 				return;
 			} else {
-				$("usernametip").html();
-				chkusername = false;
+				$("usernametip").html("");
 			}
 			//alert(username);
 			//把用户名异步穿个服务器，进行重复校验
@@ -37,7 +37,7 @@
 				data : {
 					"username" : username
 				},
-				url : "userRegister.do?method=userCheckName",
+				url : "user.do?method=userCheckName",
 				type : "POST",
 				success : function(data) {
 					console.log(data);
@@ -85,11 +85,30 @@
 	
 		if($("#chkagree").prop("checked")){
 			if (chkusername && chkpassword && cpassword) {
-			return true;
-		}else{
-			alert("请按照要求填写相应消息！");
-			return false;
-		}
+				var formObj = {};
+				formObj.username = $("#username").val();
+				formObj.password = $("#password").val();
+				formObj.nickname = $("#nickname").val();
+				formObj.email = $("#email").val() + $("#email-last").val();
+				formObj.phone = $("#phone").val();
+				console.log(formObj)
+			
+				//发送请求注册
+				var promise = getPostAjaxPromise("user.do?method=userSave",formObj);
+				promise.then(function(res) {
+					console.log(res);
+					if(res.status == 200){
+						window.location.href = "${pageContext.request.contextPath}/userEmailWatingPage.html";
+					}else{
+						alert(res.msg);
+					}
+				})
+				
+				return false;
+			}else{
+				alert("请按照要求填写相应消息！");
+				return false;
+			}
 		}else{
 			alert("请同意用户注册协议！");
 			return false;
@@ -110,7 +129,7 @@
 			</div>
 			<div>
 				<form class="form-horizontal"
-					action="userRegister.do?method=userSave" method="post"
+					action="user.do?method=userSave" method="post"
 					onsubmit="return check()">
 					<div class="form-group">
 						<label for="inputusername"
@@ -163,22 +182,6 @@
 									<option value="@sogou.com">@sogou.com</option>
 									<option value="">自填</option>
 								</select>
-								<!-- 							<button type="button" class="btn btn-default dropdown-toggle"
-								data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false">
-								@qq.com <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu dropdown-menu-right">
-								<li value="@qq.com"><a href="#">@qq.com</a></li>
-								<li value="@126.com"><a href="#">@126.com</a></li>
-								<li value="@163.com"><a href="#">@163.com</a></li>
-								<li value="@sina.com"><a href="#">@sina.com</a></li>
-								<li value="@sohu.com"><a href="#">@sohu.com</a></li>
-								<li value="@yahoo.com.cn"><a href="#">@yahoo.com.cn</a></li>
-								<li value="@sogou.com"><a href="#">@sogou.com</a></li>
-								<li role="separator" class="divider"></li>
-								<li value=""><a href="#">自填</a></li>
-							</ul> -->
 							</div>
 							<!-- /btn-group -->
 						</div>

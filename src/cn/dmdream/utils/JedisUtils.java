@@ -26,7 +26,7 @@ public class JedisUtils {
 	//获取连接的方法
 	public static Jedis getJedis(){
 		Jedis jedis = pool.getResource();
-		jedis.auth("123123");
+		jedis.auth("s18334435420");
 		return jedis;
 	}
 	

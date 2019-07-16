@@ -74,4 +74,11 @@ public interface SnCollectionService {
 	 * @return
 	 */
 	public int countByNovel(SnNovel novel);
+	
+	/**
+	 * wxw专用查询用户的所有收藏书籍 可得到最新阅读记录
+	 * @param user
+	 * @return
+	 */
+	public List<SnCollection> wxwfindByUserByPage(SnUser user ,int pageSize ,int page);
 }

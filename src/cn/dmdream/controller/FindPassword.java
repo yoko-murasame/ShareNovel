@@ -58,7 +58,7 @@ public class FindPassword extends BaseServlet {
 				user.setUserCode(avticeCode);
 				//更新用户信息
 				snUserService.update(user);
-				String url = "http://localhost:8080/ShareNovel/findPassword.do?method=verifyCode";
+				String url = "http://novel.dmdream.cn:8070/findPassword.do?method=verifyCode";
 				url = url + "&userId=" + user.getUserId() + "&userCode="+avticeCode;
 				//发送邮件
 				int isok = EmailUitl.sendFindPasswordEmail(user.getUserUsername(), user.getUserEmail(), url);

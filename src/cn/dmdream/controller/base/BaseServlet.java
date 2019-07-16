@@ -14,7 +14,6 @@ public class BaseServlet extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		// localhost:8080/store/productServlet?method=addProduct
 
 		String method = req.getParameter("method");
 
@@ -43,7 +42,7 @@ public class BaseServlet extends HttpServlet {
 				//访问不到方法时跳转
 				req.getRequestDispatcher("/admin/login.jsp").forward(req, resp);
 			}else{
-				req.getRequestDispatcher("/login.jsp").forward(req, resp);
+				req.getRequestDispatcher("/index.jsp").forward(req, resp);
 			}
 		}
 

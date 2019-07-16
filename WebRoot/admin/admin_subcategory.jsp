@@ -281,12 +281,12 @@
 				<ul class="sidebar-menu" id="nav-accordion">
 
 					<p class="centered">
-						<a href="#"><img src="${admin.adminNickpic}"
+						<a href="${pageContext.request.contextPath }/admin/admin_index.jsp"><img src="${admin.adminNickpic}"
 							class="img-rounded" width="100"></a>
 					</p>
 					<h5 class="centered"> ${admin.adminUsername}</h5>
 					<li class="mt"><a 
-						href="${pageContext.request.contextPath }/admin/admin_index.html">
+						href="${pageContext.request.contextPath }/admin/admin_index.jsp">
 							<i class="fa fa-dashboard"></i> <span>首页</span>
 					</a></li>
 

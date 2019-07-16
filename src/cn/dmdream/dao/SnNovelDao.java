@@ -103,6 +103,28 @@ public interface SnNovelDao {
 	 */
 	public List<SnNovel> queryByCategory(int cid);
 	
+	
+	/**
+	 * 根据小说上传者查询
+	 * @param userId
+	 * @return
+	 */
+	public List<SnNovel> findByShareUserId(Integer userId);
+	
+	/**
+	 * 根据小说上传者分页查询
+	 * @param userId, pageSize, page
+	 * @return
+	 */
+	public List<SnNovel> findByShareUserIdByPage(Integer userId, int pageSize , int page);
+	
+	/**
+	 * 根据小说上传者计数
+	 * @param userId
+	 * @return
+	 */
+	public Integer findCountByShareUserId(Integer userId);	
+	
 	public Integer findCount();
 
 	public Integer findCountByStatus(Integer status);

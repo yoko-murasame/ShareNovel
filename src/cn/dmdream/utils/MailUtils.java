@@ -4,8 +4,10 @@ import java.security.GeneralSecurityException;
 import java.util.Properties;
 
 import javax.mail.Address;
+import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
@@ -52,7 +54,6 @@ public class MailUtils {
 		message.setSubject("用户激活");
 		// message.setText("这是一封激活邮件，请<a href='#'>点击</a>");
 
-		String url = "http://localhost:8080/store_v5/UserServlet?method=active&code=" + emailMsg;
 		String content = "<h1>来自购物天堂的激活邮件!激活请点击以下链接!</h1><h3><a href='" + url + "'>" + url + "</a></h3>";
 		// 设置邮件内容
 		message.setContent(content, "text/html;charset=utf-8");
@@ -82,7 +83,7 @@ public class MailUtils {
         
         Message msg = new MimeMessage(session);
         msg.setSubject("星象小说的注册验证邮件");
-		String url = "http://localhost:8080/ShareNovel/UserServlet?method=active&code=" + emailMsg;
+		String url = "http://novel.dmdream.cn:8070/UserServlet?method=active&code=" + emailMsg;
 		String content = "<h1>来自星象小说的激活邮件!激活请点击以下链接!</h1><h3><a href='" + url + "'>" + url + "</a></h3>";
 		// 设置邮件内容
 		msg.setContent(content, "text/html;charset=utf-8");
@@ -121,7 +122,7 @@ public class MailUtils {
         
         Message msg = new MimeMessage(session);
         msg.setSubject("星象小说的找回密码邮件");
-		String url = "http://localhost:8080/ShareNovel/findPassword.do?method=confirm&code=" + emailMsg;
+		String url = "http://novel.dmdream.cn:8070/findPassword.do?method=confirm&code=" + emailMsg;
 		String content = "<h1>来自星象小说的找回密码邮件!确认请点击以下链接!</h1><h3><a href='" + url + "'>" + url + "</a></h3>";
 		// 设置邮件内容
 		msg.setContent(content, "text/html;charset=utf-8");
@@ -134,8 +135,55 @@ public class MailUtils {
         transport.sendMessage(msg, new Address[] { new InternetAddress(email) });
         transport.close();
 	}
+	
+	
+	public static void AuthUserEmail(String to,String url) {
+		
+		/*
+		 * 使用QQ邮箱的设置
+		 */
+		Properties props = new Properties();
+		// 开启debug调试
+		props.setProperty("mail.debug", "true");
+		// 发送服务器需要身份验证
+		props.setProperty("mail.smtp.auth", "true");
+		// 设置邮件服务器主机名
+		props.setProperty("mail.host", "smtp.qq.com");
+		// 发送邮件协议名称
+		props.setProperty("mail.transport.protocol", "smtp");
+
+		try {
+			MailSSLSocketFactory sf = new MailSSLSocketFactory();
+			sf.setTrustAllHosts(true);
+			props.put("mail.smtp.ssl.enable", "true");
+			props.put("mail.smtp.ssl.socketFactory", sf);
+			
+			Session session = Session.getInstance(props);
+			
+			Message msg = new MimeMessage(session);
+			msg.setSubject("感谢您注册星象小说,请继续以下步骤");
+			String content = "<h1>来自星象小说的激活邮件!激活请点击以下链接!</h1><h3><a href='" + url + "'>" + url + "</a></h3>";
+			// 设置邮件内容
+			msg.setContent(content, "text/html;charset=utf-8");
+			
+			msg.setFrom(new InternetAddress("kuluseky@qq.com"));
+    
+			Transport transport = session.getTransport();
+			transport.connect("smtp.qq.com", "kuluseky@qq.com", "ntjpvjfdnsxjbbib");
+    
+			transport.sendMessage(msg, new Address[] { new InternetAddress(to) });
+			transport.close();
+		} catch (GeneralSecurityException | MessagingException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	public static void main(String[] args) throws AddressException, MessagingException, GeneralSecurityException {
-		MailUtils.sendMail("kuluseky@icloud.com", "123456789");
+//		MailUtils.sendMail("kuluseky@icloud.com", "123456789");
+		String url = "novel.dmdream.cn:8070/user.do?method=activeCode"
+				+ "&username=" + "123" + "&activeCode=" + "123";
+		//发送邮件
+		MailUtils.AuthUserEmail("kuluseky@qq.com", url);
 	}
 }

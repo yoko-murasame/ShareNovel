@@ -186,15 +186,15 @@
 
 	function newestNovelload(data) {
 		for (var i = 0; i < data.length; i++) {
-			var line = "<tr><td><a href='${pageContext.request.contextPath}/novelinfo.jsp?nid=" + data[i].novelId + "'>" + data[i].novelTitle + "</td><td>" + data[i].novelAuthor + "</td></tr>";
+			var line = "<tr><td><a href='${pageContext.request.contextPath}/userNovel.do?method=toNovelDetail&nid=" + data[i].novelId + "'>" + data[i].novelTitle + "</td><td>" + data[i].novelAuthor + "</td></tr>";
 			console.log(line);
 			$("#newnoveltable").append(line);
 		}
 	}
 	function newestChapterload(data) {
 		for (var i = 0; i < data.length; i++) {
-			var line = "<tr><td><a href='${pageContext.request.contextPath}/novelinfo.jsp?nid=" + data[i].snNovel.novelId + "'>" + data[i].snNovel.novelTitle + "</a></td>"
-				+ "<td><a href='${pageContext.request.contextPath}/chapter.do?method=readOnline&cid=" + data[i].chapterId + "'>" + data[i].chapterTitle + " </a></td>"
+			var line = "<tr><td><a href='${pageContext.request.contextPath}/userNovel.do?method=toNovelDetail&nid=" + data[i].snNovel.novelId + "'>" + data[i].snNovel.novelTitle + "</a></td>"
+				+ "<td><a href='${pageContext.request.contextPath}/readonline.do?method=readOnline&cid=" + data[i].chapterId + "'>" + data[i].chapterTitle + " </a></td>"
 				+ "<td><a href='#'>" + data[i].snNovel.novelAuthor + "</a></td>"
 				+ "<td><a href='#'>" + data[i].chapterUpdatetime + "</a></td></tr>	";
 			console.log(line);

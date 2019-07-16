@@ -382,7 +382,7 @@
 					// (string | mandatory) the text inside the notification
 					text: '开始你的管理之路吧',
 					// (string | optional) the image to display on the left
-					image: 'http://193.112.41.124/group1/M00/00/00/rBAABVzNhFKAXNXiAAEviRJSH0M870.jpg',
+					image: 'http://193.112.41.124/group1/M00/00/00/rBAABVzqIliAU_uOAAEvicchIW0061.jpg',
 					// (bool | optional) if you want it to fade out on its own or just sit there
 					sticky: true,
 					// (int | optional) the time you want it to be alive for before fading out

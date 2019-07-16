@@ -18,7 +18,8 @@ public class TestFastDFS {
 	    //String pic = "C:\\Users\\KuluS\\Desktop\\网游之邪龙逆天.txt";
 	    //String pic = "C:\\Users\\KuluS\\Desktop\\网游之邪龙逆天.jpg";
 	    //String pic = "C:\\Users\\KuluS\\Desktop\\逆天邪神.jpg";
-	    String pic = "C:\\Users\\KuluS\\Desktop\\元尊.jpg";
+	    //String pic = "C:\\Users\\KuluS\\Desktop\\元尊.jpg";
+	    String pic = "F:\\我的图片\\阿比.png";
 
 	    //使用工具类进行上传
 	    //创建工具类对象
@@ -42,6 +43,11 @@ public class TestFastDFS {
 		//http://193.112.41.124/group1/M00/00/00/rBAABVzRHPyAVKeEAAGCMX8MHUQ669.jpg
 		//元尊.jpg
 		//http://193.112.41.124/group1/M00/00/00/rBAABVzRHTSAWjEEAAKvF_lV0sc827.jpg
+		
+		//abi
+		//http://193.112.41.124/group1/M00/00/00/rBAABVzqY7eAbvWeABWdTa27nWw448.png
+		//214
+		//http://193.112.41.124/group1/M00/00/00/rBAABVzqIliAU_uOAAEvicchIW0061.jpg
 		
 		System.out.println(url);
 	}

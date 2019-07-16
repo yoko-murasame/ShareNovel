@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,8 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<link rel="stylesheet" href="../js/myPagination/myPagination.css" />
-		<script type="text/javascript" src="../js/myPagination/myPagination.js"></script>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/js/myPagination/myPagination.css" />
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/myPagination/myPagination.js"></script>
 		<style>
 			* {
 				margin: 0;
@@ -46,7 +47,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			.book_image {
 				width: 100px;
 				height: 110px;
-				background-image: url("../img/180.jpg");
 				background-repeat: no-repeat;
 				background-size: 100px 110px;
 				/*border: solid coral 1px;*/
@@ -76,36 +76,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<body>
 		<div id="main_container">
 			<div id="container">
+			    <c:forEach items="${myUploadPageModel.list }" var="snNovel">
+			        <div class='book' id='${snNovel.novelId}' name='${snNovel.novelTitle}'>
+			            <a href="${pageContext.request.contextPath}/usercenter.do?method=toUpdateNovelJsp&novelId=${snNovel.novelId}">
+			                <div class='book_image' style="background-image: url('${snNovel.novelCover}')"></div>
+			                <div class='book_name'>${snNovel.novelTitle}</div>
+			            </a>
+			            <div class='book_btn_release'>
+			                <button class='btn' onclick="window.location.href='${pageContext.request.contextPath}/usercenter.do?method=toUpdateChapJsp&novelId=${snNovel.novelId}'">新增章节</button>
+			            </div>
+			        </div>
+			    </c:forEach>
 			</div>
 			<div style="float: left;width: 800px;height: 58px;">
 			<div id="pagination" class="pagination" style="text-align: center;"></div>
 			</div>
 		</div>
 		<script type="text/javascript">
-		    var count = 13;
-			var length = Math.ceil(count / 5);
-			var container=document.getElementById('container');
-			for(var i = 0; i < count; i++) {
-			    container.innerHTML+="<div class='book'><a href='myuploadjsp/updatenovel.jsp'><div class='book_image'></div><div class='book_name'>斗破苍穹</div></a><div class='book_btn_release'><button class='btn'>新增章节</button></div></div>";
-			}
-		</script>
-		<script type="text/javascript">
 			window.onload = function() {
 				new Page({
 					id: 'pagination',
-					curPage: 1, //初始页码
-					pageTotal: 50, //总页数
-					pageAmount: 10, //每页多少条
-					dataTotal: 500, //总共多少条数据
+					curPage: ${myUploadPageModel.currPage}, //初始页码
+					pageTotal: ${myUploadPageModel.totalPage}, //总页数
+					pageAmount: ${myUploadPageModel.pageSize}, //每页多少条
+					dataTotal: ${myUploadPageModel.totalCount}, //总共多少条数据
 					pageSize: 5, //可选,分页个数
 					showPageTotalFlag: true, //是否显示数据统计
 					showSkipInputFlag: true, //是否支持跳转
 					getPage: function(pagenum) {
-                        //获取当前页数
-                        console.log(pagenum);
+                        //获取当前页数跳转
+                       window.location.href = "${pageContext.request.contextPath}/usercenter.do?method=toMyUploadJsp&curPage="+this.curPage + "&pageSize="+this.pageAmount;
                     }
 				})
 			}
+
 		</script>
 	</body>
 

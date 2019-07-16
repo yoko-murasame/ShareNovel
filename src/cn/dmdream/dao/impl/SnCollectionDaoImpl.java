@@ -37,7 +37,7 @@ public class SnCollectionDaoImpl implements SnCollectionDao {
 	 * @return
 	 */
 	public int delete(SnCollection collection) {
-		String sql = "delete from sn_collection where collection_id = ?";
+		String sql = "delete from sn_collection where collect_id = ?";
 		int i = dbUtil.update(sql, collection.getCollectId());
 		return i;
 	};
@@ -49,7 +49,7 @@ public class SnCollectionDaoImpl implements SnCollectionDao {
 	 * @return
 	 */
 	public int delete(Integer id) {
-		String sql = "delete from sn_collection where collection_id = ?";
+		String sql = "delete from sn_collection where collect_id = ?";
 		int i = dbUtil.update(sql, id);
 		return i;
 	};
@@ -109,6 +109,20 @@ public class SnCollectionDaoImpl implements SnCollectionDao {
 		handleData(rs, list);
 		return list.size() > 0 ? list : null;
 	};
+	
+	/**
+	 * wxw专用查询用户的所有收藏书籍 可得到最新阅读记录
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public List<SnCollection> wxwfindByUserByPage(SnUser user, int pageSize, int page) {
+		String sql = "select sn_collection.*,sn_novel.novel_title,sn_novel.novel_cover,sn_chapter.chapter_title from sn_collection,sn_novel,sn_chapter where sn_collection.collect_novelid = sn_novel.novel_id and sn_collection.collect_chapter_history = sn_chapter.chapter_id and sn_collection.collect_userid = ? group by collect_novelid limit ?,?";
+		ResultSet rs = dbUtil.query(sql, user.getUserId(), (page - 1) * pageSize, pageSize);
+		List<SnCollection> list = new ArrayList<SnCollection>();
+		wxwhandleData(rs, list);
+		return list.size() > 0 ? list : null;
+	};
 
 	/**
 	 * 查询书籍的所有收藏用户
@@ -162,6 +176,40 @@ public class SnCollectionDaoImpl implements SnCollectionDao {
 				// 封装chapterHistory对象id
 				SnChapter snChapter = new SnChapter();
 				snChapter.setChapterId(rs.getInt("collect_chapter_history"));
+				// 封装
+				SnCollection collection = new SnCollection();
+				collection.setCollectId(rs.getInt("collect_id"));
+				collection.setCollectUser(collectUser);
+				collection.setCollectNovel(snNovel);
+				collection.setCollectChapterHistory(snChapter);
+				list.add(collection);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	};
+	
+	/**
+	 * wxw专属数据封装
+	 * 
+	 * @param rs
+	 * @param list
+	 */
+	private void wxwhandleData(ResultSet rs, List<SnCollection> list) {
+		try {
+			while (rs.next()) {
+				// 封装user对象id
+				SnUser collectUser = new SnUser();
+				collectUser.setUserId(rs.getInt("collect_userid"));
+				// 封装novel对象id和title
+				SnNovel snNovel = new SnNovel();
+				snNovel.setNovelId(rs.getInt("collect_novelid"));
+				snNovel.setNovelTitle(rs.getString("novel_title"));
+				snNovel.setNovelCover(rs.getString("novel_cover"));
+				// 封装chapterHistory对象id
+				SnChapter snChapter = new SnChapter();
+				snChapter.setChapterId(rs.getInt("collect_chapter_history"));
+				snChapter.setChapterTitle(rs.getString("chapter_title"));
 				// 封装
 				SnCollection collection = new SnCollection();
 				collection.setCollectId(rs.getInt("collect_id"));

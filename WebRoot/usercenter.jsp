@@ -37,10 +37,11 @@
 				<ul class="list-group" id="fc">
 					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/userinfo.jsp' class="list-group-item active">个人信息</a>
 					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/changepwd.jsp' class="list-group-item">修改密码</a>
-					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/uploadnovel.jsp' class="list-group-item">上传小说</a>
-					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/myupload.jsp' class="list-group-item">我的上传</a>
-					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenterjsp/mybookshelf.jsp' class="list-group-item">我的书架</a>
+					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='${pageContext.request.contextPath}/usercenterjsp/addnovel.jsp' class="list-group-item">上传小说</a>
+					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='${pageContext.request.contextPath}/usercenter.do?method=toMyUploadJsp' class="list-group-item">我的上传</a>
+					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='${pageContext.request.contextPath}/usercenter.do?method=toMyBookShelfJsp' class="list-group-item">我的书架</a>
 					<a href="javascript:void(0)" onclick="setiframe(this)" iframeurl='usercenter.do?method=queryComments&page=1' class="list-group-item">我的评价</a>
+					<a href="index.jsp" class="list-group-item">返回首页</a>
 				</u>
 			</div>
 			<div class="col-lg-10">

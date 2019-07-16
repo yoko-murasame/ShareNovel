@@ -163,7 +163,13 @@ public class AdminNovelServlet extends BaseServlet {
 					category.setCatId(Integer.parseInt(novelCategory));
 					novel.setSnCategory(category);
 					novel.setNovelIsEnd(Integer.parseInt(novelIsEnd));
-					novel.setNovelCheck(Integer.parseInt(novelCheck));
+					//设置状态,判断是用户进来的还是管理员进来的
+					if(novelCheck == null){
+						//用户进来的
+						novel.setNovelCheck(0);
+					}else{
+						novel.setNovelCheck(Integer.parseInt(novelCheck));
+					}
 					// download
 					Map<String, String> urlMap = new HashMap<String, String>();
 					urlMap.put("url", "" + novelDownloadurl);

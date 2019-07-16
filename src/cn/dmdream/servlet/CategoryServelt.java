@@ -19,6 +19,10 @@ import cn.dmdream.service.impl.SnNovelServiceImpl;
 import cn.dmdream.vo.JsonMsg;
 
 public class CategoryServelt extends BaseServlet{
+	
+	private SnCategoryService categoryService = new SnCategoryServiceImpl();
+	ObjectMapper objectMapper = new ObjectMapper();
+	JsonMsg jsonMsg = null;
 	//默认方法
 	public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		return null;
@@ -53,6 +57,26 @@ public class CategoryServelt extends BaseServlet{
 		JsonMsg msg=JsonMsg.makeSuccess("1", list);
 		String jsonstr=mapper.writeValueAsString(msg);
 		resp.getWriter().print(jsonstr);
+		return null;
+	}
+	
+	//adminNovellist页面根据id异步获取所有Category
+	public String findAllCatById(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		try {
+			String catId = req.getParameter("catId");
+			List<SnCategory> allCats = categoryService.findByParentId(Integer.parseInt(catId));
+			if(allCats != null){
+				jsonMsg = JsonMsg.makeSuccess("查询成功!", allCats);
+			}else{
+				throw new Exception("无子分类!");
+			}
+		} catch (Exception e) {
+			jsonMsg = JsonMsg.makeFail("查询失败! "+e.getMessage(), null);
+		}
+
+		String jsonStr = objectMapper.writeValueAsString(jsonMsg);
+		resp.getWriter().write(jsonStr);
 		return null;
 	}
 }

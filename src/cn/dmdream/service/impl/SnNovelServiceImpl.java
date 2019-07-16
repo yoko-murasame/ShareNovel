@@ -222,4 +222,29 @@ public class SnNovelServiceImpl implements SnNovelService {
 		return snNovelDao.findNewestNovel(size);
 	}
 
+	/**
+	 * 根据小说上传者查询
+	 * @param userId
+	 * @return
+	 */
+	@Override
+	public List<SnNovel> findByShareUserId(Integer userId){
+		return snNovelDao.findByShareUserId(userId);
+	}
+	
+	/**
+	 * 根据小说上传者分页查询
+	 * @param userId, pageSize, page
+	 * @return
+	 */
+	@Override
+	public List<SnNovel> findByShareUserIdByPage(Integer userId, int pageSize , int page){
+		return snNovelDao.findByShareUserIdByPage(userId, pageSize, page);
+	}
+	
+	@Override
+	public Integer findCountByShareUserId(Integer userId) {
+		return snNovelDao.findCountByShareUserId(userId);
+	}
+	
 }

@@ -450,5 +450,52 @@ public class SnNovelDaoImpl implements SnNovelDao {
 		return list.size() > 0 ? list : null;
 	}
 
+	/**
+	 * 根据小说上传者查询
+	 * @param userId
+	 * @return
+	 */
+	@Override
+	public List<SnNovel> findByShareUserId(Integer userId) {
+		String sql="SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_category.cat_parentid,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id where novel_share_userid=?";
+		List<SnNovel> list=new ArrayList<SnNovel>();
+		CachedRowSet rs = dbUtil.query(sql, userId);
+		handleData(rs, list);
+		return list.size()>0?list:null;
+	}
+
+	/**
+	 * 根据小说上传者分页查询
+	 * @param userId, pageSize, page
+	 * @return
+	 */
+	@Override
+	public List<SnNovel> findByShareUserIdByPage(Integer userId, int pageSize, int page) {
+		String sql = "SELECT sn_novel.novel_id,sn_novel.novel_title,sn_novel.novel_author,sn_novel.novel_categoryid,sn_novel.novel_updatetime,sn_novel.novel_isEnd,sn_novel.novel_summary,sn_novel.novel_share_userid,sn_novel.novel_downloadurl,sn_novel.novel_check,sn_novel.novel_cover,sn_category.cat_name,sn_category.cat_parentid,sn_user.user_nickname,sn_user.user_nickpic FROM sn_novel INNER JOIN sn_category ON sn_novel.novel_categoryid = sn_category.cat_id INNER JOIN sn_user ON sn_novel.novel_share_userid = sn_user.user_id where novel_share_userid=? limit ?,?";
+		RowSet rs = dbUtil.query(sql,userId,(page - 1) * pageSize , pageSize);
+		List<SnNovel> list = new ArrayList<SnNovel>();
+		handleData(rs, list);
+		return list.size()>0?list:null;
+	}
+	
+	/**
+	 * 根据小说上传者计数
+	 * @param userId
+	 * @return
+	 */
+	@Override
+	public Integer findCountByShareUserId(Integer userId) {
+		String sql="select count(*) from sn_novel where novel_share_userid=?";
+		RowSet rs = dbUtil.query(sql, userId);
+		Integer count = 0;
+		try {
+			while (rs.next()) {
+				count = Integer.parseInt(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
 
 }

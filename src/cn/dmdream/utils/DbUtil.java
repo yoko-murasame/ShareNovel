@@ -1,7 +1,7 @@
 package cn.dmdream.utils;
 
+import java.beans.PropertyVetoException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,17 +11,20 @@ import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetFactory;
 import javax.sql.rowset.RowSetProvider;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
 public class DbUtil {
 
 	private static String driverName;
 	private static String url;
 	private static String username;
 	private static String password;
+	private static ComboPooledDataSource dataSource = null;
 
 	private Connection conn = null;
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
-
+	
 	static {
 		// src目录
 		ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
@@ -29,20 +32,22 @@ public class DbUtil {
 		url = resourceBundle.getString("url");
 		username = resourceBundle.getString("username");
 		password = resourceBundle.getString("password");
+		
+	    //1. 创建datasource
+	    //ComboPooledDataSource dataSource = new ComboPooledDataSource("oracle");
+	    dataSource = new ComboPooledDataSource();
 
-		// Properties properties = new Properties();
-		// try {
-		// properties.load(
-		// new FileInputStream(new File("db.properties")));
-		// // properties.load(new FileInputStream(new
-		// // File("db.properties")));//必须在同级目录
-		// driverName = properties.getProperty("drivername");
-		// url = properties.getProperty("url");
-		// username = properties.getProperty("username");
-		// password = properties.getProperty("password");
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
+	    //2. 设置连接数据的信息
+	    try {
+			dataSource.setDriverClass(driverName);
+		    //忘记了---> 去以前的代码 ---> jdbc的文档
+		    dataSource.setJdbcUrl(url);
+		    dataSource.setUser(username);
+		    dataSource.setPassword(password);
+		} catch (PropertyVetoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -55,8 +60,7 @@ public class DbUtil {
 
 		Connection connection = null;
 		try {
-			Class.forName(driverName);
-			connection = DriverManager.getConnection(url, username, password);
+			connection = dataSource.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

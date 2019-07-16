@@ -41,7 +41,7 @@ public class UserAuthFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		SnUser user=(SnUser)httpRequest.getSession().getAttribute("user");
 		if(user==null) {
-			httpRequest.getRequestDispatcher("/mainpage.jsp").forward(httpRequest, httpResponse);
+			httpRequest.getRequestDispatcher("/index.jsp").forward(httpRequest, httpResponse);
 		}else {			
 			chain.doFilter(request, response);
 		}
